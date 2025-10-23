@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,6 +11,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Brand */
+    --brand-rose: #F8719D;
+    --brand-lavender: #BBB3D9;
+    --brand-blue: #ABC2E2;
+    --brand-green: #9BBCC3;
+
+    /* Content */
+    --content-primary: #3D3B3B;
+    --content-inverse: #FFFFFF;
+
+    /* Background */
+    --background-fixed-white: #FFFFFF;
+    --background-gradient: linear-gradient(45deg, #ABC2E2 0%, #BBB3D9 50%, #CB9AD2 100%);
 }
 
 a {
