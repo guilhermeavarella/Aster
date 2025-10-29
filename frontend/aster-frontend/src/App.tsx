@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import logo from '/public/favicon.svg'
-import './App.css'
 import LiquidGlass from 'liquid-glass-react'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <div>
@@ -14,11 +11,12 @@ function App() {
           <img src={logo} className="logo" alt="Vite logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>This is H1. Lorem Ipsum</h1>
+      <h2>This is H2. Lorem Ipsum</h2>
+      <h3>This is H3. Lorem Ipsum</h3>
+      <h4>This is H4. Lorem Ipsum</h4>
+      <p>This is a paragraph. Lorem Ipsum</p>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>  

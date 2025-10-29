@@ -1,11 +1,8 @@
 :root {
   font-family: 'Segoe UI', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-size: 16px;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--content-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,63 +17,53 @@
 
     /* Content */
     --content-primary: #3D3B3B;
+    --content-secondary: #627091;
     --content-inverse: #FFFFFF;
 
     /* Background */
     --background-fixed-white: #FFFFFF;
-    --background-gradient: linear-gradient(45deg, #ABC2E2 0%, #BBB3D9 50%, #CB9AD2 100%);
-}
+    --background-aurora: linear-gradient(45deg, #ABC2E2 0%, #BBB3D9 50%, #CB9AD2 100%);
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    /* Accent */
+    --accent-green: #42CFB7;
+    --accent-red: #D5529E;
+    --accent-yellow: #E2AD26;
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  place-items: left;
+  min-width: 100vw;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.25rem;
+  font-weight: bold;
+  line-height: auto;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+h2 {
+  font-size: 2.25rem;
+  font-weight: 'semi-bold';
+  line-height: auto;
+}2,1
+
+h3 {
+  font-size: 2rem;
+  font-weight: 'semi-bold';
+  line-height: auto;
 }
 
-@media (prefers-color-scheme: light) {
+@media (max-width: 768px) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    font-size: 14px;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+}
+
+@media (max-width: 576px) {
+  :root {
+    font-size: 12px;
   }
 }
