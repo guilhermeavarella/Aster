@@ -13,7 +13,7 @@ export default function Glass({ padding = 'p-6', children }: { padding?: string,
         shadowSpread={0.45}
         frostBlur={30}
         borderRadius={48}
-        className={`min-h-[calc(100vh-3rem)] min-w-80 max-h-268 ${padding} shadow-lg rounded-[48px] border border-[var(--background-fixed-white)]/60 bg-[var(--background-fixed-white)]/40 pointer-events-none select-none`}
+        className={`${padding} shadow-lg rounded-[48px] border border-[var(--background-fixed-white)]/60 bg-[var(--background-fixed-white)]/40 pointer-events-none select-none`}
         style={{ backdropFilter: 'blur(10px)' }}
     >
         <div className={`pointer-events-auto`}>
