@@ -1,6 +1,6 @@
 import NavItem from './components/NavItem';
 import Glass from './components/Glass';
-import Button from './components/Button';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {  
   return (
@@ -53,9 +53,10 @@ function App() {
           </div>
         </Glass>
       </div>
-      <div className="w-full h-full pt-6 pb-6 pl-3 pr-9">
 
-      </div>
+      <main className="w-full h-full pt-6 pb-6 pl-3 pr-9">
+        <Outlet />
+      </main>
     </div>
   )
 }
