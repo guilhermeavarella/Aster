@@ -1,7 +1,42 @@
+import { useEffect, useState} from "react"
+import { useNavigate } from "react-router-dom"
+import Glass from "../components/Glass"
+import { useOutletContext } from "react-router-dom";
+
+
 export default function Login() {
+    const { setCurrentUser } = useOutletContext();
+    const [profiles, setProfiles] = useState([]);
+    useEffect(() => {
+        fetch('/mocks/profiles.json')
+            .then(response => response.json())
+            .then(data => setProfiles(data))
+    }, []);
+    
     return (
-        <div>
-            <h1>Login</h1>
+        <div className="w-full h-full flex flex-col items-center justify-center bg-[url('/src/assets/backgrounds/login.jpg')] bg-cover bg-center gap-6">
+            <img src="/src/assets/logos/logo-white.svg" alt="Aster Logo" className="h-32" />
+            <Glass padding="py-16 px-24">
+                <div className="flex flex-row gap-24">
+                    {profiles.map((profile: any) => (
+                        <div key={profile.nome} className="flex flex-col items-center gap-2">
+                            <button className="cursor-pointer" onClick={() => {
+                                    console.log("Login: " + `${profile.nome}`);
+                                    setCurrentUser(profile.nome);
+                                    useNavigate('/home');
+                                }}>
+                                <img src={profile.avatar} alt={`${profile.nome} Avatar`} className="h-48 w-48 rounded-[1rem] border-1 hover:border-3 border-[var(--content-inverse)]/80 transition" />
+                            </button>
+                            
+                            <div className="gap-0.5 text-center text-[var(--content-inverse)]"> 
+                                <h4>{profile.nome}</h4>
+                                <p className="font-normal">{profile.setor}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </Glass>
+            
         </div>
     )
 }
