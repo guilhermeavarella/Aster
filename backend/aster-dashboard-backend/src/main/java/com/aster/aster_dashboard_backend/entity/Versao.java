@@ -12,30 +12,26 @@ import lombok.Setter;
 @Table(name="versao")
 public class Versao{
 
-    // Número da versão
     @Id
-    @Column(name="numero")
-    private String numero;
+    @Column(name="numeroDaVersao")
+    private String numeroDaVersao;
 
-    // Arquivo instalador
-    @Column(name="extensao")
-    private String extensao;
+    @Column(name="arquivoInstalador")
+    private String arquivoInstalador;
 
-    // Data de lançamento
-    @Column(name="data")
-    private String data;
+    @Column(name="dataDeLancamento")
+    private String dataDeLancamento;
 
-    // Patch notes
-    @Column(name="notes")
-    private String notes;
+    @Column(name="patchNotes")
+    private String patchNotes;
 
     @Override
     public String toString() {
         return "Versao{" +
-                "número da versão='" + numero + '\'' +
-                ", data de lançamento='" + data + '\'' +
-                ", arquivo instalador='" + extensao + '\'' +
-                ", patch notes='" + notes + '\'' +
+                "número da versão='" + numeroDaVersao + '\'' +
+                ", data de lançamento='" + dataDeLancamento + '\'' +
+                ", arquivo instalador='" + arquivoInstalador + '\'' +
+                ", patch notes='" + patchNotes + '\'' +
                 '}';
     }
 }
