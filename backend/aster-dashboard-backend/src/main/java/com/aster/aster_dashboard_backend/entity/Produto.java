@@ -43,14 +43,14 @@ public class Produto{
 
     @Column(length = 30, nullable = false)
     private String nome;
-
+    
     @Override
     public String toString() {
         return "Produto{" +
                 "id='" + id + '\'' +
                 ", status='" + status + '\'' +
-                ", ícone='" + icone + '\'' +
-                ", descrição breve notes='" + descricaoBreve + '\'' +
+                ", icone='" + icone + '\'' +
+                ", descricaoBreve='" + descricaoBreve + '\'' +
                 ", nome='" + nome + '\'' +
                 '}';
     }
