@@ -4,34 +4,41 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="versao")
-public class Versao{
+@Table(name="produto_versao")
+public class ProdutoVersao{
 
-    @Id
-    @Column(name="numeroDaVersao")
-    private String numeroDaVersao;
+    @EmbeddedId
+    private ProdutoVersaoId id;
 
-    @Column(name="arquivoInstalador")
+    @Column(name="arquivo_instalador", length = 50)
     private String arquivoInstalador;
 
-    @Column(name="dataDeLancamento")
-    private String dataDeLancamento;
+    @Column(name="data_lancamento")
+    private LocalDate dataLancamento;
 
-    @Column(name="patchNotes")
+    @Column(name="patch_notes", length = 200)
     private String patchNotes;
+
+    @MapsId("produtoId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "produto_id", nullable = false)
+    private Produto produto;
 
     @Override
     public String toString() {
-        return "Versao{" +
-                "número da versão='" + numeroDaVersao + '\'' +
-                ", data de lançamento='" + dataDeLancamento + '\'' +
-                ", arquivo instalador='" + arquivoInstalador + '\'' +
-                ", patch notes='" + patchNotes + '\'' +
+        return "ProdutoVersao{" +
+                "numeroVersao='" + id.getNumeroVersao + '\'' +
+                ", produtoId='" + id.getProdutoId + '\'' +
+                ", dataLancamento='" + dataLancamento + '\'' +
+                ", arquivoInstalador='" + arquivoInstalador + '\'' +
+                ", patchNotes='" + patchNotes + '\'' +
+                ", produtoNome='" + (produto != null ? produto.getNome() : null) + '\'' +
                 '}';
     }
 }
