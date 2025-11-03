@@ -65,7 +65,7 @@ function App() {
 
               <div className="w-full flex flex-col items-center justify-start gap-6" >
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/painel.svg" alt="Panel Icon" className="h-6" />
                       <p> Painel </p>
@@ -89,7 +89,7 @@ function App() {
                 </section>
 
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/operacoes.svg" alt="Operations Icon" className="h-6" />
                       <p> Operações </p>
@@ -103,7 +103,7 @@ function App() {
                 </section>
 
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/suporte.svg" alt="Support Icon" className="h-6" />
                       <p> Suporte </p>
