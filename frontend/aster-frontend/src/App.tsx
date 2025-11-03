@@ -1,13 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavItem from './components/NavItem';
 import Glass from './components/Glass';
-import { Outlet, Link, useLocation, useNavigate, createContext } from 'react-router-dom'
+import { Outlet, Link, useLocation, useNavigate, createContext, useOutletContext } from 'react-router-dom'
 
 function App() {  
   const location = useLocation();
 
   const isLoginPage = location.pathname === "/" || location.pathname === "/login";
-  const [currentUser, setCurrentUser] = useState();
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(() => {
+    const savedUser = localStorage.getItem("currentUser");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
+  const userViews = [
+    {
+      "user": "Estratégia",
+      "d": "Desempenho de Vendas",
+      "i": "Demografia"
+    },
+    {
+      "user": "Tech Lead",
+      "d": "Métricas de Downloads",
+      "i": "Análise de Qualidade"
+    },
+    {
+      "user": "Finanças",
+      "d": "Métricas de Receita",
+      "i": "Indicadores"
+    },  
+    {
+      "user": "Data Base Admin",
+      "d": ["Desempenho de Vendas", "Métricas de Downloads", "Métricas de Receita"],
+      "i": ["Demografia", "Análise de Qualidade", "Indicadores"]
+    },
+  ]
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem("currentUser");
+    }
+  }, [currentUser]);
+  
+  const currentView = userViews.find(view => view.user === currentUser);
 
   return (
     isLoginPage ? ( 
@@ -33,8 +70,21 @@ function App() {
                       <img src="/src/assets/icons/sidemenu/painel.svg" alt="Panel Icon" className="h-6" />
                       <p> Painel </p>
                     </div>
-                    <NavItem label="Varia de acordo com a visão" onClick={() => {}} />
-                    <NavItem label="Varia de acordo com a visão" onClick={() => {}} />
+                     {currentView && (
+                      <>
+                        {Array.isArray(currentView.d)
+                          ? currentView.d.map((label, idx) => (
+                              <NavItem key={`d-${idx}`} label={label} onClick={() => {}} />
+                            ))
+                          : <NavItem label={currentView.d} onClick={() => {}} />}
+
+                        {Array.isArray(currentView.i)
+                          ? currentView.i.map((label, idx) => (
+                              <NavItem key={`i-${idx}`} label={label} onClick={() => {}} />
+                            ))
+                          : <NavItem label={currentView.i} onClick={() => {}} />}
+                      </>
+                    )}
                   </div>
                 </section>
 
