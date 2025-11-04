@@ -18,7 +18,7 @@ public class Produto{
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private StatusProdutoCheck status;
+    private String status;
 
     @Column(length = 20)
     private String icone;
