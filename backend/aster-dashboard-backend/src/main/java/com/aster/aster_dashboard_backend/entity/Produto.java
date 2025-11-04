@@ -16,21 +16,20 @@ public class Produto{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+    @Column(length=20)
     private String status;
 
-    @Column(length = 20)
+    @Column(length=20)
     private String icone;
 
-    @Column(name="descricao_breve", length = 150)
+    @Column(name="descricao_breve", length=150)
     private String descricaoBreve;
 
-    @Column(length = 30, nullable = false)
+    @Column(length=30, nullable=false)
     private String nome;
     
     @Override
-    public String toString() {
+    public String toString(){
         return "Produto{" +
                 "id='" + id + '\'' +
                 ", status='" + status + '\'' +
