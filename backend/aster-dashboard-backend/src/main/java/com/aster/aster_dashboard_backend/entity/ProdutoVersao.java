@@ -1,11 +1,11 @@
 package com.aster.aster_dashboard_backend.entity;
 
+import com.aster.aster_dashboard_backend.entity.ids.ProdutoVersaoId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDate;
-import ids.ProdutoVersaoId;
 
 @Getter
 @Setter
@@ -32,8 +32,8 @@ public class ProdutoVersao{
     @Override
     public String toString(){
         return "ProdutoVersao{" +
-                "numeroVersao='" + id.getNumeroVersao + '\'' +
-                ", produtoId='" + id.getProdutoId + '\'' +
+                "numeroVersao='" + id.getNumeroVersao() + '\'' +
+                ", produtoId='" + id.getProdutoId() + '\'' +
                 ", dataLancamento='" + dataLancamento + '\'' +
                 ", arquivoInstalador='" + arquivoInstalador + '\'' +
                 ", patchNotes='" + patchNotes + '\'' +

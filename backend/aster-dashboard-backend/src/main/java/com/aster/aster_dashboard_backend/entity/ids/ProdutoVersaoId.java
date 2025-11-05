@@ -1,9 +1,10 @@
-package com.aster.aster_dashboard_backend.entity;
+package com.aster.aster_dashboard_backend.entity.ids;
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 
+@NoArgsConstructor
 @Embeddable
 public class ProdutoVersaoId implements Serializable {
 
