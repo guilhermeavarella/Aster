@@ -1,6 +1,7 @@
 package com.aster.aster_dashboard_backend.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,39 +10,43 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="devolutiva")
-public class Devolutiva{
+public abstract class Devolutiva {
 
     @Id
-    @Column(name="id", nullable=false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name="id")
+    private String id;
 
     @Column(name="data_envio")
     private LocalDate dataEnvio;
 
-    @Column(name="assunto", length=50, nullable=false)
+    @Column(name="assunto")
     private String assunto;
 
-    @Column(name="mensagem", length=500)
+    @Column(name="mensagem")
     private String mensagem;
 
-    @Column(name="produto_id", nullable=false)
-    private Integer produtoId;
+    @ManyToOne
+    @JoinColumn(name="produto_id")
+    private Produto produto;
 
-    @Column(name="documento", nullable=false)
-    private String documento;
-    
+    @ManyToOne
+    @JoinColumn(name="cliente_documento")
+    private Cliente cliente;
+
     @Override
-    public String toString(){
-        return "Produto{" +
+    public String toString() {
+        return "Devolutiva{" +
                 "id='" + id + '\'' +
-                ", data_envio='" + dataEnvio + '\'' +
+                ", dataEnvio=" + dataEnvio +
                 ", assunto='" + assunto + '\'' +
                 ", mensagem='" + mensagem + '\'' +
-                ", produto_id='" + produtoId + '\'' +
-                ", documento='" + documento + '\'' +
+                ", produtoId=" + produto.getId() +
+                ", clienteDocumento=" + cliente.getDocumento() +
                 '}';
     }
 }
+

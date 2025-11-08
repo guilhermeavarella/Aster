@@ -2,6 +2,7 @@ package com.aster.aster_dashboard_backend.entity;
 
 import com.aster.aster_dashboard_backend.entity.id.ProdutoVersaoId;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="produto_versao")
 public class ProdutoVersao{
