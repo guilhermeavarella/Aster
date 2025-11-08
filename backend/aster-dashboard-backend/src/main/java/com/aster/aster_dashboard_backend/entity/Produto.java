@@ -1,35 +1,35 @@
 package com.aster.aster_dashboard_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="produto")
 public class Produto{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
-    @Column(length=20)
+    @Column(name="status")
     private String status;
 
-    @Column(length=20)
+    @Column(name="icone")
     private String icone;
 
-    @Column(name="descricao_breve", length=150)
+    @Column(name="descricao_breve")
     private String descricaoBreve;
 
-    @Column(length=30, nullable=false)
+    @Column(name="nome")
     private String nome;
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Produto{" +
                 "id='" + id + '\'' +
                 ", status='" + status + '\'' +

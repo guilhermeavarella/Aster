@@ -14,29 +14,29 @@ import java.time.LocalDate;
 public class Cliente{
 
     @Id
-    @Column(name="documento", length=30, nullable=false)
+    @Column(name="documento")
     private String documento;
     
-    @Column(name="nome", length=40, nullable=false)
+    @Column(name="nome")
     private String nome;
 
-    @Column(name="email", length=30, nullable=false)
+    @Column(name="email")
     private String email;
 
-    @Column(name="regiao", length=30)
+    @Column(name="regiao")
     private String regiao;
 
-    @Column(name="telefone", length=30)
+    @Column(name="telefone")
     private String telefone;
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Cliente{" +
                 "documento='" + documento + '\'' +
-                "nome='" + nome + '\'' +
-                "email='" + email + '\'' +
-                "regiao='" + regiao + '\'' +
-                "telefone='" + telefone + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", regiao='" + regiao + '\'' +
+                ", telefone='" + telefone + '\'' +
                 '}';
     }
 }

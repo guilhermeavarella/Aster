@@ -1,11 +1,10 @@
 package com.aster.aster_dashboard_backend.entity;
 
+import com.aster.aster_dashboard_backend.entity.id.CategoriaId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDate;
-import ids.CategoriaId;
 
 @Getter
 @Setter
@@ -16,15 +15,17 @@ public class Categoria{
 
     @EmbeddedId
     private CategoriaId id;
-    
-    @Column(name="produto_id", nullable=false)
-    private Integer produtoId;
+
+    @ManyToOne
+    @MapsId("produtoId")
+    @JoinColumn(name="produto_id")
+    private Produto produto;
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Categoria{" +
-                "categoria='" + id.getCategoria + '\'' +
-                ", produtoId='" + id.getProdutoId + '\'' +
+                "categoria=" + id.getCategoria() +
+                ", produtoId=" + id.getProdutoId() +
                 '}';
     }
 }

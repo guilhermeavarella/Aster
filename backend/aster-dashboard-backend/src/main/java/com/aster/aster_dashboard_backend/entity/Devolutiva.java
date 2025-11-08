@@ -18,7 +18,7 @@ public class Devolutiva{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nome="data_envio")
+    @Column(name="data_envio")
     private LocalDate dataEnvio;
 
     @Column(name="assunto", length=50, nullable=false)

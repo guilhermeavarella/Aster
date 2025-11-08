@@ -1,6 +1,6 @@
 package com.aster.aster_dashboard_backend.entity;
 
-import com.aster.aster_dashboard_backend.entity.ids.ProdutoVersaoId;
+import com.aster.aster_dashboard_backend.entity.id.ProdutoVersaoId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,26 +17,28 @@ public class ProdutoVersao{
     @EmbeddedId
     private ProdutoVersaoId id;
 
-    @Column(name="arquivo_instalador", length=50)
+    @Column(name="arquivo_instalador")
     private String arquivoInstalador;
 
     @Column(name="data_lancamento")
     private LocalDate dataLancamento;
 
-    @Column(name="patch_notes", length=200)
+    @Column(name="patch_notes")
     private String patchNotes;
-    
-    @Column(name="produto_id", nullable=false)
-    private Integer produtoId;
+
+    @ManyToOne
+    @MapsId("produtoId")
+    @JoinColumn(name="produto_id")
+    private Produto produto;
 
     @Override
-    public String toString(){
+    public String toString() {
         return "ProdutoVersao{" +
-                "numeroVersao='" + id.getNumeroVersao() + '\'' +
-                ", produtoId='" + id.getProdutoId() + '\'' +
-                ", dataLancamento='" + dataLancamento + '\'' +
+                "id=" + id +
                 ", arquivoInstalador='" + arquivoInstalador + '\'' +
+                ", dataLancamento=" + dataLancamento +
                 ", patchNotes='" + patchNotes + '\'' +
+                ", produtoId=" + id.getProdutoId() +
                 '}';
     }
 }
