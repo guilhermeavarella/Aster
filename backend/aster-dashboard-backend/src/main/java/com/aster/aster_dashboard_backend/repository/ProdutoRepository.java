@@ -1,6 +1,7 @@
 package com.aster.aster_dashboard_backend.repository;
 
-import com.aster.aster_dashboard_backend.entity.ProdutoInicio;
+import com.aster.aster_dashboard_backend.dto.ProdutoInicioDto;
+import com.aster.aster_dashboard_backend.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProdutoInicioRepository extends JpaRepository<ProdutoInicio,Integer> {
+public interface ProdutoRepository extends JpaRepository<Produto, String> {
 
     @Query("""
-        SELECT new com.aster.aster_dashboard_backend.entity.ProdutoInicio(p.id, AVG(f.avaliacao), (
+        SELECT new com.aster.aster_dashboard_backend.dto.ProdutoInicioDto(p.icone, CAST(AVG(f.avaliacao) AS bigdecimal), (
                 SELECT pv2.id.numeroVersao
                 FROM ProdutoVersao pv2
                 WHERE pv2.dataLancamento = (
@@ -21,9 +22,9 @@ public interface ProdutoInicioRepository extends JpaRepository<ProdutoInicio,Int
                 )
         )
         FROM Produto p
-        LEFT JOIN ProdutoVersao pv3 ON pv3.produtoId = p.id
-        LEFT JOIN Devolutiva d ON d.produtoId = p.id
-        LEFT JOIN Feedback f ON f.devolutivaId = d.id
+        LEFT JOIN ProdutoVersao pv3 ON pv3.produto = p
+        LEFT JOIN Feedback f ON f.produto = p
+        GROUP BY p.id
         """)
-    public List<ProdutoInicio> findAll();
+    public List<ProdutoInicioDto> findProdutosInicio();
 }
