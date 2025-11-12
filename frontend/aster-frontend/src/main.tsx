@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import Login from './pages/Login.tsx'
+import ProdutoForm from '../src/components/ProdutoForm.tsx'
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Login /> },
 
-      { path: 'login', element: <Login /> },/*
+      { path: 'login', element: <Login /> },
+      { path: 'produto/criar', element: <ProdutoForm />}
+      /*
       { path: 'home', element: <Home /> },
       { path: 'docs', element: <Documents /> },
 
