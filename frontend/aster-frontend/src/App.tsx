@@ -94,11 +94,11 @@ function App() {
                       <img src="/src/assets/icons/sidemenu/operacoes.svg" alt="Operations Icon" className="h-6" />
                       <p> Operações </p>
                     </div>
-                    <NavItem label="Licenças" onClick={() => {}} />
-                    <NavItem label="Produtos" onClick={() => {}} />
-                    <NavItem label="Versões" onClick={() => {}} />
-                    <NavItem label="Clientes" onClick={() => {}} />
-                    <NavItem label="Pacotes" onClick={() => {}} />
+                    <NavItem label="Licenças" onClick={() => {navigate('/operacoes/exibir/licenca')}} />
+                    <NavItem label="Produtos" onClick={() => {navigate('/operacoes/exibir/produto')}} />
+                    <NavItem label="Versões" onClick={() => {navigate('/operacoes/exibir/versao')}} />
+                    <NavItem label="Clientes" onClick={() => {navigate('/operacoes/exibir/cliente')}} />
+                    <NavItem label="Pacotes" onClick={() => {navigate('/operacoes/exibir/pacote')}} />
                   </div>
                 </section>
 
