@@ -33,4 +33,17 @@ public class ProdutoConverter {
 
         return dto;
     }
+
+    public Produto toEntity(ProdutoDto produtoDto){
+        Produto produto = new Produto();
+
+        produto.setId(produtoDto.getId());
+        produto.setStatus(produtoDto.getStatus());
+        produto.setIcone(produtoDto.getIcone());
+        produto.setDescricaoBreve(produtoDto.getDescricaoBreve());
+        produto.setDescricaoCompleta(produtoDto.getDescricao());
+        produto.setNome(produtoDto.getNome());
+
+        return produto;
+    }
 }
