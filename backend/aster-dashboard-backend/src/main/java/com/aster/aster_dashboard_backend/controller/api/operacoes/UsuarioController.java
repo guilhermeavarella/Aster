@@ -26,8 +26,24 @@ public class UsuarioController {
         return new PageResponseDto<>(pagina);
     }
 
+    @GetMapping("/{id}")
+    public UsuarioDto findById(@PathVariable String id) {
+        return service.findById(id);
+    }
+
     @PostMapping
     public void create(@RequestBody UsuarioDto dto) {
         service.create(dto);
     }
+
+    @PatchMapping("/{id}")
+    public UsuarioDto update(@PathVariable String id, @RequestBody UsuarioDto dto) {
+        return service.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) {
+        service.delete(id);
+    }
+
 }

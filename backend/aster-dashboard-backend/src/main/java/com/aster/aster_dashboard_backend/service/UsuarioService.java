@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -25,6 +26,17 @@ public class UsuarioService {
         return usuarios.map(UsuarioDto::new);
     }
 
+    public UsuarioDto findById(String id) {
+        Optional<UsuarioDto> result = repository.findById(id).map(UsuarioDto::new);
+
+        if (result.isEmpty()) {
+            throw new RuntimeException("Não há nenhum registro com esse id!");
+        }
+
+        return result.get();
+    }
+
+    @Transactional
     public void create(UsuarioDto dto) {
         if (dto.getChaveUso() == null) {
             throw new IllegalArgumentException("Uma chave de uso deve ser fornecida!");
@@ -37,5 +49,35 @@ public class UsuarioService {
         Usuario usuario = new Usuario(dto.getChaveUso());
 
         repository.save(usuario);
+    }
+
+    @Transactional
+    public UsuarioDto update(String id, UsuarioDto dto) {
+        Optional<Usuario> result = repository.findById(id);
+
+        if (result.isEmpty()) {
+            throw new RuntimeException("Essa chave de uso não existe!");
+        }
+
+        Usuario entity = result.get();
+
+        repository.delete(entity);
+
+        Usuario update = new Usuario(dto.getChaveUso());
+
+        Usuario updated = repository.save(update);
+
+        return new UsuarioDto(updated.getChaveUso());
+    }
+
+    @Transactional
+    public void delete(String id) {
+        Optional<Usuario> entity = repository.findById(id);
+
+        if (entity.isEmpty()) {
+            throw new RuntimeException("Essa chave de uso não existe!");
+        }
+
+        repository.delete(entity.get());
     }
 }
