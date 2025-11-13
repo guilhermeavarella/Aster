@@ -87,8 +87,8 @@ export default function Login() {
                 <div className="w-full flex flex-row items-end justify-between">
                     <h3 className="text-[var(--content-inverse)]">{template?.nome}</h3>
                     <div className="max-w-[504px] flex flex-row gap-4">
-                        <Glass padding="p-0" className="max-h-9">
-                            <div className="w-full min-w-[360px] h-9 gap-3 flex flex-row items-center px-6">
+                        <Glass padding="p-0" className="max-h-9 min-w-[360px]">
+                            <div className="w-full h-9 gap-3 flex flex-row items-center px-6">
                                 <img src="/src/assets/icons/search.svg" alt="busca" className="w-4 h-4"/>
 
                                 <input 
@@ -104,7 +104,7 @@ export default function Login() {
                     </div>
                 </div>
 
-                <Glass padding="p-0" className="min-w-[calc(100vw-26rem)] min-h-[41.25rem] w-full max-h-[680px] overflow-hidden">
+                <Glass padding="p-0" className="min-w-full min-h-[41.25rem] w-full max-h-[680px] overflow-hidden">
                     <table className="w-full h-full max-h-[670px] table-auto">
                         <thead className="bg-[var(--background-fixed-white)]"> 
                             {template && (
