@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import Login from './pages/Login.tsx'
+import Exibir from './pages/Exibir.tsx'
 
 const router = createBrowserRouter([
   {
@@ -17,9 +18,9 @@ const router = createBrowserRouter([
       { path: 'docs', element: <Documents /> },
 
       { path: 'painel/d/:user', element: <Painel_1 /> },
-      { path: 'painel/i/:user', element: <Painel_2 /> },
+      { path: 'painel/i/:user', element: <Painel_2 /> },*/
 
-      { path: 'operacoes/exibir/:entidade', element: <Exibir /> },
+      { path: 'operacoes/exibir/:entidade', element: <Exibir /> }, /*
       { path: 'operacoes/alterar/:entidade/:regId', element: <Alterar /> },
       { path: 'operacoes/criar/:entidade/:regId?', element: <Criar /> }
 

@@ -54,7 +54,7 @@ function App() {
      ) : (
       <div className="w-full h-full min-h-screen min-w-screen flex flex-row items-start justify-start bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)]">  
         <div className="w-full h-full max-w-92 flex flex-row items-start justify-center p-6">
-          <Glass>
+          <Glass shadow="lg">
             <div className="min-h-[calc(100vh-6rem)] min-w-68 max-h-268 w-full flex flex-col items-center justify-start gap-9">
               
               <img src="/src/assets/logos/dashboard-black.svg" alt="Aster Logo" className="h-12" />
