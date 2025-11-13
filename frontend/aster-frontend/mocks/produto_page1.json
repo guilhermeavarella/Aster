@@ -1,6 +1,7 @@
 {
    "pageNumber": 0,
-   "total_registros": 999,
+   "totalRegistros": 999,
+   "lastPage": 1,
    "content": [
          { 
             "id": "P016",
