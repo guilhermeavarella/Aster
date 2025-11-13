@@ -19,7 +19,11 @@ export default function Login() {
             console.log("Invalid page number:", page_number);
             return;
         }
-            
+        
+        await fetch(`/src/assets/files/entity-templates/${entidade}.json`)
+            .then((res) => res.json())
+            .then((data) => setTemplate(data));
+        
         try {
             const response = await api.get(`/operacoes/${entidade}?page=${page_number}`);
             setPage(response.data);
@@ -34,15 +38,17 @@ export default function Login() {
             console.log("Invalid page number:", page_number);
             return;
         }
-
-        fetch(`/mocks/produto_page${page_number}.json`)
-            .then((res) => res.json())
-            .then((data) => setPage(data));
-        console.log("Fetch:", page_number);
-
-        fetch(`/src/assets/files/entity-templates/${entidade}.json`)
+        await fetch(`/src/assets/files/entity-templates/${entidade}.json`)
             .then((res) => res.json())
             .then((data) => setTemplate(data));
+        
+        await fetch(`/mocks/produto_page${page_number}.json`)
+            .then((res) => res.json())
+            .then((data) => setPage(data));
+
+        console.log("Fetch:", page_number);
+
+        console.log("Template:", template);
     };
 
     useEffect(() => {
