@@ -22,7 +22,11 @@ public class PageResponseDto<T> {
     public PageResponseDto(Page<T> page) {
         this.pageNumber = page.getNumber();
         this.totalEntries = page.getTotalElements();
-        this.lastPage = page.getTotalPages() - 1;
+        if (page.getTotalPages() == 0) {
+            this.lastPage = 0;
+        } else {
+            this.lastPage = page.getTotalPages() - 1;
+        }
         this.content = page.getContent();
     }
 }
