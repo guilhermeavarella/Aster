@@ -8,7 +8,8 @@ import api from "../services/api"
 
 
 export default function Login() {
-    const { entidade } = useParams()
+    let { entidade } = useParams()
+    
     const [ template, setTemplate ] = useState(null)
     const [ page, setPage ] = useState()
 
@@ -35,32 +36,46 @@ export default function Login() {
         }
 
         fetch(`/mocks/produto_page${page_number}.json`)
-        .then((res) => res.json())
-        .then((data) => setPage(data));
+            .then((res) => res.json())
+            .then((data) => setPage(data));
         console.log("Fetch:", page_number);
-    };
 
-
-    useEffect(() => {
-        console.log("Entidade to display:", entidade);
-        
         fetch(`/src/assets/files/entity-templates/${entidade}.json`)
             .then((res) => res.json())
             .then((data) => setTemplate(data));
+    };
 
+    useEffect(() => {
+        if (entidade == "cliente") entidade = "cliente-individual";
+
+        console.log("Entidade em display:", entidade);
+        
         fetchPage(0);
     }, [entidade]);
 
     return (
         <section className="w-full h-full max-h-[896px] flex flex-col items-center justify-between gap-8">
-            <section className="w-full flex flex-row items-center justify-center gap-6">
-                <Glass padding="p-3">
-                    <div className="w-full min-h-10 min-w-[calc(100vw-33.25rem)] flex flex-row justify-center items-center">
-                        <p className="font-semibold text-[var(--content-inverse)]">Selecione um registro para mais informações ou para alterá-lo:</p>
-                    </div>
-                </Glass>
-                <ProfileMenu />
-            </section>
+
+            {(entidade?.startsWith("cliente")) ? (
+                <section className="w-full flex flex-row items-center justify-center gap-6">
+                    <Glass padding="p-3">
+                        <div className="w-full min-h-10 min-w-[calc(100vw-33.25rem)] flex flex-row justify-center items-center gap-6">
+                            <Button variant="primary" label="Cliente Individual" onClick={() => {entidade = "cliente-individual"; fetchPage(0)}} />
+                            <Button variant="primary" label="Cliente Organização" onClick={() => {entidade = "cliente-organizacao"; fetchPage(0)}} />
+                        </div>
+                    </Glass>
+                    <ProfileMenu />
+                </section>   
+            ) : (
+                <section className="w-full flex flex-row items-center justify-center gap-6">
+                    <Glass padding="p-3">
+                        <div className="w-full min-h-10 min-w-[calc(100vw-33.25rem)] flex flex-row justify-center items-center">
+                            <p className="font-semibold text-[var(--content-inverse)]">Selecione um registro para mais informações ou para alterá-lo:</p>
+                        </div>
+                    </Glass>
+                    <ProfileMenu />
+                </section>
+            )}
 
             <section className="w-full flex flex-col items-start justify-start gap-4">   
                 <div className="w-full flex flex-row items-end justify-between">
