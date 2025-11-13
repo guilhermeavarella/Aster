@@ -19,8 +19,8 @@ const router = createBrowserRouter([
       { path: 'home', element: <Home /> },
       { path: 'docs', element: <Documents /> },*/
 
-      { path: 'painel/d/:user/:view?', element: <Desempenho /> },
-      { path: 'painel/i/:user/:view?', element: <Indicadores /> },
+      { path: 'painel/d/:user', element: <Desempenho /> },
+      { path: 'painel/i/:user', element: <Indicadores /> },
 
       { path: 'operacoes/exibir/:entidade', element: <Exibir /> }, /*
       { path: 'operacoes/alterar/:entidade/:regId', element: <Alterar /> },

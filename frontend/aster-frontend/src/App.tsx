@@ -36,6 +36,15 @@ function App() {
     },
   ]
 
+  const eqView = {
+    "Desempenho de Vendas" : "estrategia",
+    "Métricas de Downloads" : "techlead",
+    "Métricas de Receita" : "financas",
+    "Demografia" : "estrategia",
+    "Análise de Qualidade" : "techlead",
+    "Indicadores" : "financas"
+  }
+
   useEffect(() => {
     if (currentUser) {
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -74,13 +83,13 @@ function App() {
                       <>
                         {Array.isArray(currentView.d)
                           ? currentView.d.map((label, idx) => (
-                              <NavItem key={`d-${idx}`} label={label} onClick={() => {navigate(`/painel/d/${currentUser}/${label.replace(/[^A-Z]/g, '')}`)}} />
+                              <NavItem key={`d-${idx}`} label={label} onClick={() => {navigate(`/painel/d/${eqView[label]}`)}} />
                             ))
                           : <NavItem label={currentView.d} onClick={() => {navigate(`/painel/d/${currentUser}`)}} />}
 
                         {Array.isArray(currentView.i)
                           ? currentView.i.map((label, idx) => (
-                              <NavItem key={`i-${idx}`} label={label} onClick={() => {navigate(`/painel/i/${currentUser}/${label.replace(/[^A-Z]/g, '')}`)}} />
+                              <NavItem key={`i-${idx}`} label={label} onClick={() => {navigate(`/painel/i/${eqView[label]}`)}} />
                             ))
                           : <NavItem label={currentView.i} onClick={() => {navigate(`/painel/i/${currentUser}`)}} />}
                       </>
