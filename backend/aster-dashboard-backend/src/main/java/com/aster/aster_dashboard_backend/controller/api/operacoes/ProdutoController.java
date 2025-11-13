@@ -26,6 +26,11 @@ public class ProdutoController {
         return new PageResponseDto<>(pagina);
     }
 
+    @GetMapping("/{id}")
+    public ProdutoDto findById(@PathVariable String id) {
+        return service.findById(id);
+    }
+
     @PostMapping
     public void create(@RequestBody ProdutoDto dto) {
         service.create(dto);

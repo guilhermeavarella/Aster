@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -39,6 +40,17 @@ public class ProdutoService {
         Page<Produto> produtos = repository.findAll(PageRequest.of(page, 15));
 
         return produtos.map(converter::toDto);
+    }
+
+    public ProdutoDto findById(String id) {
+        Optional<Produto> produto = repository.findById(id);
+
+        if (produto.isEmpty()) {
+            throw new RuntimeException("Não há nenhum registro com esse ID!");
+        }
+
+        return converter.toDto(produto.get());
+
     }
 
     @Transactional

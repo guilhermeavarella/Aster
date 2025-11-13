@@ -30,7 +30,7 @@ public class UsuarioService {
         Optional<UsuarioDto> result = repository.findById(id).map(UsuarioDto::new);
 
         if (result.isEmpty()) {
-            throw new RuntimeException("Não há nenhum registro com esse id!");
+            throw new RuntimeException("Não há nenhum registro com essa chave de uso!");
         }
 
         return result.get();
