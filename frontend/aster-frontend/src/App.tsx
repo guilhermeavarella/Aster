@@ -54,7 +54,7 @@ function App() {
      ) : (
       <div className="w-full h-full min-h-screen min-w-screen flex flex-row items-start justify-start bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)]">  
         <div className="w-full h-full max-w-92 flex flex-row items-start justify-center p-6">
-          <Glass>
+          <Glass shadow="lg">
             <div className="min-h-[calc(100vh-6rem)] min-w-68 max-h-268 w-full flex flex-col items-center justify-start gap-9">
               
               <img src="/src/assets/logos/dashboard-black.svg" alt="Aster Logo" className="h-12" />
@@ -65,7 +65,7 @@ function App() {
 
               <div className="w-full flex flex-col items-center justify-start gap-6" >
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/painel.svg" alt="Panel Icon" className="h-6" />
                       <p> Painel </p>
@@ -89,21 +89,21 @@ function App() {
                 </section>
 
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/operacoes.svg" alt="Operations Icon" className="h-6" />
                       <p> Operações </p>
                     </div>
-                    <NavItem label="Licenças" onClick={() => {}} />
-                    <NavItem label="Produtos" onClick={() => {}} />
-                    <NavItem label="Versões" onClick={() => {}} />
-                    <NavItem label="Clientes" onClick={() => {}} />
-                    <NavItem label="Pacotes" onClick={() => {}} />
+                    <NavItem label="Licenças" onClick={() => {navigate('/operacoes/exibir/licenca')}} />
+                    <NavItem label="Produtos" onClick={() => {navigate('/operacoes/exibir/produto')}} />
+                    <NavItem label="Versões" onClick={() => {navigate('/operacoes/exibir/versao')}} />
+                    <NavItem label="Clientes" onClick={() => {navigate('/operacoes/exibir/cliente')}} />
+                    <NavItem label="Pacotes" onClick={() => {navigate('/operacoes/exibir/pacote')}} />
                   </div>
                 </section>
 
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/suporte.svg" alt="Support Icon" className="h-6" />
                       <p> Suporte </p>
