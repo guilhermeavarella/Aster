@@ -34,4 +34,9 @@ public class ClienteIndividualController {
     public void create(@RequestBody ClienteIndividualDto dto) {
         service.create(dto);
     }
+
+    @PatchMapping("/{documento}")
+    public void update(@PathVariable String documento, @RequestBody ClienteIndividualDto dto) {
+        service.update(documento, dto);
+    }
 }

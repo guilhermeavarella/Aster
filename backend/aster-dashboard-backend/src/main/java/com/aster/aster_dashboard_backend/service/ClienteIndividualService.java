@@ -54,5 +54,38 @@ public class ClienteIndividualService {
         repository.save(converter.toEntity(dto));
     }
 
+    @Transactional
+    public void update(String documento, ClienteIndividualDto dto) {
+        Optional<Individual> result = repository.findById(documento);
+
+        if (result.isEmpty()) {
+            throw new IllegalArgumentException("Não há nenhum registro com esse documento!");
+        }
+
+        Individual entity = result.get();
+
+        if (dto.getNome() != null) {
+            entity.setNome(dto.getNome());
+        }
+
+        if (dto.getEmail() != null) {
+            entity.setEmail(dto.getEmail());
+        }
+
+        if (dto.getRegiao() != null) {
+            entity.setRegiao(dto.getRegiao());
+        }
+
+        if (dto.getTelefone() != null) {
+            entity.setTelefone(dto.getTelefone());
+        }
+
+        if (dto.getAtividadeUso() != null) {
+            entity.setAtividadeUso(dto.getAtividadeUso());
+        }
+
+        repository.save(entity);
+    }
+
 
 }
