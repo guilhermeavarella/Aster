@@ -24,6 +24,7 @@ import React, { useEffect, useState } from 'react'
 import { type SelectChangeEvent } from '@mui/material'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
+import { CriarProduto, EditarProduto } from '../../actions/Produto.ts'
 
 // Schema para validação da entidade
 const ProdutoFormSchema = z.object({
@@ -36,7 +37,7 @@ const ProdutoFormSchema = z.object({
     categorias: z.array(z.string().min(1, 'Campo obrigatório'))
 })
 
-type ProdutoFormSchemaType = z.infer<typeof ProdutoFormSchema>
+export type ProdutoFormSchemaType = z.infer<typeof ProdutoFormSchema>
 
 type produtoProps = {
     produto: Produto
@@ -81,7 +82,7 @@ export default function ProdutoForm({ produto }: produtoProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, register, reset, control } = methods
+    const { handleSubmit, reset, control } = methods
 
     // Array de status
     const status: string[] = [
@@ -109,12 +110,14 @@ export default function ProdutoForm({ produto }: produtoProps) {
 
 
     // Handler criar/editar
-    const handleCreateEdit: SubmitHandler<ProdutoFormSchemaType> = (data) => {
+    const handleCreateEdit: SubmitHandler<ProdutoFormSchemaType> = (async (data) => {
         try {
             if (produto) {
                 // Hook de edit
+                await EditarProduto(data)
                 console.log('Edit - Payload enviado: ' + JSON.stringify(data))
             } else {
+                await CriarProduto(data)
                 console.log('Create - Payload enviaod: ' + JSON.stringify(data))
                 // Hook de criar
             }
@@ -123,7 +126,7 @@ export default function ProdutoForm({ produto }: produtoProps) {
         } catch (error) {
             console.log(error)
         }
-    }
+    })
 
     return (
         <form onSubmit={handleSubmit(handleCreateEdit)}>
