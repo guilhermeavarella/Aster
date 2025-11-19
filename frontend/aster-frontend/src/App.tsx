@@ -21,28 +21,28 @@ function App() {
     },
     {
       "user": "techlead",
-      "d": "Métricas de Downloads",
+      "d": "Interação e Satisfação",
       "i": "Análise de Qualidade"
     },
     {
       "user": "financas",
       "d": "Métricas de Receita",
-      "i": "Indicadores"
+      "i": "Fluxo de Caixa"
     },  
     {
       "user": "admin",
-      "d": ["Desempenho de Vendas", "Métricas de Downloads", "Métricas de Receita"],
-      "i": ["Demografia", "Análise de Qualidade", "Indicadores"],
+      "d": ["Desempenho de Vendas", "Interação e Satisfação", "Métricas de Receita"],
+      "i": ["Demografia", "Análise de Qualidade", "Fluxo de Caixa"],
     },
   ]
 
   const eqView = {
     "Desempenho de Vendas" : "estrategia",
-    "Métricas de Downloads" : "techlead",
+    "Interação e Satisfação" : "techlead",
     "Métricas de Receita" : "financas",
     "Demografia" : "estrategia",
     "Análise de Qualidade" : "techlead",
-    "Indicadores" : "financas"
+    "Fluxo de Caixa" : "financas"
   }
 
   useEffect(() => {

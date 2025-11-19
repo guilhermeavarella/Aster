@@ -1,6 +1,7 @@
 import Estrategia_D from "./Painel/Estrategia_D"
 import Financas_D from "./Painel/Financas_D"
 import Tech_D from "./Painel/Tech_D"
+
 import Estrategia_I from "./Painel/Estrategia_I"
 import Financas_I from "./Painel/Financas_I"
 import Tech_I from "./Painel/Tech_I"
