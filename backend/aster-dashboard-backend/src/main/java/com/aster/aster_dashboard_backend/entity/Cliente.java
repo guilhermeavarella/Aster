@@ -28,6 +28,9 @@ public abstract class Cliente{
     @Column(name="regiao")
     private String regiao;
 
+    @Column(name="continente")
+    private String continente;
+
     @Column(name="telefone")
     private String telefone;
 
