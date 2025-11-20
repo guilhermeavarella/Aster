@@ -5,7 +5,8 @@ import { styled } from "@mui/material/styles";
 const StyledFormControl = styled(FormControl)(() => ({
    width: 'fit-content',
     ".MuiOutlinedInput-root": {
-        minHeight: '60px',
+        maxHeight: '60px',
+        minHeight: '50px',
         width: '100%'
     },
     ".MuiInputLabel-root": {

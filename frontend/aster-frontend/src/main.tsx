@@ -4,10 +4,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import Login from './pages/Login.tsx'
-import ProdutoForm from './components/forms/ProdutoForm.tsx'
 import Exibir from './pages/Exibir.tsx'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@mui/material'
+
+// Teste das telas de formulário
+import ProdutoForm from './components/forms/ProdutoForm.tsx'
+import VersaoForm from './components/forms/VersaoForm.tsx'
 
 // Tema global dos componentes MUI
   const theme = createTheme({
@@ -24,7 +27,8 @@ const router = createBrowserRouter([
       { index: true, element: <Login /> },
 
       { path: 'login', element: <Login /> },
-      { path: 'operacoes/criar', element: <ProdutoForm />},
+      { path: 'operacoes/criar/produto', element: <ProdutoForm />},
+      { path: 'operacoes/criar/versao', element: <VersaoForm />},
       /*
       { path: 'home', element: <Home /> },
       { path: 'docs', element: <Documents /> },

@@ -3,7 +3,6 @@ import type { TextFieldProps } from "@mui/material/TextField";
 import { styled } from "@mui/material/styles"
 
 const InputText = styled(TextField)<TextFieldProps>(() => ({
-    minHeight: '60px',
     ".MuiOutlinedInput-root": {
         maxHeight: '50px',
     },

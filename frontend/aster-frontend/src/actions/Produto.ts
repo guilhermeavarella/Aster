@@ -1,5 +1,6 @@
 import type { ProdutoFormSchemaType } from "../components/forms/ProdutoForm";
 import api from "../services/api";
+import type { PageRequest } from "../types/page-request";
 
 export async function CriarProduto(data: ProdutoFormSchemaType) {
     try {
@@ -17,4 +18,12 @@ export async function EditarProduto(data: ProdutoFormSchemaType) {
         console.log('Erro na rquisição')
         throw error
     }
+}
+
+type ProdutoListType = PageRequest<ProdutoFormSchemaType>
+
+export async function ListProduto(pageNum: number): Promise<ProdutoFormSchemaType[]> {
+       const response =  await api.get<ProdutoListType>(`operacoes/produto?page=${pageNum}`)
+       console.log("VALOR REAL ===>", response.data, Array.isArray(response.data));
+       return response.data.content;
 }

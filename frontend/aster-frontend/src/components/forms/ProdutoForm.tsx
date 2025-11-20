@@ -1,10 +1,10 @@
 // ----- To-do -----
-// 1. Validação com zod
-// 2. Estrutura do form com MUI
-// 3. HandleSubmit com o hook de CREATE/EDIT
-// 4. Caso a entidade contenha chaves estrangeiras com poucos registro, fazem select
-// 5. Utilizar o RHF para controlar o form
-// 6. Colocar o router  
+// 1. Validação com zod ok
+// 2. Estrutura do form com MUI ok
+// 3. HandleSubmit com o hook de CREATE/EDIT ok
+// 4. Caso a entidade contenha chaves estrangeiras com poucos registro, fazem select ok
+// 5. Utilizar o RHF para controlar o form ok
+// 6. Colocar o router ok
 // ----- * -----
 
 import { useForm } from 'react-hook-form'
@@ -20,7 +20,7 @@ import StyledInputSelect from '../mui/InputSelect.tsx'
 import StyledInputMultiSelect from '../mui/InputMultiSelect.tsx'
 import Button from '../Button.tsx'
 import { useNavigate } from 'react-router'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { type SelectChangeEvent } from '@mui/material'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
@@ -40,14 +40,8 @@ const ProdutoFormSchema = z.object({
 export type ProdutoFormSchemaType = z.infer<typeof ProdutoFormSchema>
 
 type produtoProps = {
-    produto: Produto
+    produto?: Produto 
 }
-
-// Get das categorias para quando o hook ficar pronto
-// const { categorias } = useGetCategorias()
-
-// Get das versões para quando o hook ficar pronto
-// const { versoes } = useGetVersoes()
 
 // Props do produto em caso de edit
 export default function ProdutoForm({ produto }: produtoProps) {
@@ -107,7 +101,6 @@ export default function ProdutoForm({ produto }: produtoProps) {
     useEffect(() => {
         console.log(methods.getValues())
     }, [methods.watch()])
-
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<ProdutoFormSchemaType> = (async (data) => {
