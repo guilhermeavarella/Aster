@@ -55,6 +55,15 @@ function App() {
   
   const currentView = userViews.find(view => view.user === currentUser);
 
+  if (window.innerWidth < 850) {
+    return (
+      <div className="w-full h-full min-h-screen min-w-screen flex flex-col items-center justify-center p-3 gap-4 bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)]">
+        <h1 className="text-2xl font-bold text-center text-white">Por favor, use o pc ou junte-se ao coleguinha mais próximo ;)</h1>
+        <img src="/rat-spinning.gif" alt="rato girando" className="h-48" />
+      </div>
+    )
+  }
+
   return (
     isLoginPage ? ( 
       <main className="w-full h-full min-h-screen min-w-screen flex flex-row items-center justify-center">
