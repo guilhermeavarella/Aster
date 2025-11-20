@@ -195,7 +195,8 @@ export default function Desempenho() {
                             height={200}
                             series={[{ 
                                 data: porcentagemSegmentoData,
-                                valueFormatter: ({ value }) => value.toString() + '%'
+                                valueFormatter: ({ value }) => value.toString() + '%',
+                                highlightScope: { fade: 'series', highlight: 'item' },
                             }]}
                             colors={colorScheme1}
                             hideLegend={false}
@@ -213,7 +214,8 @@ export default function Desempenho() {
                             height={200}
                             series={[{ 
                                 data: porcentagemAplicacaoData,
-                                valueFormatter: ({ value }) => value.toString() + '%'
+                                valueFormatter: ({ value }) => value.toString() + '%',
+                                highlightScope: { fade: 'series', highlight: 'item' },
                             }]}
                             colors={colorScheme1}
                             hideLegend={false}
@@ -231,7 +233,8 @@ export default function Desempenho() {
                             height={200}
                             series={[{ 
                                 data: porcentagemPorteData,
-                                valueFormatter: ({ value }) => value.toString() + '%'
+                                valueFormatter: ({ value }) => value.toString() + '%',
+                                highlightScope: { fade: 'series', highlight: 'item' },
                             }]}
                             colors={colorScheme1}
                             hideLegend={false}
