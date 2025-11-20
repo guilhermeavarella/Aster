@@ -24,7 +24,7 @@ export default function Login() {
                         <div key={profile.nome} className="flex flex-col items-center gap-2">
                             <button className="cursor-pointer" onClick={() => {
                                     console.log("Login: " + `${profile.nome}`);
-                                    setCurrentUser(profile.setor);
+                                    setCurrentUser(profile.user);
                                     navigate('/home');
                                 }}>
                                 <img src={profile.avatar} alt={`${profile.nome} Avatar`} className="w-48 h-48 rounded-[1rem] border-1 hover:border-3 border-[var(--content-inverse)]/80 transition" />
