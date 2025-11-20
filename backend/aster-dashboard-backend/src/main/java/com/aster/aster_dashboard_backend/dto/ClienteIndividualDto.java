@@ -14,6 +14,7 @@ public class ClienteIndividualDto {
     private String nome;
     private String email;
     private String regiao;
+    private String continente;
     private String telefone;
 
     private String atividadeUso;

@@ -1,9 +1,9 @@
 package com.aster.aster_dashboard_backend.service;
 
-import com.aster.aster_dashboard_backend.converter.ClienteIndividualConverter;
-import com.aster.aster_dashboard_backend.dto.ClienteIndividualDto;
-import com.aster.aster_dashboard_backend.entity.Individual;
-import com.aster.aster_dashboard_backend.repository.ClienteIndividualRepository;
+import com.aster.aster_dashboard_backend.converter.ClienteOrganizacaoConverter;
+import com.aster.aster_dashboard_backend.dto.ClienteOrganizacaoDto;
+import com.aster.aster_dashboard_backend.entity.Organizacao;
+import com.aster.aster_dashboard_backend.repository.ClienteOrganizacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,25 +13,25 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ClienteIndividualService {
+public class ClienteOrganizacaoService {
 
-    private final ClienteIndividualRepository repository;
-    private ClienteIndividualConverter converter;
+    private ClienteOrganizacaoRepository repository;
+    private ClienteOrganizacaoConverter converter;
 
     @Autowired
-    public ClienteIndividualService(ClienteIndividualRepository repository, ClienteIndividualConverter converter) {
+    public ClienteOrganizacaoService(ClienteOrganizacaoRepository repository, ClienteOrganizacaoConverter converter) {
         this.repository = repository;
         this.converter = converter;
     }
 
-    public Page<ClienteIndividualDto> findAllPaginated(int page) {
-        Page<Individual> clientesIndividuais = repository.findAll(PageRequest.of(page, 15));
-        return clientesIndividuais.map(converter::toDto);
+    public Page<ClienteOrganizacaoDto> findAllPaginated(int page) {
+        Page<Organizacao> clientesOrganizacoes = repository.findAll(PageRequest.of(page, 15));
+        return clientesOrganizacoes.map(converter::toDto);
     }
 
-    public ClienteIndividualDto findByDocumento(String documento) {
+    public ClienteOrganizacaoDto findByDocumento(String documento) {
 
-        Optional<Individual> result = repository.findById(documento);
+        Optional<Organizacao> result =  repository.findById(documento);
 
         if (result.isEmpty()) {
             throw new RuntimeException("Não há nenhum registro com esse documento!");
@@ -41,7 +41,7 @@ public class ClienteIndividualService {
     }
 
     @Transactional
-    public void create(ClienteIndividualDto dto) {
+    public void create(ClienteOrganizacaoDto dto) {
 
         if (dto.getDocumento() == null) {
             throw new IllegalArgumentException("Um documento deve ser fornecido!");
@@ -55,14 +55,14 @@ public class ClienteIndividualService {
     }
 
     @Transactional
-    public void update(String documento, ClienteIndividualDto dto) {
-        Optional<Individual> result = repository.findById(documento);
+    public void update(String documento, ClienteOrganizacaoDto dto) {
+        Optional<Organizacao> result = repository.findById(documento);
 
         if (result.isEmpty()) {
             throw new IllegalArgumentException("Não há nenhum registro com esse documento!");
         }
 
-        Individual entity = result.get();
+        Organizacao entity = result.get();
 
         if (dto.getNome() != null) {
             entity.setNome(dto.getNome());
@@ -76,7 +76,7 @@ public class ClienteIndividualService {
             entity.setRegiao(dto.getRegiao());
         }
 
-        if  (dto.getContinente() != null) {
+        if (dto.getContinente() != null) {
             entity.setContinente(dto.getContinente());
         }
 
@@ -84,8 +84,12 @@ public class ClienteIndividualService {
             entity.setTelefone(dto.getTelefone());
         }
 
-        if (dto.getAtividadeUso() != null) {
-            entity.setAtividadeUso(dto.getAtividadeUso());
+        if (dto.getPorte() != null) {
+            entity.setPorte(dto.getPorte());
+        }
+
+        if (dto.getSetorAtuacao()  != null) {
+            entity.setSetorAtuacao(dto.getSetorAtuacao());
         }
 
         repository.save(entity);
@@ -93,7 +97,7 @@ public class ClienteIndividualService {
 
     @Transactional
     public void delete(String documento) {
-        Optional<Individual> result = repository.findById(documento);
+        Optional<Organizacao> result = repository.findById(documento);
 
         if (result.isEmpty()) {
             throw new IllegalArgumentException("Não há nenhum registro com esse documento!");

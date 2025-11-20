@@ -20,6 +20,8 @@ public class DevolutivaFeedbackDto {
     private String assunto;
     private LocalDate dataEnvio;
     private String mensagem;
+    private String produtoId;
+    private String clienteDocumento;
 
     private BigDecimal avaliacao;
     private String atividadeUso;

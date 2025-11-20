@@ -14,6 +14,7 @@ import java.util.List;
 public class Produto{
 
     @Id
+    @Column(name="id")
     private String id;
 
     @Column(name="status")

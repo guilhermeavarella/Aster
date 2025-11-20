@@ -15,4 +15,5 @@ public class LicencaDto {
     private Boolean ativa;
     private LocalDate dataRegistro;
     private String tipo;
+    private String produtoId;
 }
