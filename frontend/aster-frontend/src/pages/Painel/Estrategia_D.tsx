@@ -143,12 +143,15 @@ export default function Desempenho() {
                                     type: 'ordinal',
                                     values: vendasPacoteData.findIndex((d: any) => d.pacote === 'Aikonic') !== -1 ? vendasPacoteData.map((d: any) => d.pacote) : [],
                                     colors: colorScheme1
-                                }}]}
+                                },
+                                width: 96
+                            }]}
                             series={[{ dataKey: 'vendas', label: 'Vendas' }]}
                             hideLegend={true}
                             layout="horizontal"
                             height={vendasPacoteData.length * 30}
                             colors= {colorScheme1}
+                            className="ml-[-3rem]"
                         />
                     </Glass>
                 </section>
