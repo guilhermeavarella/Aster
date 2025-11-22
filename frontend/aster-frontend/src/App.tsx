@@ -126,7 +126,7 @@ function App() {
                       <img src="/src/assets/icons/sidemenu/suporte.svg" alt="Support Icon" className="h-6" />
                       <p> Suporte </p>
                     </div>
-                    <NavItem label="Devolutivas" onClick={() => {}} />
+                    <NavItem label="Devolutivas" onClick={() => {navigate('/suporte/devolutivas')}} />
                     <NavItem label="Responder ticket" onClick={() => {}} />
                   </div>
                 </section>
