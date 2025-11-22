@@ -15,6 +15,7 @@ public class ClienteOrganizacaoConverter {
                 .nome(entity.getNome())
                 .email(entity.getEmail())
                 .regiao(entity.getRegiao())
+                .continente(entity.getContinente())
                 .telefone(entity.getTelefone())
                 .porte(entity.getPorte())
                 .setorAtuacao(entity.getSetorAtuacao())
@@ -28,6 +29,7 @@ public class ClienteOrganizacaoConverter {
         entity.setNome(dto.getNome());
         entity.setEmail(dto.getEmail());
         entity.setRegiao(dto.getRegiao());
+        entity.setContinente(dto.getContinente());
         entity.setTelefone(dto.getTelefone());
         entity.setPorte(dto.getPorte());
         entity.setSetorAtuacao(dto.getSetorAtuacao());

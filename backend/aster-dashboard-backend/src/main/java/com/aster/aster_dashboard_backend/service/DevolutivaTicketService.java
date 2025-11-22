@@ -39,6 +39,11 @@ public class DevolutivaTicketService {
         return converter.toDto(result.get());
     }
 
+    public Page<DevolutivaTicketDto> findNaoRespondidos(int page) {
+        Page<Ticket> pendentes = repository.findByRespostaIsNull(PageRequest.of(page, 7));
+        return pendentes.map(converter::toDto);
+    }
+
     @Transactional
     public void create(DevolutivaTicketDto dto) {
 

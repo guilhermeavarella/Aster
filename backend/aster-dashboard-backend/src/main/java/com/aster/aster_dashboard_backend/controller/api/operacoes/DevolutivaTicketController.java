@@ -24,6 +24,12 @@ public class DevolutivaTicketController {
         return new PageResponseDto<>(pagina);
     }
 
+    @GetMapping("/nao-respondidos")
+    public PageResponseDto<DevolutivaTicketDto> findNaoRespondidos(@RequestParam int page) {
+        Page<DevolutivaTicketDto> pagina = service.findNaoRespondidos(page);
+        return new PageResponseDto<>(pagina);
+    }
+
     @GetMapping("/{id}")
     public DevolutivaTicketDto findById(@PathVariable String id) {
         return service.findById(id);
