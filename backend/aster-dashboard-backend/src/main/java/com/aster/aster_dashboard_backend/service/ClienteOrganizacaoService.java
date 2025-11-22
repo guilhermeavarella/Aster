@@ -76,6 +76,10 @@ public class ClienteOrganizacaoService {
             entity.setRegiao(dto.getRegiao());
         }
 
+        if (dto.getContinente() != null) {
+            entity.setContinente(dto.getContinente());
+        }
+
         if (dto.getTelefone() != null) {
             entity.setTelefone(dto.getTelefone());
         }

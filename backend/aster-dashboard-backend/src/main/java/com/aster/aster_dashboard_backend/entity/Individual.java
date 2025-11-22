@@ -19,8 +19,8 @@ public class Individual extends Cliente {
     @Column(name="atividade_uso")
     private String atividadeUso;
 
-    public Individual(String documento, String nome, String email, String regiao, String telefone, String atividadeUso) {
-        super(documento, nome, email, regiao, telefone);
+    public Individual(String documento, String nome, String email, String regiao, String continente, String telefone, String atividadeUso) {
+        super(documento, nome, email, regiao, continente, telefone);
         this.atividadeUso = atividadeUso;
     }
 
