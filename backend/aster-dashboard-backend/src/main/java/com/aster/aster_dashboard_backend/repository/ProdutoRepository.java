@@ -1,6 +1,7 @@
 package com.aster.aster_dashboard_backend.repository;
 
 import com.aster.aster_dashboard_backend.dto.ProdutoInicioDto;
+import com.aster.aster_dashboard_backend.dto.TotalVendasProdutoDto;
 import com.aster.aster_dashboard_backend.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,13 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         GROUP BY p.id
         """)
     public List<ProdutoInicioDto> findProdutosInicio();
+
+    @Query(value = """
+        SELECT new com.aster.aster_dashboard_backend.dto.TotalVendasProdutoDto(p.nome, COUNT(*))
+        FROM Adquire a
+        LEFT JOIN Licenca l ON a.id.licencaId = l.id
+        LEFT JOIN Produto p ON l.produto.id = p.id
+        GROUP BY p.nome
+    """)
+    public List<TotalVendasProdutoDto> findTotalVendasProduto();
 }

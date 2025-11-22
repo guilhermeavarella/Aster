@@ -3,6 +3,7 @@ package com.aster.aster_dashboard_backend.service;
 import com.aster.aster_dashboard_backend.converter.ProdutoConverter;
 import com.aster.aster_dashboard_backend.dto.ProdutoDto;
 import com.aster.aster_dashboard_backend.dto.ProdutoInicioDto;
+import com.aster.aster_dashboard_backend.dto.TotalVendasProdutoDto;
 import com.aster.aster_dashboard_backend.entity.Categoria;
 import com.aster.aster_dashboard_backend.entity.Produto;
 import com.aster.aster_dashboard_backend.entity.id.CategoriaId;
@@ -12,7 +13,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,6 +51,11 @@ public class ProdutoService {
 
         return converter.toDto(produto.get());
 
+    }
+
+    public List<TotalVendasProdutoDto> findTotalVendasProduto() {
+
+        return repository.findTotalVendasProduto();
     }
 
     @Transactional
