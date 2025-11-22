@@ -14,6 +14,7 @@ import VersaoForm from './components/forms/VersaoForm.tsx'
 import PacoteForm from './components/forms/PacoteForm.tsx'
 import LicencaForm from './components/forms/LicencaForm.tsx'
 import ClienteIndividualForm from './components/forms/ClienteIndividualForm.tsx'
+import ClienteOrganizacaoForm from './components/forms/ClienteOrganizacaoForm.tsx'
 
 // Tema global dos componentes MUI
   const theme = createTheme({
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: 'operacoes/criar/pacote', element: <PacoteForm />},
       { path: 'operacoes/criar/licenca', element: <LicencaForm />},
       { path: 'operacoes/criar/cliente-individual', element: <ClienteIndividualForm />},
+      { path: 'operacoes/criar/cliente-organizacao', element: <ClienteOrganizacaoForm />},
       /*
       { path: 'home', element: <Home /> },
       { path: 'docs', element: <Documents /> },

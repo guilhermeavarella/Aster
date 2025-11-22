@@ -41,6 +41,7 @@ public abstract class Cliente{
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", regiao='" + regiao + '\'' +
+                ", continente='" + continente + '\'' +
                 ", telefone='" + telefone + '\'' +
                 '}';
     }

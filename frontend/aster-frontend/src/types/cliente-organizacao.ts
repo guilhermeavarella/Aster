@@ -5,5 +5,6 @@ export type ClienteOrganizacao = {
     regiao: string,
     continente: string,
     telefone: string,
-    atividadeUso: string
+    porte: string,
+    setorAtuacao: string
 }

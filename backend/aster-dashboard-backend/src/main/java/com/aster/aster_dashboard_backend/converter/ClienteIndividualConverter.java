@@ -15,6 +15,7 @@ public class ClienteIndividualConverter {
                 .nome(entity.getNome())
                 .email(entity.getEmail())
                 .regiao(entity.getRegiao())
+                .continente(entity.getContinente())
                 .telefone(entity.getTelefone())
                 .atividadeUso(entity.getAtividadeUso())
                 .build();
@@ -27,6 +28,7 @@ public class ClienteIndividualConverter {
         entity.setNome(dto.getNome());
         entity.setEmail(dto.getEmail());
         entity.setRegiao(dto.getRegiao());
+        entity.setContinente(dto.getContinente());
         entity.setTelefone(dto.getTelefone());
         entity.setAtividadeUso(dto.getAtividadeUso());
 

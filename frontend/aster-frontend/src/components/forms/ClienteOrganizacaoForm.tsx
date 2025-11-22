@@ -3,7 +3,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { ClienteIndividual } from '../../types/cliente-individual.ts'
+import type { ClienteOrganizacao } from '../../types/cliente-organizacao.ts'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
@@ -11,55 +11,58 @@ import Button from '../Button.tsx'
 import { useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
-import { CriarClienteIndividual, EditarClienteIndividual } from '../../actions/cliente/ClienteIndividual.ts'
+import { CriarClienteOrganizacao, EditarClienteOrganizacao } from '../../actions/cliente/ClienteOrganizacao.ts'
 import countries from 'i18n-iso-countries'
 import pt from "i18n-iso-countries/langs/pt.json";
 
 // Schema para validação da entidade
-const ClienteIndividualFormSchema = z.object({
+const ClienteOrganizacaoFormSchema = z.object({
     documento: z.string().min(1, 'Campo obrigatório').max(30, 'Limite máximo de caracteres'),
     nome: z.string().min(1, 'Campo obrigatório').max(40, 'Limite máximo de caracteres'),
     email: z.string().min(1, 'Campo obrigatório').max(30, 'Limite máximo de caracteres').includes('@'),
     regiao: z.string().min(1, 'Campo obrigatório').max(30, 'Limite máximo de caracteres'),
     continente: z.string().min(1, 'Campo obrigatório').max(20, 'Limite máximo de caracteres'),
     telefone: z.string().min(1, 'Campo obrigatório').max(15, 'Limite máximo de caracteres'),
-    atividadeUso: z.string().min(1, 'Campo obrigatório').max(50, 'Limite máximo de caracteres'),
+    porte: z.string().min(1, 'Campo obrigatório').max(20, 'Limite máximo de caracteres'),
+    setorAtuacao: z.string().min(1, 'Campo obrigatório').max(50, 'Limite máximo de caracteres'),
 })
 
-export type ClienteIndividualFormSchemaType = z.infer<typeof ClienteIndividualFormSchema>
+export type ClienteOrganizacaoFormSchemaType = z.infer<typeof ClienteOrganizacaoFormSchema>
 
-type clienteIndividualProps = {
-    clienteIndividual?: ClienteIndividual
+type clienteOrganizacaoProps = {
+    clienteOrganizacao?: ClienteOrganizacao
 }
 
-export default function ClienteIndividualForm({ clienteIndividual }: clienteIndividualProps) {
+export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOrganizacaoProps) {
     // Router
     const navigate = useNavigate()
 
     // Valores padrão do formulário
-    const defaultValues: ClienteIndividualFormSchemaType = {
+    const defaultValues: ClienteOrganizacaoFormSchemaType = {
         documento: '',
         nome: '',
         email: '',
         regiao: '',
         continente: '',
         telefone: '',
-        atividadeUso: ''
+        porte: '',
+        setorAtuacao: ''
     }
 
     // useForm
-    const methods = useForm<ClienteIndividualFormSchemaType>({
+    const methods = useForm<ClienteOrganizacaoFormSchemaType>({
         mode: 'all',
-        resolver: zodResolver(ClienteIndividualFormSchema),
+        resolver: zodResolver(ClienteOrganizacaoFormSchema),
         defaultValues,
-        values: clienteIndividual && {
-            documento: clienteIndividual.documento,
-            nome: clienteIndividual.nome,
-            email: clienteIndividual.email,
-            regiao: clienteIndividual.regiao,
-            continente: clienteIndividual.continente,
-            telefone: clienteIndividual.telefone,
-            atividadeUso: clienteIndividual.atividadeUso
+        values: clienteOrganizacao && {
+            documento: clienteOrganizacao.documento,
+            nome: clienteOrganizacao.nome,
+            email: clienteOrganizacao.email,
+            regiao: clienteOrganizacao.regiao,
+            continente: clienteOrganizacao.continente,
+            telefone: clienteOrganizacao.telefone,
+            porte: clienteOrganizacao.porte,
+            setorAtuacao: clienteOrganizacao.setorAtuacao
         }
     })
 
@@ -80,15 +83,23 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
         'Oceania'
     ]
 
+    // Lista portes
+    const portes = [
+        'Pequena', 
+        'Média',
+        'Grande',
+        'Imensa',
+    ]
+
     // Handler criar/editar
-    const handleCreateEdit: SubmitHandler<ClienteIndividualFormSchemaType> = (async (data) => {
+    const handleCreateEdit: SubmitHandler<ClienteOrganizacaoFormSchemaType> = (async (data) => {
         try {
-            if (clienteIndividual) {
+            if (clienteOrganizacao) {
                 // Hook de edit
-                await EditarClienteIndividual(data)
+                await EditarClienteOrganizacao(data)
                 console.log('Edit - Payload enviado: ' + JSON.stringify(data))
             } else {
-                await CriarClienteIndividual(data)
+                await CriarClienteOrganizacao(data)
                 console.log('Create - Payload enviaod: ' + JSON.stringify(data))
                 // Hook de criar
             }
@@ -111,7 +122,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                     <ProfileMenu />
                 </section>
                 <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
-                    <CardHeader title='Criar - Cliente individual' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
+                    <CardHeader title='Criar - Cliente organização' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
                         sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
                     }}>
                     </CardHeader>
@@ -193,7 +204,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 )}
                             />
                         </Stack>
-                         <Stack sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Stack sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Controller
                                 name="email"
                                 control={control}
@@ -227,13 +238,14 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 )}
                             />
                         </Stack>
-                        <Controller
-                                name="atividadeUso"
+                        <Stack sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Controller
+                                name="setorAtuacao"
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
-                                        label="Atividade de Uso"
-                                        placeholder="Atividade de Uso"
+                                        label="Setor de Atuação"
+                                        placeholder="Setor de Atuação"
                                         value={field.value}
                                         onChange={field.onChange}
                                         onBlur={field.onBlur}
@@ -243,10 +255,30 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                     />
                                 )}
                             />
+                            <Controller
+                                name="porte"
+                                control={control}
+                                render={({ field }) => (
+                                    <StyledInputSelect
+                                        label="Porte"
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        inputRef={field.ref}
+                                        sx={{ width: '48%' }}
+                                    >
+                                        <MenuItem value="">Selecione uma da opções abaixo</MenuItem>
+                                        {portes.map((porte) => (
+                                            <MenuItem value={porte}>{porte}</MenuItem>
+                                        ))}
+                                    </StyledInputSelect>
+                                )}
+                            />
+                        </Stack>
                         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
                             <Button
                                 variant='black'
-                                label={clienteIndividual ? 'Editar ' : 'Criar '}
+                                label={clienteOrganizacao ? 'Editar ' : 'Criar '}
                                 onClick={() => console.log('Payload enviado com sucesso')}
                             >
                             </Button>
