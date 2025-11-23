@@ -6,6 +6,7 @@ import com.aster.aster_dashboard_backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -106,5 +107,18 @@ public class DemografiaService {
 
         return dto;
 
+    }
+
+    public List<Long> findClientesContinente() {
+        List<Long> clientes = new ArrayList<>();
+
+        clientes.add(clienteRepository.countByContinente("América do Sul"));
+        clientes.add(clienteRepository.countByContinente("América do Norte"));
+        clientes.add(clienteRepository.countByContinente("África"));
+        clientes.add(clienteRepository.countByContinente("Ásia"));
+        clientes.add(clienteRepository.countByContinente("Europa"));
+        clientes.add(clienteRepository.countByContinente("Oceania"));
+
+        return clientes;
     }
 }

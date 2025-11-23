@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/painel/i/estrategia")
 public class EstrategiaIController {
@@ -21,5 +23,10 @@ public class EstrategiaIController {
     @GetMapping("/quantidades-entidades")
     public EntidadesDto findQuantidadesEntidades() {
         return demografiaService.getQuantidadesEntidades();
+    }
+
+    @GetMapping("/clientes-continente")
+    public List<Long> findClientesContinente() {
+        return demografiaService.findClientesContinente();
     }
 }
