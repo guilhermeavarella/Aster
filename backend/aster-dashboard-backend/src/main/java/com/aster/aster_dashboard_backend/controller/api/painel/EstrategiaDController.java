@@ -2,6 +2,7 @@ package com.aster.aster_dashboard_backend.controller.api.painel;
 
 import com.aster.aster_dashboard_backend.dto.TotalVendasPacoteDto;
 import com.aster.aster_dashboard_backend.dto.TotalVendasProdutoDto;
+import com.aster.aster_dashboard_backend.dto.VendasMensaisProdutoDto;
 import com.aster.aster_dashboard_backend.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +30,10 @@ public class EstrategiaDController {
     @GetMapping("/total-vendas-pacote")
     public List<TotalVendasPacoteDto> findTotalVendasPacote() {
         return produtoService.findTotalVendasPacote();
+    }
+
+    @GetMapping("/vendas-mensais-produto")
+    public List<VendasMensaisProdutoDto> findVendasMensaisProduto() {
+        return produtoService.findVendasMensaisProduto();
     }
 }
