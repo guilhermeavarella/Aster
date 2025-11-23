@@ -63,6 +63,10 @@ public class ProdutoService {
         return repository.findReceitaTotalProduto();
     }
 
+    public List<ReceitaMensalProdutoDto> findReceitaMensalProduto() {
+        return repository.findReceitaMensalProduto();
+    }
+
     @Transactional
     public void create(ProdutoDto dto) {
         if (dto.getId() == null) {

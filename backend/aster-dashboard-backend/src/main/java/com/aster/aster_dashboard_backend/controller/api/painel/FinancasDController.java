@@ -1,5 +1,7 @@
 package com.aster.aster_dashboard_backend.controller.api.painel;
 
+import com.aster.aster_dashboard_backend.dto.ReceitaMensalPacoteDto;
+import com.aster.aster_dashboard_backend.dto.ReceitaMensalProdutoDto;
 import com.aster.aster_dashboard_backend.dto.ReceitaTotalPacoteDto;
 import com.aster.aster_dashboard_backend.dto.ReceitaTotalProdutoDto;
 import com.aster.aster_dashboard_backend.service.PacoteService;
@@ -32,5 +34,15 @@ public class FinancasDController {
     @GetMapping("/receita-total-pacote")
     public List<ReceitaTotalPacoteDto> findReceitaTotalPacote() {
         return pacoteService.findReceitaTotalPacote();
+    }
+
+    @GetMapping("/receita-mensal-produto")
+    public List<ReceitaMensalProdutoDto> findReceitaMensalProduto() {
+        return produtoService.findReceitaMensalProduto();
+    }
+
+    @GetMapping("/receita-mensal-pacote")
+    public List<ReceitaMensalPacoteDto> findReceitaMensalPacote() {
+        return pacoteService.findReceitaMensalPacote();
     }
 }

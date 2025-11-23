@@ -1,5 +1,6 @@
 package com.aster.aster_dashboard_backend.repository;
 
+import com.aster.aster_dashboard_backend.dto.ReceitaMensalPacoteDto;
 import com.aster.aster_dashboard_backend.dto.ReceitaTotalPacoteDto;
 import com.aster.aster_dashboard_backend.dto.TotalVendasPacoteDto;
 import com.aster.aster_dashboard_backend.dto.VendasMensaisPacoteDto;
@@ -37,4 +38,13 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
         GROUP BY p.nome
     """)
     public List<ReceitaTotalPacoteDto> findReceitaTotalPacote();
+
+    @Query("""
+        SELECT new com.aster.aster_dashboard_backend.dto.ReceitaMensalPacoteDto(p.nome, DATE_TRUNC('month', l.dataRegistro), CAST((SUM(p.precoIndividual) + SUM(p.precoOrganizacional)) AS bigdecimal))
+        FROM Adquire a
+        LEFT JOIN Licenca l ON a.id.licencaId = l.id
+        LEFT JOIN Pacote p ON a.id.pacoteNome = p.nome
+        GROUP BY DATE_TRUNC('month', l.dataRegistro), p.nome
+    """)
+    public List<ReceitaMensalPacoteDto> findReceitaMensalPacote();
 }
