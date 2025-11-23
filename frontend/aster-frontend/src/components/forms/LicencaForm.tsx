@@ -9,12 +9,9 @@ import { EditarLicenca, CriarLicenca } from '../../actions/Licenca.ts'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box, Checkbox, FormControlLabel } from '@mui/material'
 import { ListProduto } from '../../actions/Produto.ts'
 import StyledInputText from '../mui/InputText.tsx'
-import StyledInputTextArea from '../mui/InputTextArea.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
-import StyledInputMultiSelect from '../mui/InputMultiSelect.tsx'
 import Button from '../Button.tsx'
 import { useEffect, useState } from 'react'
-import { type SelectChangeEvent } from '@mui/material'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import type { ProdutoFormSchemaType } from './ProdutoForm.tsx'
@@ -228,5 +225,4 @@ export default function LicencaForm({ licenca }: licencaProps) {
             </Stack>
         </form>
     )
-
 }
