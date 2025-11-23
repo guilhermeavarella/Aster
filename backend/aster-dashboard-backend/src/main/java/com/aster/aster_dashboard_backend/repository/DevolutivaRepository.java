@@ -1,12 +1,9 @@
 package com.aster.aster_dashboard_backend.repository;
 
-import com.aster.aster_dashboard_backend.entity.Licenca;
+import com.aster.aster_dashboard_backend.entity.Devolutiva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LicencaRepository extends JpaRepository<Licenca, String> {
-
-    long countByAtiva(Boolean ativa);
-
+public interface DevolutivaRepository extends JpaRepository<Devolutiva, String> {
 }
