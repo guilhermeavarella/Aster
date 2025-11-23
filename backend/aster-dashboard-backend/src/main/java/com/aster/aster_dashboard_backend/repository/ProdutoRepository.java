@@ -45,4 +45,15 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         GROUP BY DATE_TRUNC('month', l.dataRegistro), p.nome
     """)
     public List<VendasMensaisProdutoDto> findVendasMensaisProduto();
+
+    @Query("""
+        SELECT new com.aster.aster_dashboard_backend.dto.ReceitaTotalProdutoDto(p.nome, CAST((SUM(pct.precoIndividual) + SUM(pct.precoOrganizacional)) AS bigdecimal))
+        FROM Adquire a
+        LEFT JOIN Pacote pct ON a.id.pacoteNome = pct.nome
+        LEFT JOIN Contem c ON c.id.pacoteNome = pct.nome
+        LEFT JOIN Produto p ON p.id = c.id.produtoId
+        WHERE pct.nome IN ('Nova', 'Celeste', 'Solaris', 'Eclipt', 'PrismaCut', 'EtherFX', 'Framea', 'Aikonic', 'Orbit', 'Graphia', 'Nebula3D', 'Spectra', 'ScreenFlow', 'LumenFrame', 'AuraPaint', 'LumenDraw', 'Picta', 'BloomBank', 'ChromaSwap')
+        GROUP BY p.nome
+    """)
+    public List<ReceitaTotalProdutoDto> findReceitaTotalProduto();
 }
