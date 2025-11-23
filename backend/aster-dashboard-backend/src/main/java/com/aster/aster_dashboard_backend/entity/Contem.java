@@ -44,6 +44,8 @@ public class Contem {
     public String toString() {
         return "Contem{" +
                 "id=" + id +
+                ", produto=" + produto +
+                ", pacote=" + pacote +
                 '}';
     }
 }
