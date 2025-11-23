@@ -55,10 +55,6 @@ public class ProdutoService {
         return repository.findTotalVendasProduto();
     }
 
-    public List<TotalVendasPacoteDto> findTotalVendasPacote() {
-        return repository.findTotalVendasPacote();
-    }
-
     public List<VendasMensaisProdutoDto> findVendasMensaisProduto() {
         return repository.findVendasMensaisProduto();
     }
