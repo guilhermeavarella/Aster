@@ -1,5 +1,6 @@
 package com.aster.aster_dashboard_backend.service;
 
+import com.aster.aster_dashboard_backend.dto.ClientesPaisDto;
 import com.aster.aster_dashboard_backend.dto.EntidadesDto;
 import com.aster.aster_dashboard_backend.dto.QuantidadeDto;
 import com.aster.aster_dashboard_backend.repository.*;
@@ -120,5 +121,9 @@ public class DemografiaService {
         clientes.add(clienteRepository.countByContinente("Oceania"));
 
         return clientes;
+    }
+
+    public List<ClientesPaisDto> findClientesPais() {
+        return clienteRepository.countByRegiao();
     }
 }
