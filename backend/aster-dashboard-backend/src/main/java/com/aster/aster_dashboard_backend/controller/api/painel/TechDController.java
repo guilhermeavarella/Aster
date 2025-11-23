@@ -1,9 +1,10 @@
 package com.aster.aster_dashboard_backend.controller.api.painel;
 
 import com.aster.aster_dashboard_backend.dto.MediaAvaliacoesPacoteDto;
+import com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto;
 import com.aster.aster_dashboard_backend.dto.UsuariosProdutoDto;
-import com.aster.aster_dashboard_backend.repository.UsuarioRepository;
 import com.aster.aster_dashboard_backend.service.PacoteService;
+import com.aster.aster_dashboard_backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +16,11 @@ import java.util.List;
 @RequestMapping("/api/painel/d/tech")
 public class TechDController {
 
-    private UsuarioRepository usuarioService;
+    private UsuarioService usuarioService;
     private PacoteService pacoteService;
 
     @Autowired
-    public TechDController(UsuarioRepository usuarioService, PacoteService pacoteService) {
+    public TechDController(UsuarioService usuarioService, PacoteService pacoteService) {
         this.usuarioService = usuarioService;
         this.pacoteService = pacoteService;
     }
@@ -32,5 +33,10 @@ public class TechDController {
     @GetMapping("/media-avaliacoes-pacote")
     public List<MediaAvaliacoesPacoteDto> findMediaAvaliacoesPacote() {
         return pacoteService.findMediaAvaliacoesPacote();
+    }
+
+    @GetMapping("/usuarios-mensais-produto")
+    public List<UsuariosMensaisProdutoDto> findUsuariosMensaisProduto() {
+        return usuarioService.findUsuariosMensaisProduto();
     }
 }

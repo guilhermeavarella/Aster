@@ -1,5 +1,6 @@
 package com.aster.aster_dashboard_backend.repository;
 
+import com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto;
 import com.aster.aster_dashboard_backend.dto.UsuariosProdutoDto;
 import com.aster.aster_dashboard_backend.entity.Usuario;
 import org.springframework.data.domain.Page;
@@ -23,4 +24,13 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
         GROUP BY p.nome
     """)
     public List<UsuariosProdutoDto> findUsuariosProduto();
+
+    @Query("""
+        SELECT new com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto(p.nome, DATE_TRUNC('month', l.dataRegistro), COUNT(u.id.usuarioChaveUso))
+        FROM Usa u
+        JOIN Licenca l ON u.id.licencaId = l.id
+        JOIN Produto p ON l.produto.id = p.id
+        GROUP BY DATE_TRUNC('month', l.dataRegistro), p.nome
+    """)
+    public List<UsuariosMensaisProdutoDto> findUsuariosMensaisProduto();
 }

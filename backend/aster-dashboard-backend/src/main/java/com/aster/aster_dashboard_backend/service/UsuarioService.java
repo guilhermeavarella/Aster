@@ -1,6 +1,7 @@
 package com.aster.aster_dashboard_backend.service;
 
 import com.aster.aster_dashboard_backend.dto.UsuarioDto;
+import com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto;
 import com.aster.aster_dashboard_backend.dto.UsuariosProdutoDto;
 import com.aster.aster_dashboard_backend.entity.Usuario;
 import com.aster.aster_dashboard_backend.repository.UsuarioRepository;
@@ -38,8 +39,12 @@ public class UsuarioService {
         return result.get();
     }
 
-    public List<UsuariosProdutoDto> findUsuariosProdutos() {
+    public List<UsuariosProdutoDto> findUsuariosProduto() {
         return repository.findUsuariosProduto();
+    }
+
+    public List<UsuariosMensaisProdutoDto> findUsuariosMensaisProduto() {
+        return repository.findUsuariosMensaisProduto();
     }
 
     @Transactional
