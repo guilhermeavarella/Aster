@@ -17,6 +17,6 @@ public class AdquireDto {
     
     private List<String> licencaId;
     private String pacoteNome;
-    private string clienteDocumento
+    private String clienteDocumento;
 
 }

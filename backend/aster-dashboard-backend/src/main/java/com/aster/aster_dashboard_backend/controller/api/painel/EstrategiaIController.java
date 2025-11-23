@@ -1,5 +1,6 @@
 package com.aster.aster_dashboard_backend.controller.api.painel;
 
+import com.aster.aster_dashboard_backend.dto.ClientesPaisDto;
 import com.aster.aster_dashboard_backend.dto.EntidadesDto;
 import com.aster.aster_dashboard_backend.service.DemografiaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class EstrategiaIController {
     @GetMapping("/clientes-continente")
     public List<Long> findClientesContinente() {
         return demografiaService.findClientesContinente();
+    }
+
+    @GetMapping("/clientes-pais")
+    public List<ClientesPaisDto> findClientesPais() {
+        return demografiaService.findClientesPais();
     }
 }
