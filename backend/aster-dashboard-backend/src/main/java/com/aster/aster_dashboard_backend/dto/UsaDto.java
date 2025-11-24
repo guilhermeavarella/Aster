@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class UsaDto {
     
-    private List<String> usuariosChaveUso;
+    private String usuarioChaveUso;
     private String licencaId;
     private String clienteDocumento;
 

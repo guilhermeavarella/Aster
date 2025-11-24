@@ -4,23 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aster.aster_dashboard_backend.converter.ContemConverter;
 import com.aster.aster_dashboard_backend.dto.ContemDto;
-import com.aster.aster_dashboard_backend.dto.DevolutivaFeedbackDto;
-import com.aster.aster_dashboard_backend.dto.PacoteDto;
-import com.aster.aster_dashboard_backend.dto.ProdutoDto;
 import com.aster.aster_dashboard_backend.entity.Contem;
-import com.aster.aster_dashboard_backend.entity.Feedback;
 import com.aster.aster_dashboard_backend.entity.Pacote;
 import com.aster.aster_dashboard_backend.entity.Produto;
-import com.aster.aster_dashboard_backend.entity.ProdutoVersao;
 import com.aster.aster_dashboard_backend.entity.id.ContemId;
-import com.aster.aster_dashboard_backend.entity.id.ProdutoVersaoId;
 import com.aster.aster_dashboard_backend.repository.ContemRepository;
 import com.aster.aster_dashboard_backend.repository.PacoteRepository;
 import com.aster.aster_dashboard_backend.repository.ProdutoRepository;
