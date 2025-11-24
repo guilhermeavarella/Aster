@@ -41,6 +41,7 @@ public interface AdquireRepository extends JpaRepository<Adquire, AdquireId> {
         
         SELECT
             m.mes::date AS data,
+            ROUND(
             SUM(
                 CASE
                     WHEN m.tipo = 'Mensal' THEN
@@ -63,7 +64,7 @@ public interface AdquireRepository extends JpaRepository<Adquire, AdquireId> {
         
                     ELSE 0
                 END
-            ) AS vendas
+            ), 2) AS vendas
         FROM meses_licenca m
         LEFT JOIN INDIVIDUAL i ON i.cliente_documento = m.cliente_documento
         LEFT JOIN ORGANIZACAO o ON o.cliente_documento = m.cliente_documento

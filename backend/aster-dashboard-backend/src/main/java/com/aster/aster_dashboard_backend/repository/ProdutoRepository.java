@@ -51,8 +51,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
     @Query(value = """
         SELECT
             pr.nome AS produto,
+            ROUND(
             SUM(
-                CASE\s
+                CASE
                     WHEN l.tipo = 'Mensal' THEN
                         CASE
                             WHEN i.cliente_documento IS NOT NULL THEN p.preco_individual
@@ -70,7 +71,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
                         END
                     ELSE 0
                 END
-            ) AS receita
+            ), 2) AS receita
         FROM PRODUTO pr
         JOIN CONTEM c ON c.produto_id = pr.id
         JOIN PACOTE p ON p.nome = c.pacote_nome
@@ -78,7 +79,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         JOIN LICENCA l ON l.id = a.licenca_id
         LEFT JOIN INDIVIDUAL i ON i.cliente_documento = a.cliente_documento
         LEFT JOIN ORGANIZACAO o ON o.cliente_documento = a.cliente_documento
-        WHERE pr.status = 'Comercializável'
+        WHERE pr.status = 'Comercializável' AND l.ativa = TRUE
         GROUP BY pr.nome
         ORDER BY pr.nome
     """, nativeQuery = true)
@@ -90,6 +91,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
                 l.id AS licenca_id,
                 l.tipo,
                 l.data_registro,
+                l.ativa,
                 a.cliente_documento,
                 c.produto_id,
                 p.preco_individual,
@@ -98,7 +100,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         
                 generate_series(
                     date_trunc('month', l.data_registro),
-                    CASE\s
+                    CASE
                         WHEN l.tipo = 'Mensal' THEN date_trunc('month', l.data_registro)
                         WHEN l.tipo = 'Anual' THEN date_trunc('month', l.data_registro) + interval '11 month'
                         WHEN l.tipo = 'Vitalícia' THEN date_trunc('month', CURRENT_DATE)
@@ -115,7 +117,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         SELECT
             pr.nome AS produto,
             m.mes::date AS data,   -- retorno como DATE
-        
+            ROUND(
             SUM(
                 CASE
                     WHEN m.tipo = 'Mensal' THEN
@@ -138,13 +140,13 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         
                     ELSE 0
                 END
-            ) AS vendas
+            ), 2) AS vendas
         
         FROM meses_licenca m
         JOIN PRODUTO pr ON pr.id = m.produto_id
         LEFT JOIN INDIVIDUAL i ON i.cliente_documento = m.cliente_documento
         LEFT JOIN ORGANIZACAO o ON o.cliente_documento = m.cliente_documento
-        WHERE pr.status = 'Comercializável'
+        WHERE pr.status = 'Comercializável' AND m.ativa = TRUE
         GROUP BY pr.nome, m.mes
         ORDER BY pr.nome, m.mes
     """, nativeQuery = true)

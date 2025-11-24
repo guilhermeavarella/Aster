@@ -31,6 +31,7 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
     @Query(value = """
         SELECT
             p.nome AS pacote,
+            ROUND(
             SUM(
                 CASE
                     WHEN l.tipo = 'Mensal' THEN
@@ -54,12 +55,13 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
         
                     ELSE 0
                 END
-            ) AS receita
+            ), 2) AS receita
         FROM PACOTE p
         JOIN ADQUIRE a ON a.pacote_nome = p.nome
         JOIN LICENCA l ON l.id = a.licenca_id
         LEFT JOIN INDIVIDUAL i ON i.cliente_documento = a.cliente_documento
         LEFT JOIN ORGANIZACAO o ON o.cliente_documento = a.cliente_documento
+        WHERE l.ativa = TRUE
         GROUP BY p.nome
         ORDER BY p.nome
     """, nativeQuery = true)
@@ -71,6 +73,7 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
                 l.id AS licenca_id,
                 l.tipo,
                 l.data_registro,
+                l.ativa,
                 a.cliente_documento,
                 a.pacote_nome,
                 p.preco_individual,
@@ -94,6 +97,7 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
         SELECT
             m.pacote_nome AS pacote,
             m.mes::date AS data,
+            ROUND(
             SUM(
                 CASE
                     WHEN m.tipo = 'Mensal' THEN
@@ -116,10 +120,11 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
         
                     ELSE 0
                 END
-            ) AS vendas
+            ), 2) AS vendas
         FROM meses_licenca m
         LEFT JOIN INDIVIDUAL i ON i.cliente_documento = m.cliente_documento
         LEFT JOIN ORGANIZACAO o ON o.cliente_documento = m.cliente_documento
+        WHERE m.ativa = TRUE
         GROUP BY m.pacote_nome, m.mes
         ORDER BY m.pacote_nome, m.mes
     """, nativeQuery = true)
