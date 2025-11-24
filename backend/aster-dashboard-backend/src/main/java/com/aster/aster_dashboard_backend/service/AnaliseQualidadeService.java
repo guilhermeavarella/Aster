@@ -2,11 +2,14 @@ package com.aster.aster_dashboard_backend.service;
 
 import com.aster.aster_dashboard_backend.dto.PorcentagemDto;
 import com.aster.aster_dashboard_backend.dto.QuantidadeDto;
+import com.aster.aster_dashboard_backend.dto.UsuarioComClienteDto;
 import com.aster.aster_dashboard_backend.dto.VersaoDto;
 import com.aster.aster_dashboard_backend.repository.LicencaRepository;
 import com.aster.aster_dashboard_backend.repository.ProdutoVersaoRepository;
 import com.aster.aster_dashboard_backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -46,5 +49,18 @@ public class AnaliseQualidadeService {
 
     public List<VersaoDto> findVersoesMaisRecentes() {
         return produtoVersaoRepository.findVersoesMaisRecentes();
+    }
+
+    public Page<UsuarioComClienteDto> findUsuarioComClientePaginated(int page) {
+        return usuarioRepository.findUsuarioComClientePaginated(PageRequest.of(page, 15));
+    }
+
+    public List<QuantidadeDto> findUsuariosTipoCliente() {
+        List<Object[]> lista = usuarioRepository.findUsuariosTipoCliente();
+        return lista.stream().map(o -> new QuantidadeDto(
+                ((Integer)o[0]),
+                ((Long) o[1]),
+                (o[2].toString())
+        )).toList();
     }
 }

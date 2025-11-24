@@ -1,5 +1,6 @@
 package com.aster.aster_dashboard_backend.repository;
 
+import com.aster.aster_dashboard_backend.dto.UsuarioComClienteDto;
 import com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto;
 import com.aster.aster_dashboard_backend.dto.UsuariosProdutoDto;
 import com.aster.aster_dashboard_backend.entity.Usuario;
@@ -77,4 +78,50 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
         ORDER BY pr.nome
     """, nativeQuery=true)
     public List<Object[]> findUsuariosTotalProduto();
+
+    @Query(value= """
+        SELECT new com.aster.aster_dashboard_backend.dto.UsuarioComClienteDto(c.nome, u.chaveUso)
+        FROM Usuario u
+        JOIN Usa usa ON usa.usuario.chaveUso = u.chaveUso
+        JOIN Cliente c ON usa.cliente.documento = c.documento
+    """, countQuery= """
+        SELECT COUNT(u.chaveUso)
+        FROM Usuario u
+        JOIN Usa usa ON usa.usuario.chaveUso = u.chaveUso
+        JOIN Cliente c ON usa.cliente.documento = c.documento
+    """)
+    public Page<UsuarioComClienteDto> findUsuarioComClientePaginated(Pageable pageable);
+
+    @Query(value = """
+        WITH usuarios_tipo AS (
+            SELECT
+                u.usuario_chave_uso,
+                CASE
+                    WHEN i.cliente_documento IS NOT NULL THEN 'Individual'
+                    ELSE 'Organizacional'
+                END AS tipo_cliente
+            FROM USA u
+            JOIN LICENCA l ON l.id = u.licenca_id
+            LEFT JOIN INDIVIDUAL i ON i.cliente_documento = u.cliente_documento
+            LEFT JOIN ORGANIZACAO o ON o.cliente_documento = u.cliente_documento
+            WHERE l.ativa = TRUE
+        )
+        
+        SELECT
+            0 AS id,
+            COUNT(DISTINCT usuario_chave_uso) AS value,
+            'Usuários individuais' AS label
+        FROM usuarios_tipo
+        WHERE tipo_cliente = 'Individual'
+        
+        UNION ALL
+        
+        SELECT
+            1 AS id,
+            COUNT(DISTINCT usuario_chave_uso) AS value,
+            'Usuários organizacionais' AS label
+        FROM usuarios_tipo
+        WHERE tipo_cliente = 'Organizacional'
+    """, nativeQuery = true)
+    public List<Object[]> findUsuariosTipoCliente();
 }
