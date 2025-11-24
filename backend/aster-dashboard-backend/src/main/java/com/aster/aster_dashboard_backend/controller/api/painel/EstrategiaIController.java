@@ -46,4 +46,9 @@ public class EstrategiaIController {
     public List<PorcentagemDto> findPorcentagemAtividadeUso() {
         return demografiaService.findPorcentagemAtividadeUso();
     }
+
+    @GetMapping("/porcentagem-porte")
+    public List<PorcentagemDto> findPorcentagemPorte() {
+        return demografiaService.findPorcentagemPorte();
+    }
 }

@@ -52,4 +52,34 @@ public interface ClienteOrganizacaoRepository extends JpaRepository<Organizacao,
         ORDER BY id
     """, nativeQuery = true)
     public List<Object[]> findPorcentagemSetorAtuacao();
+
+    @Query(value= """
+        WITH base AS (
+            SELECT
+                TRIM(porte) AS porte,
+                COUNT(*) AS qtd
+            FROM organizacao
+            GROUP BY TRIM(porte)
+        ),
+        
+        total AS (
+            SELECT SUM(qtd) AS total_geral
+            FROM base
+        ),
+        
+        com_porcentagem AS (
+            SELECT
+                porte,
+                ROUND(100.0 * qtd / total_geral, 2) AS porcentagem
+            FROM base, total
+        )
+        
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY porcentagem DESC) AS id,
+            porcentagem,
+            porte
+        FROM com_porcentagem
+        ORDER BY id
+    """, nativeQuery = true)
+    public List<Object[]> findPorcentagemPorte();
 }

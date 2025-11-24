@@ -150,4 +150,13 @@ public class DemografiaService {
                 (o[2].toString())
         )).toList();
     }
+
+    public List<PorcentagemDto> findPorcentagemPorte() {
+        List<Object[]> lista = clienteOrganizacaoRepository.findPorcentagemPorte();
+        return lista.stream().map(o -> new PorcentagemDto(
+                (((Long) o[0]).intValue()),
+                ((BigDecimal) o[1]),
+                (o[2].toString())
+        )).toList();
+    }
 }
