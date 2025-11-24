@@ -30,7 +30,7 @@ export default function SubmitDialog({ label, handleSubmit }: { label: string, h
                     alignItems: 'center',
                     gap: '10px',
                     backgroundColor: '#3D3E4A',
-                    boxShadow: '2px 4px 4px 0 rgba(0, 0, 0, 0.25)',
+                    boxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.25)',
                     borderRadius: '80px',
                     borderColor: '#3D3E4A'
                 }}>
@@ -124,7 +124,7 @@ export default function SubmitDialog({ label, handleSubmit }: { label: string, h
                             fontStyle: 'normal',
                             fontWeight: '700',
                             lineHeight: 'normal',
-                            color: 'black',
+                            color: 'var(--content-primary)',
                             textTransform: 'capitalize'
                         }}
                     >Cancelar</Button>

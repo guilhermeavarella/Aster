@@ -123,9 +123,9 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Devolutiva feedback' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -192,7 +192,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                                                 fontSize: '20px',
                                                                 padding: '0 6px 0 0px',
                                                                 backgroundColor: "#fff",
-                                                                color: 'black'
+                                                                color: 'var(--content-primary)'
                                                             },
                                                             "& .MuiPickersInputBase-root": {
                                                                 height: 50,

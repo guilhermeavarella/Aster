@@ -12,7 +12,7 @@ const InputTextArea = styled(TextField)<TextFieldProps>(() => ({
     '& .MuiFormLabel-root': {
         fontSize: '20px',
         fontWeight: 'bold',
-        color: 'black',
+        color: 'var(--content-primary)',
         backgroundColor: '#fff',
         padding: '0 6px 0 0px',
     },

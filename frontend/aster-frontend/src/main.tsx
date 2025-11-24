@@ -4,6 +4,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import Login from './pages/Login.tsx'
+import Devolutivas from './pages/Devolutivas.tsx'
+import Home from './pages/Home.tsx'
+import Documentacao from './pages/Documentacao.tsx'
+import { painelRoutes } from './pages/Painel.tsx'
 import Exibir from './pages/Exibir.tsx'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@mui/material'
@@ -43,9 +47,9 @@ const router = createBrowserRouter([
       { path: 'operacoes/criar/devolutiva-feedback', element: <DevolutivaFeedbackForm />},
       { path: 'operacoes/criar/devolutiva-ticket', element: <DevolutivaTicketForm />},
       { path: 'operacoes/criar/usuario', element: <UsuarioForm />},
-      /*
+
       { path: 'home', element: <Home /> },
-      { path: 'docs', element: <Documents /> },
+      { path: 'docs', element: <Documentacao /> },
 
       { path: 'operacoes/exibir/:entidade', element: <Exibir /> }, /*
       { path: 'operacoes/alterar/:entidade/:regId', element: <Alterar /> },
@@ -61,8 +65,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider theme={theme}>
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
   </ThemeProvider>
 )
