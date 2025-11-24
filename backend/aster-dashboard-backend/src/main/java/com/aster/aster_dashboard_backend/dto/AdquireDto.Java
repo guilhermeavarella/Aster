@@ -1,7 +1,5 @@
 package com.aster.aster_dashboard_backend.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +13,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class AdquireDto {
     
-    private List<String> licencaId;
+    private String licencaId;
     private String pacoteNome;
-    private string clienteDocumento
+    private String clienteDocumento;
 
 }
