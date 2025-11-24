@@ -25,6 +25,7 @@ public class DemografiaService {
     private DevolutivaRepository devolutivaRepository;
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
     public DemografiaService(LicencaRepository licencaRepository, ProdutoRepository produtoRepository, ProdutoVersaoRepository produtoVersaoRepository, ClienteRepository clienteRepository, ClienteOrganizacaoRepository clienteOrganizacaoRepository, ClienteIndividualRepository clienteIndividualRepository, PacoteRepository pacoteRepository, DevolutivaRepository devolutivaRepository, UsuarioRepository usuarioRepository) {
         this.licencaRepository = licencaRepository;
         this.produtoRepository = produtoRepository;
@@ -36,9 +37,6 @@ public class DemografiaService {
         this.devolutivaRepository = devolutivaRepository;
         this.usuarioRepository = usuarioRepository;
     }
-
-    @Autowired
-
 
     public EntidadesDto getQuantidadesEntidades() {
         EntidadesDto dto = new EntidadesDto();
@@ -137,6 +135,15 @@ public class DemografiaService {
 
     public List<PorcentagemDto> findPorcentagemSetorAtuacao() {
         List<Object[]> lista = clienteOrganizacaoRepository.findPorcentagemSetorAtuacao();
+        return lista.stream().map(o -> new PorcentagemDto(
+                (((Long) o[0]).intValue()),
+                ((BigDecimal) o[1]),
+                (o[2].toString())
+        )).toList();
+    }
+
+    public List<PorcentagemDto> findPorcentagemAtividadeUso() {
+        List<Object[]> lista = clienteIndividualRepository.findPorcentagemAtividadeUso();
         return lista.stream().map(o -> new PorcentagemDto(
                 (((Long) o[0]).intValue()),
                 ((BigDecimal) o[1]),
