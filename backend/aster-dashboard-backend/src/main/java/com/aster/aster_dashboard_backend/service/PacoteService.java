@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,11 +51,20 @@ public class PacoteService {
     }
 
     public List<ReceitaTotalPacoteDto> findReceitaTotalPacote() {
-        return repository.findReceitaTotalPacote();
+        List<Object[]> lista = repository.findReceitaTotalPacote();
+        return lista.stream().map(o -> new ReceitaTotalPacoteDto(
+                (o[0].toString()),
+                ((BigDecimal) o[1])
+        )).toList();
     }
 
     public List<ReceitaMensalPacoteDto> findReceitaMensalPacote() {
-        return repository.findReceitaMensalPacote();
+        List<Object[]> lista = repository.findReceitaMensalPacote();
+        return lista.stream().map(o-> new ReceitaMensalPacoteDto(
+                (o[0].toString()),
+                ((Date) o[1]),
+                ((BigDecimal) o[2])
+        )).toList();
     }
 
     public List<MediaAvaliacoesPacoteDto> findMediaAvaliacoesPacote() {

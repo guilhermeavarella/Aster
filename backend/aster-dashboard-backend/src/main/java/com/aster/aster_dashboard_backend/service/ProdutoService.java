@@ -13,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,11 +63,20 @@ public class ProdutoService {
     }
 
     public List<ReceitaTotalProdutoDto> findReceitaTotalProduto() {
-        return repository.findReceitaTotalProduto();
+        List<Object[]> lista = repository.findReceitaTotalProduto();
+        return lista.stream().map(o -> new ReceitaTotalProdutoDto(
+                (o[0].toString()),
+                ((BigDecimal) o[1])
+        )).toList();
     }
 
     public List<ReceitaMensalProdutoDto> findReceitaMensalProduto() {
-        return repository.findReceitaMensalProduto();
+        List<Object[]> lista = repository.findReceitaMensalProduto();
+        return lista.stream().map(o-> new ReceitaMensalProdutoDto(
+                (o[0].toString()),
+                ((Date) o[1]),
+                ((BigDecimal) o[2])
+        )).toList();
     }
 
     @Transactional

@@ -3,6 +3,7 @@ package com.aster.aster_dashboard_backend.dto;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Getter
@@ -13,6 +14,6 @@ import java.time.LocalDate;
 public class ReceitaMensalPacoteDto {
 
     private String pacote;
-    private LocalDate data;
+    private Date data;
     private BigDecimal receita;
 }
