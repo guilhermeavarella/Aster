@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import About from './pages/About.tsx'
+import Contato from './pages/Contato.tsx'
 import { createTheme, ThemeProvider } from '@mui/material'
 
 // Tema global dos componentes MUI
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       // { path: 'landing', element: <Landing /> },
       // { path: 'galeria', element: <Galeria /> },
       { path: 'sobre', element: <About /> },
-      // { path: 'contato', element: <Contact />},
+      { path: 'contato', element: <Contato />},
     ]
   }
 ])
