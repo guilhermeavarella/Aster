@@ -14,7 +14,6 @@ type ProfileType = {
 const profiles: ProfileType[] = [
     {
         foto: 'profile_danilo.png',
-        // foto: '',
         linkedin: 'www.linkedin.com/in/danilo-nishimoto',
         atividades: ['Desenvolvimento Front End', 'Ideação da identidade visual'],
         vulgo: '"Danillo"',

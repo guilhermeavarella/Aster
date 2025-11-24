@@ -1,13 +1,13 @@
-import { Box, Link, Stack } from "@mui/material";
+import { Box, createTheme, Link, Stack } from "@mui/material";
 import PlainButton from "./mui/PlainButton";
-import AsterLogo from '../assets/icons/aster_logo.svg'
+import AsterLogo from '../assets/icons/aster_logo_white.svg'
 import { useNavigate } from "react-router-dom";
 
-export default function NavTop({backgroundColor}: {backgroundColor: string}) {
+export default function NavTop() {
     const navigate = useNavigate()
 
     return (
-        <Stack sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',alignItems: 'center', padding: '8px 128px', width: '100%', backgroundColor: `${backgroundColor}`, position: 'absolute', zIndex: 10}}>
+        <Stack sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',alignItems: 'center', padding: '8px 128px', width: '100%', backgroundColor: 'transparent', position: 'absolute', zIndex: 10}}>
             <Box sx={{
                 width: '120px',
                 height: '50px',
@@ -16,9 +16,9 @@ export default function NavTop({backgroundColor}: {backgroundColor: string}) {
                 backgroundRepeat: 'no-repeat'
             }}/>
             <Stack direction={'row'} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} spacing={4}>
-                <Link underline="none" sx={{color: 'black'}} component='button' onClick={() => {navigate('/galeria')}}>Produtos</Link>
-                <Link underline="none" sx={{color: 'black'}} component='button' onClick={() => {navigate('/sobre')}}>Sobre nós</Link>
-                <Link underline="none" sx={{color: 'black'}} component='button' onClick={() => {navigate('/contato')}}>Contato</Link>
+                <Link underline="none" sx={{color: 'white'}} component='button' onClick={() => {navigate('/galeria')}}>Produtos</Link>
+                <Link underline="none" sx={{color: 'white'}} component='button' onClick={() => {navigate('/sobre')}}>Sobre nós</Link>
+                <Link underline="none" sx={{color: 'white'}} component='button' onClick={() => {navigate('/contato')}}>Contato</Link>
                 <PlainButton>
                     Comece a criar
                 </PlainButton>
