@@ -8,7 +8,7 @@ import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/materia
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarDevolutivaTicket, EditarDevolutivaTicket } from '../../actions/devolutiva/DevolutivaTicket.ts'
@@ -44,6 +44,10 @@ type devolutivaTicketProps = {
 export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTicketProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    devolutivaTicket = dados;
 
     // Valores padrão do formulário
     const defaultValues: DevolutivaTicketFormSchemaType = {
@@ -89,7 +93,7 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                 await CriarDevolutivaTicket({ ...data, dataEnvio: dayjs(data.dataEnvio).format('YYYY-MM-DD') })
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/devolutiva-ticket")
         } catch (error) {
             console.log(error)
         }

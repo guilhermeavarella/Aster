@@ -23,6 +23,11 @@ import DevolutivaFeedbackForm from './components/forms/DevolutivaFeedbackForm.ts
 import DevolutivaTicketForm from './components/forms/DevolutivaTicketForm.tsx'
 import UsuarioForm from './components/forms/UsuarioForm.tsx'
 
+// ----- Forms -----
+// Criar: Para usar a função de Criar basta acessar o element de formulário da entidade desejada
+// Editar: Para usar a função de Editar deve-se passar um registro da entidade para o element
+
+
 // Tema global dos componentes MUI
   const theme = createTheme({
     typography: {
@@ -38,7 +43,7 @@ const router = createBrowserRouter([
       { index: true, element: <Login /> },
 
       { path: 'login', element: <Login /> },
-      { path: 'operacoes/criar/produto', element: <ProdutoForm />},
+      { path: 'operacoes/form/produto', element: <ProdutoForm />},
       { path: 'operacoes/criar/versao', element: <VersaoForm />},
       { path: 'operacoes/criar/pacote', element: <PacoteForm />},
       { path: 'operacoes/criar/licenca', element: <LicencaForm />},

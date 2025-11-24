@@ -8,7 +8,7 @@ import { Stack, Card, CardHeader, Typography, MenuItem, Box, FormControlLabel } 
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarDevolutivaFeedback, EditarDevolutivaFeedback } from '../../actions/devolutiva/DevolutivaFeedback.ts'
@@ -46,6 +46,10 @@ type devolutivaFeedbackProps = {
 export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutivaFeedbackProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    devolutivaFeedback = dados;
 
     // Valores padrão do formulário
     const defaultValues: DevolutivaFeedbackFormSchemaType = {
@@ -91,7 +95,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                 await CriarDevolutivaFeedback({ ...data, dataEnvio: dayjs(data.dataEnvio).format('YYYY-MM-DD') })
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/devolutiva-feedback")
         } catch (error) {
             console.log(error)
         }

@@ -37,12 +37,14 @@ export default function Login() {
     };*/
 
     const criarRegistro = () => {
-        navigate(`/criar/${entidade}`);
+        navigate(`/operacoes/form/${entidade}`);
     }
 
     const alterarRegistro = () => {
-        navigate(`/alterar/${entidade}/${selectedRegister?.id ?? ""}`);
+        console.log('a' + selectedRegister)
+        navigate(`/operacoes/form/${entidade}`, {state: { selectedRegister }});
     }
+
 
     const deletarRegistro = () => {
         // implementar hook de deleção
@@ -138,7 +140,7 @@ export default function Login() {
                                 <tr 
                                     key={item.id}
                                     className="bg-[var(--surface-700)] hover:bg-[var(--surface-600)] cursor-pointer border-b border-[var(--content-inverse)]"
-                                    onClick={() => { setSelectedRegister(item); setOpenModal(true); }}
+                                    onClick={() => { setSelectedRegister(item); setOpenModal(true);}}
                                 >
                                     {template.displayed.map((attrKey: string) => (
                                         <td key={attrKey} className="py-2.25 text-center text-[14px] text-[var(--content-primary)]">

@@ -8,7 +8,7 @@ import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/materia
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarClienteOrganizacao, EditarClienteOrganizacao } from '../../actions/cliente/ClienteOrganizacao.ts'
@@ -37,6 +37,10 @@ type clienteOrganizacaoProps = {
 export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOrganizacaoProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    clienteOrganizacao = dados;
 
     // Valores padrão do formulário
     const defaultValues: ClienteOrganizacaoFormSchemaType = {
@@ -105,7 +109,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/cliente-organizacao")
         } catch (error) {
             console.log(error)
         }

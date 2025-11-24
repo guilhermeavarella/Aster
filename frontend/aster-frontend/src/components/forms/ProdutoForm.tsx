@@ -19,7 +19,7 @@ import StyledInputTextArea from '../mui/InputTextArea.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import StyledInputMultiSelect from '../mui/InputMultiSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 import { type SelectChangeEvent } from '@mui/material'
 import Glass from '../Glass.tsx'
@@ -48,6 +48,10 @@ type produtoProps = {
 export default function ProdutoForm({ produto }: produtoProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    produto = dados;
 
     // Valores padrão do formulário
     const defaultValues: ProdutoFormSchemaType = {
@@ -116,7 +120,7 @@ export default function ProdutoForm({ produto }: produtoProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/produto")
         } catch (error) {
             console.log(error)
         }

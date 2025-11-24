@@ -8,7 +8,7 @@ import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/materia
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarClienteIndividual, EditarClienteIndividual } from '../../actions/cliente/ClienteIndividual.ts'
@@ -36,6 +36,10 @@ type clienteIndividualProps = {
 export default function ClienteIndividualForm({ clienteIndividual }: clienteIndividualProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    clienteIndividual = dados;
 
     // Valores padrão do formulário
     const defaultValues: ClienteIndividualFormSchemaType = {
@@ -94,7 +98,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/cliente-individual")
         } catch (error) {
             console.log(error)
         }

@@ -3,7 +3,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { EditarLicenca, CriarLicenca } from '../../actions/Licenca.ts'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box, Checkbox, FormControlLabel } from '@mui/material'
@@ -34,6 +34,10 @@ type licencaProps = {
 export default function LicencaForm({ licenca }: licencaProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    licenca = dados;
 
     // Valores padrão do formulário
     const defaultValues: LicencaFormSchemaType = {
@@ -75,7 +79,7 @@ export default function LicencaForm({ licenca }: licencaProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/licenca")
         } catch (error) {
             console.log(error)
         }

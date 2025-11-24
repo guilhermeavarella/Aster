@@ -10,7 +10,7 @@ import StyledInputTextArea from '../mui/InputTextArea.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import StyledInputMultiSelect from '../mui/InputMultiSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 import { type SelectChangeEvent } from '@mui/material'
 import Glass from '../Glass.tsx'
@@ -38,6 +38,10 @@ type pacoteProps = {
 export default function PacoteForm({ pacote }: pacoteProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    pacote = dados;
 
     // Valores padrão do formulário
     const defaultValues: PacoteFormSchemaType = {
@@ -73,7 +77,7 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/pacote")
         } catch (error) {
             console.log(error)
         }

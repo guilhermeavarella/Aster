@@ -3,7 +3,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { EditarVersao, CriarVersao } from '../../actions/Versao'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
@@ -39,6 +39,10 @@ type versaoProps = {
 export default function VersaoForm({ versao }: versaoProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    versao = dados;
 
     // Valores padrão do formulário
     const defaultValues: VersaoFormSchemaType = {
@@ -80,7 +84,7 @@ export default function VersaoForm({ versao }: versaoProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/versao")
         } catch (error) {
             console.log(error)
         }

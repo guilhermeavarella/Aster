@@ -16,7 +16,7 @@ import type { Usuario } from '../../types/usuario.ts'
 import { Stack, Card, CardHeader, Typography, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
@@ -38,6 +38,10 @@ type usuarioProps = {
 export default function UsuarioForm({ usuario }: usuarioProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    usuario = dados;
 
     // Valores padrão do formulário
     const defaultValues: UsuarioFormSchemaType = {
@@ -75,7 +79,7 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/usuario")
         } catch (error) {
             console.log(error)
         }
