@@ -1,6 +1,6 @@
-import { Box, createTheme, Link, Stack } from "@mui/material";
+import { Box, Link, Stack } from "@mui/material";
 import PlainButton from "./mui/PlainButton";
-import AsterLogo from '../assets/icons/aster_logo_white.svg'
+import AsterLogo from '../assets/icons/aster_logo_contrast.svg'
 import { useNavigate } from "react-router-dom";
 
 export default function NavTop() {
