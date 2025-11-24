@@ -2,7 +2,9 @@ package com.aster.aster_dashboard_backend.service;
 
 import com.aster.aster_dashboard_backend.dto.PorcentagemDto;
 import com.aster.aster_dashboard_backend.dto.QuantidadeDto;
+import com.aster.aster_dashboard_backend.dto.VersaoDto;
 import com.aster.aster_dashboard_backend.repository.LicencaRepository;
+import com.aster.aster_dashboard_backend.repository.ProdutoVersaoRepository;
 import com.aster.aster_dashboard_backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,13 @@ public class AnaliseQualidadeService {
 
     private LicencaRepository licencaRepository;
     private UsuarioRepository usuarioRepository;
+    private ProdutoVersaoRepository produtoVersaoRepository;
 
     @Autowired
-    public AnaliseQualidadeService(LicencaRepository licencaRepository, UsuarioRepository usuarioRepository) {
+    public AnaliseQualidadeService(LicencaRepository licencaRepository, UsuarioRepository usuarioRepository, ProdutoVersaoRepository produtoVersaoRepository) {
         this.licencaRepository = licencaRepository;
         this.usuarioRepository = usuarioRepository;
+        this.produtoVersaoRepository = produtoVersaoRepository;
     }
 
     public List<PorcentagemDto> findPorcentagemAtiva() {
@@ -38,5 +42,9 @@ public class AnaliseQualidadeService {
                 ((Long) o[1]),
                 (o[2].toString())
         )).toList();
+    }
+
+    public List<VersaoDto> findVersoesMaisRecentes() {
+        return produtoVersaoRepository.findVersoesMaisRecentes();
     }
 }
