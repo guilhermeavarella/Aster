@@ -1,49 +1,35 @@
 package com.aster.aster_dashboard_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-public enum StatusProdutoCheck{
-    EM_DESENVOLVIMENTO("Em desenvolvimento"),
-    COMERCIALIZAVEL("Comercializável"),
-    DESCONTINUADO("Descontinuado");
-
-    private final String texto;
-
-    StatusProdutoCheck(String texto){
-      this.texto = texto;
-
-    public String getTexto(){
-        return texto;
-    }
-}
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="produto")
 public class Produto{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name="id")
+    private String id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private StatusProdutoCheck status;
+    @Column(name="status")
+    private String status;
 
-    @Column(length = 20)
+    @Column(name="icone")
     private String icone;
 
-    @Column(name="descricao_breve", length = 150)
+    @Column(name="descricao_breve")
     private String descricaoBreve;
 
-    @Column(length = 30, nullable = false)
+    @Column(name="descricao_completa")
+    private String descricaoCompleta;
+
+    @Column(name="nome")
     private String nome;
-    
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -51,6 +37,7 @@ public class Produto{
                 ", status='" + status + '\'' +
                 ", icone='" + icone + '\'' +
                 ", descricaoBreve='" + descricaoBreve + '\'' +
+                ", descricaoCompleta='" + descricaoCompleta + '\'' +
                 ", nome='" + nome + '\'' +
                 '}';
     }

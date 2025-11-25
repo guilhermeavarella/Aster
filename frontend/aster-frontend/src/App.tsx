@@ -15,26 +15,35 @@ function App() {
 
   const userViews = [
     {
-      "user": "Estratégia",
+      "user": "estrategia",
       "d": "Desempenho de Vendas",
       "i": "Demografia"
     },
     {
-      "user": "Tech Lead",
-      "d": "Métricas de Downloads",
+      "user": "techlead",
+      "d": "Interação e Satisfação",
       "i": "Análise de Qualidade"
     },
     {
-      "user": "Finanças",
+      "user": "financas",
       "d": "Métricas de Receita",
-      "i": "Indicadores"
+      "i": "Fluxo de Caixa"
     },  
     {
-      "user": "Data Base Admin",
-      "d": ["Desempenho de Vendas", "Métricas de Downloads", "Métricas de Receita"],
-      "i": ["Demografia", "Análise de Qualidade", "Indicadores"]
+      "user": "admin",
+      "d": ["Desempenho de Vendas", "Interação e Satisfação", "Métricas de Receita"],
+      "i": ["Demografia", "Análise de Qualidade", "Fluxo de Caixa"],
     },
   ]
+
+  const eqView = {
+    "Desempenho de Vendas" : "estrategia",
+    "Interação e Satisfação" : "techlead",
+    "Métricas de Receita" : "financas",
+    "Demografia" : "estrategia",
+    "Análise de Qualidade" : "techlead",
+    "Fluxo de Caixa" : "financas"
+  }
 
   useEffect(() => {
     if (currentUser) {
@@ -46,6 +55,15 @@ function App() {
   
   const currentView = userViews.find(view => view.user === currentUser);
 
+  if (window.innerWidth < 850) {
+    return (
+      <div className="w-full h-full min-h-screen min-w-screen flex flex-col items-center justify-center p-3 gap-4 bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)]">
+        <h1 className="text-2xl font-bold text-center text-white">Por favor, use o pc ou junte-se ao coleguinha mais próximo ;)</h1>
+        <img src="/rat-spinning.gif" alt="rato girando" className="h-48" />
+      </div>
+    )
+  }
+
   return (
     isLoginPage ? ( 
       <main className="w-full h-full min-h-screen min-w-screen flex flex-row items-center justify-center">
@@ -54,18 +72,18 @@ function App() {
      ) : (
       <div className="w-full h-full min-h-screen min-w-screen flex flex-row items-start justify-start bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)]">  
         <div className="w-full h-full max-w-92 flex flex-row items-start justify-center p-6">
-          <Glass>
+          <Glass shadow="lg">
             <div className="min-h-[calc(100vh-6rem)] min-w-68 max-h-268 w-full flex flex-col items-center justify-start gap-9">
               
               <img src="/src/assets/logos/dashboard-black.svg" alt="Aster Logo" className="h-12" />
               <div className="w-full flex flex-col items-center justify-start gap-3">
-                <NavItem label="Início" onClick={() => {}} />
-                <NavItem label="Documentação" onClick={() => {}} />
+                <NavItem label="Início" onClick={() => {navigate('/home')}} />
+                <NavItem label="Documentação" onClick={() => {navigate('/docs')}} />
               </div>
 
               <div className="w-full flex flex-col items-center justify-start gap-6" >
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/painel.svg" alt="Panel Icon" className="h-6" />
                       <p> Painel </p>
@@ -74,41 +92,41 @@ function App() {
                       <>
                         {Array.isArray(currentView.d)
                           ? currentView.d.map((label, idx) => (
-                              <NavItem key={`d-${idx}`} label={label} onClick={() => {}} />
+                              <NavItem key={`d-${idx}`} label={label} onClick={() => {navigate(`/painel/d/${eqView[label]}`)}} />
                             ))
-                          : <NavItem label={currentView.d} onClick={() => {}} />}
+                          : <NavItem label={currentView.d} onClick={() => {navigate(`/painel/d/${currentUser}`)}} />}
 
                         {Array.isArray(currentView.i)
                           ? currentView.i.map((label, idx) => (
-                              <NavItem key={`i-${idx}`} label={label} onClick={() => {}} />
+                              <NavItem key={`i-${idx}`} label={label} onClick={() => {navigate(`/painel/i/${eqView[label]}`)}} />
                             ))
-                          : <NavItem label={currentView.i} onClick={() => {}} />}
+                          : <NavItem label={currentView.i} onClick={() => {navigate(`/painel/i/${currentUser}`)}} />}
                       </>
                     )}
                   </div>
                 </section>
 
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/operacoes.svg" alt="Operations Icon" className="h-6" />
                       <p> Operações </p>
                     </div>
-                    <NavItem label="Licenças" onClick={() => {}} />
-                    <NavItem label="Produtos" onClick={() => {}} />
-                    <NavItem label="Versões" onClick={() => {}} />
-                    <NavItem label="Clientes" onClick={() => {}} />
-                    <NavItem label="Pacotes" onClick={() => {}} />
+                    <NavItem label="Licenças" onClick={() => {navigate('/operacoes/exibir/licenca')}} />
+                    <NavItem label="Produtos" onClick={() => {navigate('/operacoes/exibir/produto')}} />
+                    <NavItem label="Versões" onClick={() => {navigate('/operacoes/exibir/versao')}} />
+                    <NavItem label="Clientes" onClick={() => {navigate('/operacoes/exibir/cliente')}} />
+                    <NavItem label="Pacotes" onClick={() => {navigate('/operacoes/exibir/pacote')}} />
                   </div>
                 </section>
 
                 <section className="w-full flex flex-col items-center justify-start gap-6 bg-[var(--content-primary)]/5 rounded-3xl p-3">
-                  <div className="w-full flex flex-col items-center justify-start gap-3"> {/* SERÁ DINÂMICO, VARIA DE ACROD COM A VISÃO */}
+                  <div className="w-full flex flex-col items-center justify-start gap-3">
                     <div className="w-full flex flex-row gap-1 items-center">
                       <img src="/src/assets/icons/sidemenu/suporte.svg" alt="Support Icon" className="h-6" />
                       <p> Suporte </p>
                     </div>
-                    <NavItem label="Devolutivas" onClick={() => {}} />
+                    <NavItem label="Devolutivas" onClick={() => {navigate('/suporte/devolutivas')}} />
                     <NavItem label="Responder ticket" onClick={() => {}} />
                   </div>
                 </section>

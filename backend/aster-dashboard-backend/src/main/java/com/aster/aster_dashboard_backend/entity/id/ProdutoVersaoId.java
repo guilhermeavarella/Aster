@@ -1,30 +1,21 @@
-package com.aster.aster_dashboard_backend.entity;
+package com.aster.aster_dashboard_backend.entity.id;
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class ProdutoVersaoId implements Serializable {
 
-    @Column(name = "numero_versao", length = 10, nullable = false)
+    @Column(name = "numero_versao")
     private String numeroVersao;
 
-    @Column(name = "produto_id", nullable = false)
-    private Integer produtoId;
-
-   public ProdutoVersaoId(String numeroVersao, Integer produtoId) {
-        this.numeroVersao = numeroVersao;
-        this.produtoId = produtoId;
-    }
-
-    public String getNumeroVersao() {
-        return numeroVersao;
-    }
-
-    public Integer getProdutoId() {
-        return produtoId;
-    }
+    @Column(name = "produto_id")
+    private String produtoId;
 
     @Override
     public boolean equals(Object o) {

@@ -1,25 +1,8 @@
 {
-    "ID": {
-        "name": "ID",
-        "value": "PROD-004"
-    },
-    "Nome": {
-        "name": "Nome",
-        "value": "ChipiPicture"
-    },
-    "Categoria": {
-        "name": "Categoria",
-        "value": "Fotos"
-    },
-    "Versao_atual": {
-        "name": "Versão atual",
-        "value": "4.2.1"
-    },
-    "Descricao_breve": {
-        "name": "Descrição breve",
-        "value": "Software de edição e organização de fotos com recursos avançados."
-    },
-    "Descricao": {
-        "name": "Descrição",
-        "value": "O ChipiPicture é um software inovador que combina ferramentas avançadas de edição de fotos com ferramentas de inteligência artificial para facilitar a organização e aprimoramento de imagens. Com recursos como reconhecimento facial, filtros automáticos e sugestões de edição, o ChipiPicture é ideal para fotógrafos profissionais e entusiastas que desejam otimizar seu fluxo de trabalho."
-    }
+    "id": "PROD-004",
+    "nome": "ChipiPicture",
+    "status": "Comercializável",
+    "descricaoBreve": "Software de edição e organização de fotos com recursos avançados.",
+    "icone": "xyz.png",
+    "categorias": ["Fotos", "Vídeo", "Edição"]
+}

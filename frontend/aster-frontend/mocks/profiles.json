@@ -2,21 +2,25 @@
     {
         "nome": "Estella Schmidt",
         "setor": "Estratégia",
-        "avatar": "https://randomuser.me/api/portraits/women/3.jpg"
+        "user": "estrategia",
+        "avatar": "/mocks/avatars/estrategia.svg"
     },
     {
         "nome": "Faustino Bittencourt",
         "setor": "Finanças",
-        "avatar": "https://randomuser.me/api/portraits/men/88.jpg"
+        "user": "financas",
+        "avatar": "/mocks/avatars/financas.svg"
     },
     {
         "nome": "Tiffany Laurence",
         "setor": "Tech Lead",
-        "avatar": "https://randomuser.me/api/portraits/women/67.jpg"
+        "user": "techlead",
+        "avatar": "/mocks/avatars/techlead.svg"
     },
     {
         "nome": "Dougllas Adib",
         "setor": "Data Base Admin",
-        "avatar": "https://randomuser.me/api/portraits/men/20.jpg"
+        "user": "admin",
+        "avatar": "/mocks/avatars/admin.svg"
     }
 ]
