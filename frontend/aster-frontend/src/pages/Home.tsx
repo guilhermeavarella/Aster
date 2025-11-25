@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import ProfileMenu from "../components/ProfileMenu";
 import Glass from "../components/Glass";
-import NavItem from "../components/NavItem";
 import { LineChart } from '@mui/x-charts/LineChart';
 import { PieChart } from '@mui/x-charts/PieChart';
+import api from "../services/api";
 
 
 export default function Home() {
@@ -35,20 +35,13 @@ export default function Home() {
     }
 
     async function fetchProductData() {
-        await fetch('/mocks/produtos_geral.json')
-            .then(response => response.json())
-            .then(data => setProdutoGeral(data))
-    }
-
-    /* API REQUEST
-    async function fetchProductData() {
         try {
-            await api.get('/inicio/produtos_geral')
-                .then(response => setProdutoGeral(response.data))
+            await api.get('/inicio/produtos-geral')
+                .then(response => {setProdutoGeral(response.data), console.log(response.data)});
         } catch (error) {
             console.error("Error fetching product data:", error);
         }
-    */
+    }
 
     function separarProduto(dados: any[], indice: number) {
         return dados[indice] ?? [];
@@ -96,7 +89,7 @@ export default function Home() {
                             <div className="w-full h-full flex flex-col p-6 gap-3">
                                 <p className="font-semibold">Acesso rápido</p>
                                 <div className="flex flex-col gap-2.5"> 
-                                    <button className="w-full p-2 bg-[var(--background-fixed-white)] text-[var(--content-primary)] rounded-[12px] font-semibold text-sm shadow-md outline-1 outline-gray-300 hover:bg-[var(--background-fixed-white)]/80 transition-discrete cursor-pointer" onClick={() => {window.open('https://example.com/1234')}}>
+                                    <button className="w-full p-2 bg-[var(--background-fixed-white)] text-[var(--content-primary)] rounded-[12px] font-semibold text-sm shadow-md outline-1 outline-gray-300 hover:bg-[var(--background-fixed-white)]/80 transition-discrete cursor-pointer" onClick={() => {window.open('http://localhost:5000/')}}>
                                         Website
                                     </button>
                                     <button className="w-full p-2 bg-[var(--background-fixed-white)] text-[var(--content-primary)] rounded-[12px] font-semibold text-sm shadow-md outline-1 outline-gray-300 hover:bg-[var(--background-fixed-white)]/80 transition-discrete cursor-pointer" onClick={() => {}}>
@@ -141,19 +134,19 @@ export default function Home() {
                                     <div className="w-full h-full flex flex-row items-center justify-center py-6 px-3 gap-4">
                                         <img src={`src/assets/icons/home/left.svg`} alt="Produto anterior" className="h-6 hover:cursor-pointer" onClick={() => {if(currentProductIndex > 0) setCurrentProductIndex(currentProductIndex - 1); else setCurrentProductIndex(15)}}/>
                                         <div className="w-full flex flex-row items-center gap-4">
-                                            <img src={`src/assets/product-icons/${currentProduct["produto_icone"]}.svg`} alt="Ícone do produto" className="h-18 w-18 drop-shadow-sm"/>
+                                            <img src={`src/assets/product-icons/${currentProduct["produtoIcone"]}.svg`} alt="Ícone do produto" className="h-18 w-18 drop-shadow-sm"/>
                                             <div className="w-full h-full flex flex-col items-center justify-between gap-1">
                                                 <div className="w-full flex flex-row items-center gap-2">
                                                     <p className="text-sm font-semibold">Avaliação:</p>
-                                                    <p className="text-sm text-[var(--content-secondary)]">{currentProduct.media_avaliacoes}</p>
+                                                    <p className="text-sm text-[var(--content-secondary)]">{currentProduct.mediaAvaliacoes}</p>
                                                 </div>
                                                 <div className="w-full flex flex-row items-center gap-2">
                                                     <p className="text-sm font-semibold">Cópias vendidas:</p>
-                                                    <p className="text-sm text-[var(--content-secondary)]">{Intl.NumberFormat('pt-BR').format((currentProduct.media_avaliacoes + currentProduct.media_avaliacoes/20) * 100000)}</p>
+                                                    <p className="text-sm text-[var(--content-secondary)]">{Intl.NumberFormat('pt-BR').format((currentProduct.mediaAvaliacoes + currentProduct.mediaAvaliacoes/20) * 100000)}</p>
                                                 </div>
                                                 <div className="w-full flex flex-row items-center gap-2">
                                                     <p className="text-sm font-semibold">Versão atual:</p>
-                                                    <p className="text-sm text-[var(--content-secondary)]">{currentProduct.versao_atual}</p>
+                                                    <p className="text-sm text-[var(--content-secondary)]">{currentProduct.versaoAtual}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +172,7 @@ export default function Home() {
 
                         <div className="col-span-2 row-span-2 bg-[url(/src/assets/backgrounds/home-panel.jpg)] bg-cover bg-center rounded-3xl shadow-md">
                             <div className="w-full h-full flex flex-col items-center justify-center">
-                                <img src="/src/assets/logos/logo-white.svg" alt="Logo" className="h-32 mb-8 drop-shadow-lg hover:cursor-pointer" onClick={() => {window.open('https://example.com/1234')}}/>
+                                <img src="/src/assets/logos/logo-white.svg" alt="Logo" className="h-32 mb-8 drop-shadow-lg hover:cursor-pointer" onClick={() => {window.open('http://localhost:5000/')}}/>
                             </div>
                         </div>
 

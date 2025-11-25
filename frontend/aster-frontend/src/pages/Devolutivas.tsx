@@ -17,7 +17,6 @@ export default function Login() {
     const [selectedRegister, setSelectedRegister] = useState(null)
     const navigate = useNavigate()
 
-    /*
     const fetchPage = async (page_number: number) => {
         if (page_number < 0 || (page && page_number > page.lastPage)) {
             console.log("Invalid page number:", page_number);
@@ -34,7 +33,7 @@ export default function Login() {
         } catch (error) {
             console.error(`Error fetching page ${page_number}:`, error);
         }
-    };*/
+    };
 
     const criarRegistro = () => {
         navigate(`/criar/${entidade}`);
@@ -44,28 +43,16 @@ export default function Login() {
         navigate(`/alterar/${entidade}/${selectedRegister?.id ?? ""}`);
     }
 
-    const deletarRegistro = () => {
-        // implementar hook de deleção
+    const deletarRegistro = async () => {
+        await api.delete(`/operacoes/${entidade}/${selectedRegister.id}`)
+            .then(() => {
+                console.log("Registro deletado com sucesso.");
+                fetchPage(0);
+            })
+            .catch((error) => {
+                console.error("Erro ao deletar o registro:", error);
+            });
     }
-
-    // MOCK: 
-    const fetchPage = async (page_number: number) => {
-        if (page_number < 0 || (page && page_number > page.lastPage)) {
-            console.log("Invalid page number:", page_number);
-            return;
-        }
-        await fetch(`/src/assets/files/entity-templates/${entidade}.json`)
-            .then((res) => res.json())
-            .then((data) => setTemplate(data));
-        
-        await fetch(`/mocks/produto_page${page_number}.json`)
-            .then((res) => res.json())
-            .then((data) => setPage(data));
-
-        console.log("Fetch:", page_number);
-
-        console.log("Template:", template);
-    };
 
     useEffect(() => {
         console.log("Entidade em display:", entidade);

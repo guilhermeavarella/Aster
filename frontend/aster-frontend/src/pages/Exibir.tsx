@@ -17,7 +17,6 @@ export default function Login() {
     const [selectedRegister, setSelectedRegister] = useState(null)
     const navigate = useNavigate()
 
-    /*
     const fetchPage = async (page_number: number) => {
         if (page_number < 0 || (page && page_number > page.lastPage)) {
             console.log("Invalid page number:", page_number);
@@ -31,10 +30,11 @@ export default function Login() {
         try {
             const response = await api.get(`/operacoes/${entidade}?page=${page_number}`);
             setPage(response.data);
+            console.log("Página:", response.data);
         } catch (error) {
             console.error(`Error fetching page ${page_number}:`, error);
         }
-    };*/
+    };
 
     const criarRegistro = () => {
         navigate(`/operacoes/form/${entidade}`);
@@ -45,28 +45,16 @@ export default function Login() {
     }
 
 
-    const deletarRegistro = () => {
-        // implementar hook de deleção
+    const deletarRegistro = async () => {
+        await api.delete(`/operacoes/${entidade}/${selectedRegister.id}`)
+            .then(() => {
+                console.log("Registro deletado com sucesso.");
+                fetchPage(0);
+            })
+            .catch((error) => {
+                console.error("Erro ao deletar o registro:", error);
+            });
     }
-    
-    // MOCK: 
-    const fetchPage = async (page_number: number) => {
-        if (page_number < 0 || (page && page_number > page.lastPage)) {
-            console.log("Invalid page number:", page_number);
-            return;
-        }
-        await fetch(`/src/assets/files/entity-templates/${entidade}.json`)
-            .then((res) => res.json())
-            .then((data) => setTemplate(data));
-        
-        await fetch(`/mocks/produto_page${page_number}.json`)
-            .then((res) => res.json())
-            .then((data) => setPage(data));
-
-        console.log("Fetch:", page_number);
-
-        console.log("Template:", template);
-    };
 
     useEffect(() => {
         if (entidade == "cliente") entidade = "cliente-individual";
@@ -166,7 +154,7 @@ export default function Login() {
                 />
 
                 <div className="w-full flex flex-row items-start justify-between">
-                    <p className="font-semibold">{page?.totalRegistros} Registros encontrados</p>
+                    <p className="font-semibold">{page?.totalEntries} Registros encontrados</p>
                     <div className="flex flex-row gap-2">
                         <img src="/src/assets/icons/chevron-left.svg" alt="left arrow" className="w-9 h-9 cursor-pointer" onClick={() => {fetchPage(page.pageNumber)}}/>
                         <BallButton variant="white" label="1" onClick={() => {fetchPage(0)}} />

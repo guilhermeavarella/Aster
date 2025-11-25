@@ -5,7 +5,7 @@
         "dataLancamento": "Data de Lançamento",
         "arquivoInstalador": "Arquivo Instalador",
         "patchNotes": "Patch Notes",
-        "produto": "Produto"
+        "produtoId": "Produto"
     },
-    "displayed": [ "produto", "numeroVersao", "dataLancamento", "patchNotes" ]
+    "displayed": [ "produtoId", "numeroVersao", "dataLancamento", "patchNotes" ]
 }
