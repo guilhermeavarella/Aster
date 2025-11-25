@@ -203,4 +203,14 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
         ORDER BY fpm.pacote, fpm.mes
     """, nativeQuery=true)
     public List<Object[]> findAvaliacaoMensalPacote();
+
+    @Query("""
+        SELECT new com.aster.aster_dashboard_backend.entity.Pacote(p.nome, p.precoOrganizacional, p.precoIndividual)
+        FROM Adquire a
+        JOIN Pacote p ON a.id.pacoteNome = p.nome
+        GROUP BY p.nome
+        ORDER BY COUNT(*) DESC, p.nome
+        LIMIT 4
+    """)
+    public List<Pacote> findPacotesMaisPopulares();
 }

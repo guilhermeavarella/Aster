@@ -79,6 +79,11 @@ public class ProdutoService {
         )).toList();
     }
 
+    public List<ProdutoDto> findProdutosMaisPopulares() {
+        List<Produto> produtos = repository.findProdutosMaisPopulares();
+        return produtos.stream().map(converter::toDto).toList();
+    }
+
     @Transactional
     public void create(ProdutoDto dto) {
         if (dto.getId() == null) {

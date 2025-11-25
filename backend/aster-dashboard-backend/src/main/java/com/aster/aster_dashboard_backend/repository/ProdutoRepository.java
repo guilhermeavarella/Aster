@@ -192,4 +192,16 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
         ORDER BY pr.nome, m.mes
     """, nativeQuery = true)
     public List<Object[]> findReceitaMensalProduto();
+
+    @Query("""
+        SELECT new com.aster.aster_dashboard_backend.entity.Produto(p.id, p.status, p.icone, p.descricaoBreve, p.descricaoCompleta, p.nome)
+        FROM Adquire a
+        JOIN Contem c ON c.id.pacoteNome = a.id.pacoteNome
+        JOIN Produto p ON p.id = c.id.produtoId
+        WHERE p.status = 'Comercializável'
+        GROUP BY p.id
+        ORDER BY COUNT(*) DESC, p.id
+        LIMIT 4
+    """)
+    public List<Produto> findProdutosMaisPopulares();
 }

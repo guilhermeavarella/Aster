@@ -80,6 +80,11 @@ public class PacoteService {
         )).toList();
     }
 
+    public List<PacoteDto> findPacotesMaisPopulares() {
+        List<Pacote> pacotes = repository.findPacotesMaisPopulares();
+        return pacotes.stream().map(converter::toDto).toList();
+    }
+
     @Transactional
     public void create(PacoteDto dto) {
 
