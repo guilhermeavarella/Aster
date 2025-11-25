@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import Home from './pages/Home.tsx'
+import Produtos from './pages/Produtos.tsx'
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'home', element: <Home /> },/*
-      { path: 'produtos' , element: <Produtos /> },
+      { path: 'home', element: <Home /> },
+      { path: 'produtos' , element: <Produtos /> },/*
       { path: 'sobre', element: <SobreNos /> },
       { path: 'contato', element: <Contato /> }*/
     ]
