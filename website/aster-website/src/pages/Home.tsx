@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <section className="w-full flex flex-col items-center justify-start">
             <section className="w-full bg-gradient-to-br from-[#B273D5] via-[#9779CD] to-[#807AD0] flex flex-col items-center justify-start px-36">
-                <div className="w-full h-18 flex items-center justify-center text-center border-b-1"> header area</div>
+                <div className="w-full h-16 flex items-center justify-center text-center"> {/* header area */} </div>
                 <div className="w-full flex flex-row items-start justify-between py-64">
                     <p className="h-full max-w-128 text-2xl text-[var(--content-inverse)] text-start flex flex-col items-start justify-start">
                         A gama completa de recursos para designers, artistas, videomakers, criadores independentes e profissionais que querem transformar ideias em experiências visuais extraordinárias. Um ecossistema poderoso, intuitivo e inovador - criado para quem vive de criatividade.

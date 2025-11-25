@@ -1,6 +1,6 @@
 import { Box, Link, Stack } from "@mui/material";
 import PlainButton from "./mui/PlainButton";
-import AsterLogo from '../assets/icons/aster_logo_contrast.svg'
+import AsterLogo from '/logos/all-white.svg'
 import { useNavigate } from "react-router-dom";
 
 export default function NavTop() {
@@ -13,8 +13,11 @@ export default function NavTop() {
                 height: '50px',
                 backgroundImage: `url(${AsterLogo})`,
                 backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat'
-            }}/>
+                backgroundRepeat: 'no-repeat',
+                cursor: 'pointer'
+            }}
+            onClick={() => {navigate('/')}}
+            />
             <Stack direction={'row'} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} spacing={4}>
                 <Link underline="none" sx={{color: 'white', fontWeight: 600}} component='button' onClick={() => {navigate('/produtos')}}>Produtos</Link>
                 <Link underline="none" sx={{color: 'white', fontWeight: 600}} component='button' onClick={() => {navigate('/sobre')}}>Sobre nós</Link>

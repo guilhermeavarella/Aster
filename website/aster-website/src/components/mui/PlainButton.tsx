@@ -10,11 +10,13 @@ declare module '@mui/material/Button' {
 }
 
 const StyledButton = styled(Button)(() => ({
-    width: '200px',
-    height: '40px',
+    width: '160px',
+    height: '32px',
     borderRadius: '200px',
     backgroundColor: 'white',
     boxShadow: 'none',
+    justifyContent: 'center',
+    alignItems: 'center',
 }));
 
 export default function PlainButton(props: ButtonProps) {

@@ -5,6 +5,8 @@ import ProdutoCard from "../components/ProdutoCard";
 export default function Produtos () {
     return (
         <section className="w-full bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)] flex flex-col items-center justify-start">
+            <div className="w-full h-16 flex items-center justify-center text-center"> {/* header area */} </div>
+
             <div className="w-full flex flex-col items-center justify-center py-32 gap-4">
                 <h2>Explore todos os produtos Aster. Crie tudo que puder imaginar.</h2>
                 <p className="max-w-180 text-center">A Aster reúne em um único ecossistema tudo o que você precisa para criar: edição avançada de imagens, design gráfico inteligente, animação fluida, efeitos visuais e produção multimídia completa. <br/> Cada software foi projetado para oferecer performance, simplicidade e liberdade criativa.</p>
