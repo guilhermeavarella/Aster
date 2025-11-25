@@ -236,10 +236,6 @@ export default function Desempenho() {
                             ))}
                         </div>
                     </Glass>
-
-                    <Glass className="min-w-full rounded-t-3xl rounded-b-3xl">
-                        Alguma coisinha aqui
-                    </Glass>
                 </section>
             </section>
             

@@ -151,8 +151,20 @@ export default function Desempenho() {
                     </Glass>
 
                     <Glass className="min-w-full rounded-t-3xl rounded-b-3xl">
-                        <div className="flex flex-row items-center ml-3 my-2">
+                        <div className="flex flex-row items-center ml-3 gap-14">
                             <h5 className="text-xl font-semibold">Quantidades totais:</h5>
+                            <div>
+                                <p className="font-semibold">Licenças ativas: </p>
+                                <p className="text-center"> 505.312 </p>
+                            </div>
+                            <div>
+                                <p className="font-semibold">Downloads totais: </p>
+                                <p className="text-center"> 7.995.396 </p>
+                            </div>
+                            <div>
+                                <p className="font-semibold">Downloads recentes: </p>
+                                <p className="text-center"> 12.886 </p>
+                            </div>
                         </div>
                     </Glass>
                 </section>
