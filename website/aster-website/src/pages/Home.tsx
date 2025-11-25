@@ -105,6 +105,7 @@ export default function Home() {
                     <p className="max-w-240">Adquira um de nossos pacotes e economize! Junte-se a milhares de criadores que já estão transformando suas ideias em realidade com a Aster.</p>
                 </div>
 
+                {/* FAZER DINAMICO */}
                 <div className="w-full flex flex-row items-center justify-center gap-9">
                     <PacoteCard />
                     <PacoteCard />

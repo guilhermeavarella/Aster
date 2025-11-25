@@ -1,6 +1,6 @@
 import Button from '../components/Button'
 
-export default function PacoteCard () {
+export default function PacoteCard () { {/* TORNAR DINAMICO */}
     return (
         <div className="w-80 h-116 bg-[var(--background-fixed-white)] rounded-3xl shadow-sm flex flex-col items-center justify-center p-6 gap-3">
             <p className="font-semibold text-2xl text-center">Design</p>
