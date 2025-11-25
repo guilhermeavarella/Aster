@@ -1,8 +1,58 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import PacoteCard from "../components/PacoteCard";
-import ProdutoCard from "../components/ProdutoCard";
 
 export default function Home() {
+    const navigate = useNavigate();
+    
+    // Mock temporario para testes
+    const mockProdutos = [
+        {
+            "id": "P001",
+            "nome": "Nova",
+            "status": "Comercializável",
+            "descricaoBreve": "Software Nova",
+            "descricao": "Software Nova completo",
+            "icone": "nova.png",
+            "categorias": [
+            "Design"
+            ]
+        },
+        {
+            "id": "P002",
+            "nome": "Nova2",
+            "status": "Comercializável",
+            "descricaoBreve": "Software Nova",
+            "descricao": "Software Nova completo",
+            "icone": "nova.png",
+            "categorias": [
+            "Design"
+            ]
+        },
+        {
+            "id": "P003",
+            "nome": "Nova3",
+            "status": "Comercializável",
+            "descricaoBreve": "Software Nova",
+            "descricao": "Software Nova completo",
+            "icone": "nova.png",
+            "categorias": [
+            "Design"
+            ]
+        },
+        {
+            "id": "P004",
+            "nome": "Nova4",
+            "status": "Comercializável",
+            "descricaoBreve": "Software Nova",
+            "descricao": "Software Nova completo",
+            "icone": "nova.png",
+            "categorias": [
+            "Design"
+            ]
+        }
+    ];
+
     return (
         <section className="w-full flex flex-col items-center justify-start">
             <section className="w-full bg-gradient-to-br from-[#B273D5] via-[#9779CD] to-[#807AD0] flex flex-col items-center justify-start px-36">
@@ -26,30 +76,30 @@ export default function Home() {
                             <div className="w-76 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src="/assets/products/product-3.svg" alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">Aikonic</p>
+                                        <img src={`/assets/products/${mockProdutos[0].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[0].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">O software de design gráfico mais avançado do mercado.</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[0].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
-                                    <Button variant="black" label="Saiba mais" />
-                                    <Button variant="white" label="Solicitar demo" />
+                                    <Button variant="black" label="Saiba mais" onClick={() => {navigate('/produtos')}} />
+                                    <Button variant="white" label="Solicitar demo" onClick={() => {navigate('/produtos')}} />
                                 </div>
                             </div>
                     
                             <div className="w-182 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src="/assets/products/product-3.svg" alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">Aikonic</p>
+                                        <img src={`/assets/products/${mockProdutos[1].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[1].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">O software de design gráfico mais avançado do mercado.</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[1].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
-                                    <Button variant="black" label="Saiba mais" />
-                                    <Button variant="white" label="Solicitar demo" />
+                                    <Button variant="black" label="Saiba mais" onClick={() => {navigate('/produtos')}} />
+                                    <Button variant="white" label="Solicitar demo" onClick={() => {navigate('/produtos')}} />
                                 </div>
                             </div>
                         </div>
@@ -58,36 +108,36 @@ export default function Home() {
                             <div className="w-182 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src="/assets/products/product-3.svg" alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">Aikonic</p>
+                                        <img src={`/assets/products/${mockProdutos[2].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[2].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">O software de design gráfico mais avançado do mercado.</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[2].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
-                                    <Button variant="black" label="Saiba mais" />
-                                    <Button variant="white" label="Solicitar demo" />
+                                    <Button variant="black" label="Saiba mais" onClick={() => {navigate('/produtos')}} />
+                                    <Button variant="white" label="Solicitar demo" onClick={() => {navigate('/produtos')}} />
                                 </div>
                             </div>
 
                             <div className="w-76 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src="/assets/products/product-3.svg" alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">Aikonic</p>
+                                        <img src={`/assets/products/${mockProdutos[3].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[3].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">O software de design gráfico mais avançado do mercado.</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[3].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
-                                    <Button variant="black" label="Saiba mais" />
-                                    <Button variant="white" label="Solicitar demo" />
+                                    <Button variant="black" label="Saiba mais" onClick={() => {navigate('/produtos')}} />
+                                    <Button variant="white" label="Solicitar demo" onClick={() => {navigate('/produtos')}} />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <Button variant="black" label="Ver todos os produtos Aster" px={6} />
+                    <Button variant="black" label="Ver todos os produtos Aster" px={6} onClick={() => {navigate('/produtos')}} />
                 </div>
             </section>
 
@@ -114,7 +164,7 @@ export default function Home() {
                 </div>
                
                 
-                <Button variant="black" label="Ver todos os pacotes Aster" px={6} />
+                <Button variant="black" label="Ver todos os pacotes Aster" px={6} onClick={() => {navigate('/produtos')}} />
             </section>
         </section>
     )

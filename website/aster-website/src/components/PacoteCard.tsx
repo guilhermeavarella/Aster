@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button'
 
 export default function PacoteCard () { {/* TORNAR DINAMICO */}
+    const navigate = useNavigate();
     return (
         <div className="w-80 h-116 bg-[var(--background-fixed-white)] rounded-3xl shadow-sm flex flex-col items-center justify-center p-6 gap-3">
             <p className="font-semibold text-2xl text-center">Design</p>
@@ -40,7 +42,7 @@ export default function PacoteCard () { {/* TORNAR DINAMICO */}
             </div>
 
             <div className="w-full flex flex-row justify-end">
-                <Button variant="black" label="Compre agora" px={6} />
+                <Button variant="black" label="Compre agora" px={6} onClick={() => {navigate('/produtos')}} />
             </div>
         </div>
     )
