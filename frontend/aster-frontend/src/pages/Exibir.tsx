@@ -102,7 +102,7 @@ export default function Login() {
             <section className="w-full flex flex-col items-start justify-start gap-4">   
                 <div className="w-full flex flex-row items-end justify-between">
                     <h3 className="text-[var(--content-inverse)]">{template?.nome}</h3>
-                    <div className="max-w-[504px] flex flex-row gap-4">
+                    <div className="max-w-[704px] flex flex-row gap-4">
                         <Glass padding="p-0" className="max-h-9 min-w-[360px]">
                             <div className="w-full h-9 gap-3 flex flex-row items-center px-6">
                                 <img src="/src/assets/icons/search.svg" alt="busca" className="w-4 h-4"/>
@@ -117,6 +117,7 @@ export default function Login() {
                             </div>
                         </Glass>
                         <Button variant="primary" label="Consultar" onClick={() => {}} />
+                        <Button variant="black" label="Criar Registro" onClick={() => {criarRegistro()}}/>
                     </div>
                 </div>
 
