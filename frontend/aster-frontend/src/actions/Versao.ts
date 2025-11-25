@@ -12,7 +12,7 @@ export async function CriarVersao(data: VersaoFormSchemaType) {
 
 export async function EditarVersao(data: VersaoFormSchemaType) {
     try {
-        await api.patch(`/operacoes/vesao/${data.numeroVersao}/${data.produtoId}`, data)
+        await api.patch(`/operacoes/versao/${data.numeroVersao}/${data.produtoId}`, data)
     } catch(error) {
         console.log('Erro na rquisição')
         throw error

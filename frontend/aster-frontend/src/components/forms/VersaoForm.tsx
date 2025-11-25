@@ -3,7 +3,7 @@ import type { SubmitHandler } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { EditarVersao, CriarVersao } from '../../actions/Versao'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
@@ -40,6 +40,10 @@ export default function VersaoForm({ versao }: versaoProps) {
     // Router
     const navigate = useNavigate()
 
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    versao = dados;
+
     // Valores padrão do formulário
     const defaultValues: VersaoFormSchemaType = {
         numeroVersao: '',
@@ -64,7 +68,7 @@ export default function VersaoForm({ versao }: versaoProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, reset, control, watch } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<VersaoFormSchemaType> = (async (data) => {
@@ -80,7 +84,7 @@ export default function VersaoForm({ versao }: versaoProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/versao")
         } catch (error) {
             console.log(error)
         }
@@ -110,9 +114,9 @@ export default function VersaoForm({ versao }: versaoProps) {
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Versão' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -125,6 +129,8 @@ export default function VersaoForm({ versao }: versaoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.numeroVersao}
+                                        helperText={errors.numeroVersao?.message}
                                         label="Número da versão"
                                         placeholder="Número da versão"
                                         value={field.value}
@@ -141,6 +147,7 @@ export default function VersaoForm({ versao }: versaoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.produtoId}
                                         label="Produto"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -182,7 +189,7 @@ export default function VersaoForm({ versao }: versaoProps) {
                                                                 fontSize: '20px',
                                                                 padding: '0 6px 0 0px',
                                                                 backgroundColor: "#fff",
-                                                                color: 'black'
+                                                                color: 'var(--content-primary)'
                                                             },
                                                             "& .MuiPickersInputBase-root": {
                                                                 height: 50,
@@ -208,6 +215,8 @@ export default function VersaoForm({ versao }: versaoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.arquivoInstalador}
+                                        helperText={errors.arquivoInstalador?.message}
                                         label="Arquivo de instalação"
                                         placeholder="Arquivo de instalação"
                                         value={field.value}
@@ -225,6 +234,8 @@ export default function VersaoForm({ versao }: versaoProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputTextArea
+                                    error={!!errors.patchNotes}
+                                    helperText={errors.patchNotes?.message}
                                     label="Notas da versão"
                                     placeholder="Notas da versão"
                                     value={field.value}

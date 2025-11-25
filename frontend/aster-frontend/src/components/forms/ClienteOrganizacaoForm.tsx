@@ -8,7 +8,7 @@ import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/materia
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarClienteOrganizacao, EditarClienteOrganizacao } from '../../actions/cliente/ClienteOrganizacao.ts'
@@ -37,6 +37,10 @@ type clienteOrganizacaoProps = {
 export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOrganizacaoProps) {
     // Router
     const navigate = useNavigate()
+
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    clienteOrganizacao = dados;
 
     // Valores padrão do formulário
     const defaultValues: ClienteOrganizacaoFormSchemaType = {
@@ -67,7 +71,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: {errors} } = methods
 
     // Lista dos países 
     countries.registerLocale(pt)
@@ -86,10 +90,9 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
 
     // Lista portes
     const portes = [
-        'Pequena',
-        'Média',
+        'Pequeno',
+        'Médio',
         'Grande',
-        'Imensa',
     ]
 
     // Handler criar/editar
@@ -105,7 +108,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/cliente-organizacao")
         } catch (error) {
             console.log(error)
         }
@@ -122,9 +125,9 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Cliente organização' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -137,6 +140,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -153,6 +158,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.documento}
+                                        helperText={errors.documento?.message}
                                         label="Documento"
                                         placeholder="Documento"
                                         value={field.value}
@@ -171,6 +178,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.regiao}
                                         label="Região"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -190,6 +198,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.continente}
                                         label="Continente"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -211,6 +220,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.email}
+                                        helperText={errors.email?.message}
                                         label="Email"
                                         placeholder="Email"
                                         value={field.value}
@@ -227,6 +238,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.telefone}
+                                        helperText={errors.telefone?.message}
                                         label="Telefone"
                                         placeholder="Telefone"
                                         value={field.value}
@@ -245,6 +258,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.setorAtuacao}
+                                        helperText={errors.setorAtuacao?.message}
                                         label="Setor de Atuação"
                                         placeholder="Setor de Atuação"
                                         value={field.value}
@@ -261,6 +276,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.porte}
                                         label="Porte"
                                         value={field.value}
                                         onChange={field.onChange}

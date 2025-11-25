@@ -12,7 +12,7 @@ const StyledFormControl = styled(FormControl)(() => ({
     ".MuiInputLabel-root": {
         fontWeight: "bold",
         fontSize: "18px",
-        color: "black",
+        color: "var(--content-primary)",
         backgroundColor: "#fff",
         padding: "0 4px",
     },

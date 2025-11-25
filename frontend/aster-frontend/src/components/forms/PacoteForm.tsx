@@ -4,15 +4,9 @@ import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Pacote } from '../../types/pacote.ts'
-import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
+import { Stack, Card, CardHeader, Typography, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
-import StyledInputTextArea from '../mui/InputTextArea.tsx'
-import StyledInputSelect from '../mui/InputSelect.tsx'
-import StyledInputMultiSelect from '../mui/InputMultiSelect.tsx'
-import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
-import { useEffect, useState } from 'react'
-import { type SelectChangeEvent } from '@mui/material'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarPacote, EditarPacote } from '../../actions/Pacote.ts'
@@ -39,6 +33,10 @@ export default function PacoteForm({ pacote }: pacoteProps) {
     // Router
     const navigate = useNavigate()
 
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    pacote = dados;
+
     // Valores padrão do formulário
     const defaultValues: PacoteFormSchemaType = {
         nome: '',
@@ -58,7 +56,7 @@ export default function PacoteForm({ pacote }: pacoteProps) {
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<PacoteFormSchemaType> = (async (data) => {
@@ -73,7 +71,7 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/pacote")
         } catch (error) {
             console.log(error)
         }
@@ -90,9 +88,9 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Pacote' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -105,6 +103,8 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -122,6 +122,8 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.precoIndividual}
+                                        helperText={errors.precoIndividual?.message}
                                         label="Preço individual"
                                         placeholder="Preço individual"
                                         value={field.value}
@@ -139,6 +141,8 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputText
+                                    error={!!errors.precoOrganizacional}
+                                    helperText={errors.precoOrganizacional?.message}
                                     label="Preço organizacional"
                                     placeholder="Preço organizacional"
                                     value={field.value}

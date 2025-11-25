@@ -26,6 +26,8 @@
   /* Background */
   --background-fixed-white: #FFFFFF;
   --background-fixed-black: #3D3B3B;
+  --background-dark: #221D28;
+  --background-light: #F3F0F9;
   --background-aurora: linear-gradient(45deg, #ABC2E2 0%, #BBB3D9 50%, #CB9AD2 100%);
 
   /* Accent */

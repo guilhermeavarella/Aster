@@ -4,6 +4,7 @@ import Glass from "../components/Glass"
 import ProfileMenu from "../components/ProfileMenu"
 import Button from "../components/Button"
 import BallButton from "../components/BallButton"
+import { Modal } from "../components/Modal"
 import api from "../services/api"
 
 
@@ -12,6 +13,9 @@ export default function Login() {
     
     const [ template, setTemplate ] = useState(null)
     const [ page, setPage ] = useState()
+    const [ openModal, setOpenModal] = useState(false)
+    const [selectedRegister, setSelectedRegister] = useState(null)
+    const navigate = useNavigate()
 
     /*
     const fetchPage = async (page_number: number) => {
@@ -32,6 +36,19 @@ export default function Login() {
         }
     };*/
 
+    const criarRegistro = () => {
+        navigate(`/operacoes/form/${entidade}`);
+    }
+
+    const alterarRegistro = () => {
+        navigate(`/operacoes/form/${entidade}`, {state: { selectedRegister }});
+    }
+
+
+    const deletarRegistro = () => {
+        // implementar hook de deleção
+    }
+    
     // MOCK: 
     const fetchPage = async (page_number: number) => {
         if (page_number < 0 || (page && page_number > page.lastPage)) {
@@ -60,8 +77,7 @@ export default function Login() {
     }, [entidade]);
 
     return (
-        <section className="w-full h-full max-h-[896px] flex flex-col items-center justify-between gap-8">
-
+        <section className="w-full h-full max-h-[896px] flex flex-col items-center justify-between gap-8">            
             {(entidade?.startsWith("cliente")) ? (
                 <section className="w-full flex flex-row items-center justify-center gap-6">
                     <Glass padding="p-3">
@@ -86,7 +102,7 @@ export default function Login() {
             <section className="w-full flex flex-col items-start justify-start gap-4">   
                 <div className="w-full flex flex-row items-end justify-between">
                     <h3 className="text-[var(--content-inverse)]">{template?.nome}</h3>
-                    <div className="max-w-[504px] flex flex-row gap-4">
+                    <div className="max-w-[704px] flex flex-row gap-4">
                         <Glass padding="p-0" className="max-h-9 min-w-[360px]">
                             <div className="w-full h-9 gap-3 flex flex-row items-center px-6">
                                 <img src="/src/assets/icons/search.svg" alt="busca" className="w-4 h-4"/>
@@ -101,6 +117,7 @@ export default function Login() {
                             </div>
                         </Glass>
                         <Button variant="primary" label="Consultar" onClick={() => {}} />
+                        <Button variant="black" label="Criar Registro" onClick={() => {criarRegistro()}}/>
                     </div>
                 </div>
 
@@ -120,7 +137,11 @@ export default function Login() {
 
                         <tbody>
                             {page && page.content.map((item: any) => (
-                                <tr key={item.id} className="bg-[var(--surface-700)] hover:bg-[var(--surface-600)] cursor-pointer border-b border-[var(--content-inverse)]" onClick={() => {}}>
+                                <tr 
+                                    key={item.id}
+                                    className="bg-[var(--surface-700)] hover:bg-[var(--surface-600)] cursor-pointer border-b border-[var(--content-inverse)]"
+                                    onClick={() => { setSelectedRegister(item); setOpenModal(true);}}
+                                >
                                     {template.displayed.map((attrKey: string) => (
                                         <td key={attrKey} className="py-2.25 text-center text-[14px] text-[var(--content-primary)]">
                                             {Array.isArray(item[attrKey]) ? item[attrKey].join(", ") :
@@ -132,6 +153,17 @@ export default function Login() {
                         </tbody>
                     </table>
                 </Glass>
+
+                <Modal
+                    isOpen={openModal}
+                    onClose={() => { setOpenModal(false); setSelectedRegister(null); }}
+                    register={selectedRegister}
+                    template={template}
+                    type={template?.nome ?? "Registro"}
+                    createRegister={criarRegistro}
+                    updateRegister={alterarRegistro}
+                    deleteRegister={deletarRegistro}
+                />
 
                 <div className="w-full flex flex-row items-start justify-between">
                     <p className="font-semibold">{page?.totalRegistros} Registros encontrados</p>

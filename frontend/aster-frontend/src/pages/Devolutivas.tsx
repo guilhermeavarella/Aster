@@ -5,6 +5,7 @@ import ProfileMenu from "../components/ProfileMenu"
 import Button from "../components/Button"
 import BallButton from "../components/BallButton"
 import api from "../services/api"
+import { Modal } from "../components/Modal"
 
 
 export default function Login() {
@@ -12,6 +13,9 @@ export default function Login() {
     
     const [ template, setTemplate ] = useState(null)
     const [ page, setPage ] = useState()
+    const [ openModal, setOpenModal] = useState(false)
+    const [selectedRegister, setSelectedRegister] = useState(null)
+    const navigate = useNavigate()
 
     /*
     const fetchPage = async (page_number: number) => {
@@ -31,6 +35,18 @@ export default function Login() {
             console.error(`Error fetching page ${page_number}:`, error);
         }
     };*/
+
+    const criarRegistro = () => {
+        navigate(`/criar/${entidade}`);
+    }
+
+    const alterarRegistro = () => {
+        navigate(`/alterar/${entidade}/${selectedRegister?.id ?? ""}`);
+    }
+
+    const deletarRegistro = () => {
+        // implementar hook de deleção
+    }
 
     // MOCK: 
     const fetchPage = async (page_number: number) => {
@@ -106,7 +122,11 @@ export default function Login() {
 
                         <tbody>
                             {page && page.content.map((item: any) => (
-                                <tr key={item.id} className="bg-[var(--surface-700)] hover:bg-[var(--surface-600)] cursor-pointer border-b border-[var(--content-inverse)]" onClick={() => {}}>
+                                <tr 
+                                    key={item.id}
+                                    className="bg-[var(--surface-700)] hover:bg-[var(--surface-600)] cursor-pointer border-b border-[var(--content-inverse)]"
+                                    onClick={() => { setSelectedRegister(item); setOpenModal(true); }}
+                                >
                                     {template.displayed.map((attrKey: string) => (
                                         <td key={attrKey} className="py-2.25 text-center text-[14px] text-[var(--content-primary)]">
                                             {Array.isArray(item[attrKey]) ? item[attrKey].join(", ") :
@@ -118,6 +138,17 @@ export default function Login() {
                         </tbody>
                     </table>
                 </Glass>
+
+                <Modal
+                    isOpen={openModal}
+                    onClose={() => { setOpenModal(false); setSelectedRegister(null); }}
+                    register={selectedRegister}
+                    template={template}
+                    type={template?.nome ?? "Registro"}
+                    createRegister={criarRegistro}
+                    updateRegister={alterarRegistro}
+                    deleteRegister={deletarRegistro}
+                />
 
                 <div className="w-full flex flex-row items-start justify-between">
                     <p className="font-semibold">{page?.totalRegistros} Registros encontrados</p>

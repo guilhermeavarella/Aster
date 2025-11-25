@@ -4,6 +4,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import Login from './pages/Login.tsx'
+import Devolutivas from './pages/Devolutivas.tsx'
+import Home from './pages/Home.tsx'
+import Documentacao from './pages/Documentacao.tsx'
+import { painelRoutes } from './pages/Painel.tsx'
 import Exibir from './pages/Exibir.tsx'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@mui/material'
@@ -18,6 +22,10 @@ import ClienteOrganizacaoForm from './components/forms/ClienteOrganizacaoForm.ts
 import DevolutivaFeedbackForm from './components/forms/DevolutivaFeedbackForm.tsx'
 import DevolutivaTicketForm from './components/forms/DevolutivaTicketForm.tsx'
 import UsuarioForm from './components/forms/UsuarioForm.tsx'
+
+// ----- Forms -----
+// Criar: Para usar a função de Criar basta acessar o element de formulário da entidade desejada
+// Editar: Para usar a função de Editar deve-se passar um registro da entidade para o element
 
 // Tema global dos componentes MUI
   const theme = createTheme({
@@ -34,18 +42,18 @@ const router = createBrowserRouter([
       { index: true, element: <Login /> },
 
       { path: 'login', element: <Login /> },
-      { path: 'operacoes/criar/produto', element: <ProdutoForm />},
-      { path: 'operacoes/criar/versao', element: <VersaoForm />},
-      { path: 'operacoes/criar/pacote', element: <PacoteForm />},
-      { path: 'operacoes/criar/licenca', element: <LicencaForm />},
-      { path: 'operacoes/criar/cliente-individual', element: <ClienteIndividualForm />},
-      { path: 'operacoes/criar/cliente-organizacao', element: <ClienteOrganizacaoForm />},
-      { path: 'operacoes/criar/devolutiva-feedback', element: <DevolutivaFeedbackForm />},
-      { path: 'operacoes/criar/devolutiva-ticket', element: <DevolutivaTicketForm />},
-      { path: 'operacoes/criar/usuario', element: <UsuarioForm />},
-      /*
+      { path: 'operacoes/form/produto', element: <ProdutoForm />},
+      { path: 'operacoes/form/versao', element: <VersaoForm />},
+      { path: 'operacoes/form/pacote', element: <PacoteForm />},
+      { path: 'operacoes/form/licenca', element: <LicencaForm />},
+      { path: 'operacoes/form/cliente-individual', element: <ClienteIndividualForm />},
+      { path: 'operacoes/form/cliente-organizacao', element: <ClienteOrganizacaoForm />},
+      { path: 'operacoes/form/devolutiva-feedback', element: <DevolutivaFeedbackForm />},
+      { path: 'operacoes/form/devolutiva-ticket', element: <DevolutivaTicketForm />},
+      { path: 'operacoes/form/usuario', element: <UsuarioForm />},
+
       { path: 'home', element: <Home /> },
-      { path: 'docs', element: <Documents /> },
+      { path: 'docs', element: <Documentacao /> },
 
       { path: 'operacoes/exibir/:entidade', element: <Exibir /> }, /*
       { path: 'operacoes/alterar/:entidade/:regId', element: <Alterar /> },
@@ -61,8 +69,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider theme={theme}>
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
   </ThemeProvider>
 )

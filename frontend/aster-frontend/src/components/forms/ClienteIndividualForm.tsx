@@ -7,8 +7,7 @@ import type { ClienteIndividual } from '../../types/cliente-individual.ts'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
-import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarClienteIndividual, EditarClienteIndividual } from '../../actions/cliente/ClienteIndividual.ts'
@@ -37,6 +36,10 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
     // Router
     const navigate = useNavigate()
 
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    clienteIndividual = dados;
+
     // Valores padrão do formulário
     const defaultValues: ClienteIndividualFormSchemaType = {
         documento: '',
@@ -64,7 +67,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: {errors} } = methods
 
     // Lista dos países 
     countries.registerLocale(pt)
@@ -94,7 +97,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/cliente-individual")
         } catch (error) {
             console.log(error)
         }
@@ -111,9 +114,9 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Cliente individual' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -126,6 +129,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -142,6 +147,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.documento}
+                                        helperText={errors.documento?.message}
                                         label="Documento"
                                         placeholder="Documento"
                                         value={field.value}
@@ -160,6 +167,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.regiao}
                                         label="Região"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -179,6 +187,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.continente}
                                         label="Continente"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -200,6 +209,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.email}
+                                        helperText={errors.email?.message}
                                         label="Email"
                                         placeholder="Email"
                                         value={field.value}
@@ -216,6 +227,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.telefone}
+                                        helperText={errors.telefone?.message}
                                         label="Telefone"
                                         placeholder="Telefone"
                                         value={field.value}
@@ -233,6 +246,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                             control={control}
                             render={({ field }) => (
                                 <StyledInputText
+                                    error={!!errors.atividadeUso}
+                                    helperText={errors.atividadeUso?.message}
                                     label="Atividade de Uso"
                                     placeholder="Atividade de Uso"
                                     value={field.value}

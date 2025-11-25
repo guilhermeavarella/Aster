@@ -16,7 +16,7 @@ import type { Usuario } from '../../types/usuario.ts'
 import { Stack, Card, CardHeader, Typography, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
@@ -39,6 +39,10 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
     // Router
     const navigate = useNavigate()
 
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    usuario = dados;
+
     // Valores padrão do formulário
     const defaultValues: UsuarioFormSchemaType = {
         chaveUso: ''
@@ -55,7 +59,7 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Debug
     useEffect(() => {
@@ -75,7 +79,7 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
                 // Hook de criar
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/usuario")
         } catch (error) {
             console.log(error)
         }
@@ -92,9 +96,9 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Usuário' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -107,6 +111,8 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.chaveUso}
+                                        helperText={errors.chaveUso?.message}
                                         label="Chave de uso"
                                         placeholder="Chave de uso"
                                         value={field.value}

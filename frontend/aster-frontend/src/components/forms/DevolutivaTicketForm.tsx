@@ -7,8 +7,7 @@ import type { DevolutivaTicket } from '../../types/devolutiva-ticket.ts'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
-import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarDevolutivaTicket, EditarDevolutivaTicket } from '../../actions/devolutiva/DevolutivaTicket.ts'
@@ -45,6 +44,10 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
     // Router
     const navigate = useNavigate()
 
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    devolutivaTicket = dados;
+
     // Valores padrão do formulário
     const defaultValues: DevolutivaTicketFormSchemaType = {
         id: '',
@@ -74,7 +77,7 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<DevolutivaTicketFormSchemaType> = (async (data) => {
@@ -89,7 +92,7 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                 await CriarDevolutivaTicket({ ...data, dataEnvio: dayjs(data.dataEnvio).format('YYYY-MM-DD') })
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/devolutiva-ticket")
         } catch (error) {
             console.log(error)
         }
@@ -128,9 +131,9 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Devolutiva ticket' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -143,6 +146,8 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.id}
+                                        helperText={errors.id?.message}
                                         label="Id"
                                         placeholder="Id"
                                         value={field.value}
@@ -159,6 +164,8 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.resposta}
+                                        helperText={errors.resposta?.message}
                                         label="Resposta"
                                         placeholder="Resposta"
                                         value={field.value}
@@ -197,7 +204,7 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                                                 fontSize: '20px',
                                                                 padding: '0 6px 0 0px',
                                                                 backgroundColor: "#fff",
-                                                                color: 'black'
+                                                                color: 'var(--content-primary)'
                                                             },
                                                             "& .MuiPickersInputBase-root": {
                                                                 height: 50,
@@ -222,6 +229,7 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.status}
                                         label="Status"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -245,6 +253,8 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.assunto}
+                                        helperText={errors.assunto?.message}
                                         label="Assunto"
                                         placeholder="Assunto"
                                         value={field.value}
@@ -261,6 +271,7 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.produtoId}
                                         label="Produto"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -282,6 +293,8 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.clienteDocumento}
+                                        helperText={errors.clienteDocumento?.message}
                                         label="Documento do cliente"
                                         placeholder="Documento do cliente"
                                         value={field.value}
@@ -298,6 +311,8 @@ export default function DevolutivaTicketForm({ devolutivaTicket }: devolutivaTic
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.mensagem}
+                                        helperText={errors.mensagem?.message}
                                         label="Mensagem"
                                         placeholder="Mensagem"
                                         value={field.value}

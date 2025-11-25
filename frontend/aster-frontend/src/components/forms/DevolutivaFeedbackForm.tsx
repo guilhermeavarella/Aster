@@ -4,11 +4,10 @@ import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { DevolutivaFeedback } from '../../types/devolutiva-feedback.ts'
-import { Stack, Card, CardHeader, Typography, MenuItem, Box, FormControlLabel } from '@mui/material'
+import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
-import Button from '../Button.tsx'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarDevolutivaFeedback, EditarDevolutivaFeedback } from '../../actions/devolutiva/DevolutivaFeedback.ts'
@@ -47,6 +46,10 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
     // Router
     const navigate = useNavigate()
 
+    const { state } = useLocation();
+    const dados = state?.selectedRegister;
+    devolutivaFeedback = dados;
+
     // Valores padrão do formulário
     const defaultValues: DevolutivaFeedbackFormSchemaType = {
         id: '',
@@ -76,7 +79,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<DevolutivaFeedbackFormSchemaType> = (async (data) => {
@@ -91,7 +94,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                 await CriarDevolutivaFeedback({ ...data, dataEnvio: dayjs(data.dataEnvio).format('YYYY-MM-DD') })
             }
             reset()
-            // navigate("")
+            navigate("/operacoes/exibir/devolutiva-feedback")
         } catch (error) {
             console.log(error)
         }
@@ -123,9 +126,9 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                     </Glass>
                     <ProfileMenu />
                 </section>
-                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '10px 10px 4px 0 rgba(0, 0, 0, 0.25)' }}>
+                <Card sx={{ p: 3, borderRadius: '30px', boxShadow: '2px 4px 10px 0 rgba(0, 0, 0, 0.15)' }}>
                     <CardHeader title='Criar - Devolutiva feedback' sx={{ fontWeight: 'bold', px: 0, pt: 1 }} titleTypographyProps={{
-                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'black' }
+                        sx: { fontWeight: 'bold', fontSize: '40px', color: 'var(--content-primary)' }
                     }}>
                     </CardHeader>
                     <Typography sx={{ pb: 5 }}>
@@ -138,6 +141,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.id}
+                                        helperText={errors.id?.message}
                                         label="Id"
                                         placeholder="Id"
                                         value={field.value}
@@ -154,6 +159,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.avaliacao}
+                                        helperText={errors.avaliacao?.message}
                                         label="Avaliação"
                                         placeholder="Avaliação"
                                         value={field.value}
@@ -192,7 +199,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                                                 fontSize: '20px',
                                                                 padding: '0 6px 0 0px',
                                                                 backgroundColor: "#fff",
-                                                                color: 'black'
+                                                                color: 'var(--content-primary)'
                                                             },
                                                             "& .MuiPickersInputBase-root": {
                                                                 height: 50,
@@ -217,6 +224,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.atividadeUso}
+                                        helperText={errors.atividadeUso?.message}
                                         label="Atividade de uso"
                                         placeholder="Atividade de uso"
                                         value={field.value}
@@ -235,6 +244,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.assunto}
+                                        helperText={errors.assunto?.message}
                                         label="Assunto"
                                         placeholder="Assunto"
                                         value={field.value}
@@ -251,6 +262,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.produtoId}
                                         label="Produto"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -272,6 +284,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.clienteDocumento}
+                                        helperText={errors.clienteDocumento?.message}
                                         label="Documento do cliente"
                                         placeholder="Documento do cliente"
                                         value={field.value}
@@ -288,6 +302,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.mensagem}
+                                        helperText={errors.mensagem?.message}
                                         label="Mensagem"
                                         placeholder="Mensagem"
                                         value={field.value}
