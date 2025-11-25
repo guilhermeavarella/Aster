@@ -102,7 +102,7 @@ export default function Home() {
             <section className="w-full bg-[var(--background-light)] flex flex-col items-center justify-center py-16 gap-16">
                 <div className="w-full flex flex-col items-center justify-center text-center gap-3">
                     <h4 className="text-3xl">Pronto para levar sua criatividade às estrelas?</h4>
-                    <p className="max-w-240">Adquira um de nossos pacotes e economize! Junte-se a milhares de criadores que já estão transformando suas ideias em realidade com a Aster.</p>
+                    <p>Adquira um de nossos pacotes e economize! Junte-se a milhares de criadores que já estão transformando suas ideias em realidade com a Aster.</p>
                 </div>
 
                 {/* FAZER DINAMICO */}
