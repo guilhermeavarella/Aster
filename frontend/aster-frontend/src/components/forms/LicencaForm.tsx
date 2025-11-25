@@ -63,7 +63,7 @@ export default function LicencaForm({ licenca }: licencaProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<LicencaFormSchemaType> = (async (data) => {
@@ -129,6 +129,8 @@ export default function LicencaForm({ licenca }: licencaProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.id}
+                                        helperText={errors.id?.message}
                                         label="Id"
                                         placeholder="Id"
                                         value={field.value}
@@ -145,6 +147,8 @@ export default function LicencaForm({ licenca }: licencaProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.dataRegistro}
+                                        helperText={errors.dataRegistro?.message}
                                         label="Data de Lançamento"
                                         placeholder="Data de lançamento"
                                         value={field.value}
@@ -163,6 +167,7 @@ export default function LicencaForm({ licenca }: licencaProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.produtoId}
                                         label="Produto"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -182,6 +187,7 @@ export default function LicencaForm({ licenca }: licencaProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.tipo}
                                         label="Tipo de licença"
                                         value={field.value}
                                         onChange={field.onChange}

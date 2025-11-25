@@ -4,15 +4,9 @@ import { Controller } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Pacote } from '../../types/pacote.ts'
-import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
+import { Stack, Card, CardHeader, Typography, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
-import StyledInputTextArea from '../mui/InputTextArea.tsx'
-import StyledInputSelect from '../mui/InputSelect.tsx'
-import StyledInputMultiSelect from '../mui/InputMultiSelect.tsx'
-import Button from '../Button.tsx'
 import { useLocation, useNavigate } from 'react-router'
-import { useEffect, useState } from 'react'
-import { type SelectChangeEvent } from '@mui/material'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
 import { CriarPacote, EditarPacote } from '../../actions/Pacote.ts'
@@ -62,7 +56,7 @@ export default function PacoteForm({ pacote }: pacoteProps) {
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<PacoteFormSchemaType> = (async (data) => {
@@ -109,6 +103,8 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -126,6 +122,8 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.precoIndividual}
+                                        helperText={errors.precoIndividual?.message}
                                         label="Preço individual"
                                         placeholder="Preço individual"
                                         value={field.value}
@@ -143,6 +141,8 @@ export default function PacoteForm({ pacote }: pacoteProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputText
+                                    error={!!errors.precoOrganizacional}
+                                    helperText={errors.precoOrganizacional?.message}
                                     label="Preço organizacional"
                                     placeholder="Preço organizacional"
                                     value={field.value}

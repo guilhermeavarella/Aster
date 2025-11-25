@@ -71,7 +71,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: {errors} } = methods
 
     // Lista dos países 
     countries.registerLocale(pt)
@@ -140,6 +140,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -156,6 +158,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.documento}
+                                        helperText={errors.documento?.message}
                                         label="Documento"
                                         placeholder="Documento"
                                         value={field.value}
@@ -174,6 +178,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.regiao}
                                         label="Região"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -193,6 +198,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.continente}
                                         label="Continente"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -214,6 +220,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.email}
+                                        helperText={errors.email?.message}
                                         label="Email"
                                         placeholder="Email"
                                         value={field.value}
@@ -230,6 +238,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.telefone}
+                                        helperText={errors.telefone?.message}
                                         label="Telefone"
                                         placeholder="Telefone"
                                         value={field.value}
@@ -248,6 +258,8 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.setorAtuacao}
+                                        helperText={errors.setorAtuacao?.message}
                                         label="Setor de Atuação"
                                         placeholder="Setor de Atuação"
                                         value={field.value}
@@ -264,6 +276,7 @@ export default function ClienteOrganizacaoForm({ clienteOrganizacao }: clienteOr
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.porte}
                                         label="Porte"
                                         value={field.value}
                                         onChange={field.onChange}

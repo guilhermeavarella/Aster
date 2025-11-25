@@ -68,7 +68,7 @@ export default function VersaoForm({ versao }: versaoProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, reset, control, watch } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<VersaoFormSchemaType> = (async (data) => {
@@ -129,6 +129,8 @@ export default function VersaoForm({ versao }: versaoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.numeroVersao}
+                                        helperText={errors.numeroVersao?.message}
                                         label="Número da versão"
                                         placeholder="Número da versão"
                                         value={field.value}
@@ -145,6 +147,7 @@ export default function VersaoForm({ versao }: versaoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.produtoId}
                                         label="Produto"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -212,6 +215,8 @@ export default function VersaoForm({ versao }: versaoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.arquivoInstalador}
+                                        helperText={errors.arquivoInstalador?.message}
                                         label="Arquivo de instalação"
                                         placeholder="Arquivo de instalação"
                                         value={field.value}
@@ -229,6 +234,8 @@ export default function VersaoForm({ versao }: versaoProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputTextArea
+                                    error={!!errors.patchNotes}
+                                    helperText={errors.patchNotes?.message}
                                     label="Notas da versão"
                                     placeholder="Notas da versão"
                                     value={field.value}

@@ -7,7 +7,6 @@ import type { ClienteIndividual } from '../../types/cliente-individual.ts'
 import { Stack, Card, CardHeader, Typography, MenuItem, Box } from '@mui/material'
 import StyledInputText from '../mui/InputText.tsx'
 import StyledInputSelect from '../mui/InputSelect.tsx'
-import Button from '../Button.tsx'
 import { useLocation, useNavigate } from 'react-router'
 import Glass from '../Glass.tsx'
 import ProfileMenu from '../ProfileMenu.tsx'
@@ -68,7 +67,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: {errors} } = methods
 
     // Lista dos países 
     countries.registerLocale(pt)
@@ -130,6 +129,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -146,6 +147,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.documento}
+                                        helperText={errors.documento?.message}
                                         label="Documento"
                                         placeholder="Documento"
                                         value={field.value}
@@ -164,6 +167,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.regiao}
                                         label="Região"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -183,6 +187,7 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.continente}
                                         label="Continente"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -204,6 +209,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.email}
+                                        helperText={errors.email?.message}
                                         label="Email"
                                         placeholder="Email"
                                         value={field.value}
@@ -220,6 +227,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.telefone}
+                                        helperText={errors.telefone?.message}
                                         label="Telefone"
                                         placeholder="Telefone"
                                         value={field.value}
@@ -237,6 +246,8 @@ export default function ClienteIndividualForm({ clienteIndividual }: clienteIndi
                             control={control}
                             render={({ field }) => (
                                 <StyledInputText
+                                    error={!!errors.atividadeUso}
+                                    helperText={errors.atividadeUso?.message}
                                     label="Atividade de Uso"
                                     placeholder="Atividade de Uso"
                                     value={field.value}

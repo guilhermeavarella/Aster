@@ -29,13 +29,13 @@ import SubmitDialog from '../mui/SubmitDialog.tsx'
 
 // Schema para validação da entidade
 const ProdutoFormSchema = z.object({
-    id: z.string().min(1, 'Campo obrigatório'),
-    nome: z.string().min(1, 'Campo obrigatório'),
-    status: z.string().min(1, 'Campo obrigatório'),
-    descricaoBreve: z.string().min(1, 'Campo obrigatório'),
-    descricaoCompleta: z.string().min(1, 'Campo obrigatório'),
-    icone: z.string().min(1, 'Campo obrigatório'),
-    categorias: z.array(z.string().min(1, 'Campo obrigatório'))
+    id: z.string().length(4, 'Campo deve conter exatamente 4 caracteres'),
+    nome: z.string().min(1, 'Campo obrigatório').max(30, 'Limite máximo de caracteres atingido: 30'),
+    status: z.string().min(1, 'Campo obrigatório').max(20, 'Limite máximo de caracteres atingido: 20'),
+    descricaoBreve: z.string().min(1, 'Campo obrigatório').max(200, 'Limite máximo de caracteres atingido: 200'),
+    descricaoCompleta: z.string().min(1, 'Campo obrigatório').max(600, 'Limite máximo de caracteres atingido'),
+    icone: z.string().min(1, 'Campo obrigatório').max(30, 'Limite máximo de caracteres atingido: 30'),
+    categorias: z.array(z.string().min(1, 'Campo obrigatório').max(30, 'Limite máximo de caracteres atingido: 30'))
 })
 
 export type ProdutoFormSchemaType = z.infer<typeof ProdutoFormSchema>
@@ -81,7 +81,7 @@ export default function ProdutoForm({ produto }: produtoProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Array de status
     const status: string[] = [
@@ -152,6 +152,8 @@ export default function ProdutoForm({ produto }: produtoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.id}
+                                        helperText={errors.id?.message}
                                         label="ID"
                                         placeholder="ID"
                                         value={field.value}
@@ -169,6 +171,8 @@ export default function ProdutoForm({ produto }: produtoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.nome}
+                                        helperText={errors.nome?.message}
                                         label="Nome"
                                         placeholder="Nome"
                                         value={field.value}
@@ -188,6 +192,7 @@ export default function ProdutoForm({ produto }: produtoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.status}
                                         label="Status"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -210,6 +215,7 @@ export default function ProdutoForm({ produto }: produtoProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputMultiSelect
+                                        error={!!errors.categorias}
                                         label="Categorias"
                                         value={field.value || []}
                                         onChange={(e) => field.onChange(e.target.value)}
@@ -231,6 +237,8 @@ export default function ProdutoForm({ produto }: produtoProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputText
+                                    error={!!errors.descricaoBreve}
+                                    helperText={errors.descricaoBreve?.message}
                                     label="Descrição breve"
                                     placeholder="Descrição breve"
                                     value={field.value}
@@ -248,6 +256,8 @@ export default function ProdutoForm({ produto }: produtoProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputText
+                                    error={!!errors.icone}
+                                    helperText={errors.icone?.message}
                                     label="Ícone"
                                     placeholder="Ícone"
                                     value={field.value}
@@ -265,6 +275,8 @@ export default function ProdutoForm({ produto }: produtoProps) {
                             control={control}
                             render={({ field }) => (
                                 <StyledInputTextArea
+                                    error={!!errors.descricaoCompleta}
+                                    helperText={errors.descricaoCompleta?.message}
                                     label="Descrição completa"
                                     placeholder="Descrição completa"
                                     value={field.value}

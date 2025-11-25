@@ -80,7 +80,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
         }
     })
 
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Handler criar/editar
     const handleCreateEdit: SubmitHandler<DevolutivaFeedbackFormSchemaType> = (async (data) => {
@@ -142,6 +142,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.id}
+                                        helperText={errors.id?.message}
                                         label="Id"
                                         placeholder="Id"
                                         value={field.value}
@@ -158,6 +160,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.avaliacao}
+                                        helperText={errors.avaliacao?.message}
                                         label="Avaliação"
                                         placeholder="Avaliação"
                                         value={field.value}
@@ -221,6 +225,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.atividadeUso}
+                                        helperText={errors.atividadeUso?.message}
                                         label="Atividade de uso"
                                         placeholder="Atividade de uso"
                                         value={field.value}
@@ -239,6 +245,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.assunto}
+                                        helperText={errors.assunto?.message}
                                         label="Assunto"
                                         placeholder="Assunto"
                                         value={field.value}
@@ -255,6 +263,7 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputSelect
+                                        error={!!errors.produtoId}
                                         label="Produto"
                                         value={field.value}
                                         onChange={field.onChange}
@@ -276,6 +285,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.clienteDocumento}
+                                        helperText={errors.clienteDocumento?.message}
                                         label="Documento do cliente"
                                         placeholder="Documento do cliente"
                                         value={field.value}
@@ -292,6 +303,8 @@ export default function DevolutivaFeedbackForm({ devolutivaFeedback }: devolutiv
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.mensagem}
+                                        helperText={errors.mensagem?.message}
                                         label="Mensagem"
                                         placeholder="Mensagem"
                                         value={field.value}

@@ -59,7 +59,7 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
     })
 
     // Methods do useForm
-    const { handleSubmit, reset, control } = methods
+    const { handleSubmit, reset, control, formState: { errors } } = methods
 
     // Debug
     useEffect(() => {
@@ -111,6 +111,8 @@ export default function UsuarioForm({ usuario }: usuarioProps) {
                                 control={control}
                                 render={({ field }) => (
                                     <StyledInputText
+                                        error={!!errors.chaveUso}
+                                        helperText={errors.chaveUso?.message}
                                         label="Chave de uso"
                                         placeholder="Chave de uso"
                                         value={field.value}

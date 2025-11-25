@@ -1,6 +1,5 @@
 package com.aster.aster_dashboard_backend.controller.api.operacoes;
 
-import com.aster.aster_dashboard_backend.dto.ClienteIndividualDto;
 import com.aster.aster_dashboard_backend.dto.ClienteOrganizacaoDto;
 import com.aster.aster_dashboard_backend.dto.PageResponseDto;
 import com.aster.aster_dashboard_backend.service.ClienteOrganizacaoService;
