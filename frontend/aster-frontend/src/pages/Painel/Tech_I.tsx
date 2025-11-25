@@ -20,14 +20,13 @@ export default function Desempenho() {
 
     const fetchData = async (request: string) => {
         try {
-            const response = await api.get(`/painel/i/estrategia/${request}`);
+            const response = await api.get(`/painel/i/tech/${request}`);
             return(response.data);
         } catch (error) {
             console.error(`Error fetching json ${request}:`, error);
         }
     };
 
-    // FETCH MOCKS
     const fetchJson = async (path: string) => {
         const response = await fetch(path);
         if (!response.ok) throw new Error(`Erro ao buscar: ${path}`);
@@ -45,7 +44,7 @@ export default function Desempenho() {
             .then((data) => {setTemplate(data)});
 
         try {
-            const response = await api.get(`/operacoes/usuario?page=${page_number}`);
+            const response = await api.get(`/painel/i/tech/registros-usuarios?page=${page_number}`);
             setPage(response.data);
         } catch (error) {
             console.error(`Error fetching page ${page_number}:`, error);
@@ -66,26 +65,13 @@ export default function Desempenho() {
                 palette1,
                 palette2
             ] = await Promise.all([
-                // MOCKS
-                [ { "id": 0, "value": 85, "label": "Licenças Ativas" }, { "id": 1, "value": 15, "label": "Licenças Inativas" } ],
-                fetchJson(`/mocks/metricas-painel/prevalescenciaContinente.json`),
-                fetchJson(`/mocks/produto_page1.json`),
-                fetchJson(`/mocks/metricas-painel/ticketMedio.json`),
+                fetchData('porcentagem-status-licencas'),
+                fetchData('quantidade-usuarios-produto'),
+                fetchData('versoes-recentes'),
+                fetchData('quantidade-usuarios-cliente'),
 
                 fetchJson(`/src/assets/files/color-palettes/chartPalette4.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`)
-
-                /*
-                fetchData('quantidadesTotais'),
-                fetchData('clientesContinente'),
-                fetchData('clientesPais'),
-                fetchData('porcentagemSegmento'),
-                fetchData('porcentagemAplicacao'),
-                fetchData('porcentagemPorte'),
-
-                fetchJson(`/src/assets/files/color-palettes/chartPalette4.json`),
-                fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`)
-                */
             ]);
 
             setPorcentagemLicencaData(porcentagemLicenca);

@@ -26,7 +26,6 @@ export default function Desempenho() {
         }
     };
 
-    // FETCH MOCKS
     const fetchJson = async (path: string) => {
         const response = await fetch(path);
         if (!response.ok) throw new Error(`Erro ao buscar: ${path}`);
@@ -52,18 +51,18 @@ export default function Desempenho() {
                 tempoProduto,
                 tempoPacote,
                 palette1,
-               palette2,
+                palette2,
                 palette3,
             ] = await Promise.all([
-                // MOCKS
-                fetchJson(`/mocks/metricas-painel/vendasProduto.json`),
-                fetchJson(`/mocks/metricas-painel/vendasPacote.json`),
-                fetchJson(`/mocks/metricas-painel/tempoProduto.json`),
-                fetchJson(`/mocks/metricas-painel/tempoPacote.json`),
+                fetchData('total-vendas-produto'),
+                fetchData('total-vendas-pacote'),
+                fetchData('vendas-mensais-produto'),
+                fetchData('vendas-mensais-pacote'),
                 
                 fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette1.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette2.json`),
+                
             ]);
 
             setVendasProdutoData(vendasProduto);

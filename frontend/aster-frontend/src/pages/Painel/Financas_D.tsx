@@ -3,6 +3,7 @@ import ProfileMenu from "../../components/ProfileMenu";
 import Glass from "../../components/Glass";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
+import api from "../../services/api";
 
 export default function Desempenho() {
     const [receitaProdutoData, setReceitaProdutoData] = useState();
@@ -26,7 +27,6 @@ export default function Desempenho() {
         }
     };
 
-    // FETCH MOCKS
     const fetchJson = async (path: string) => {
         const response = await fetch(path);
         if (!response.ok) throw new Error(`Erro ao buscar: ${path}`);
@@ -52,14 +52,13 @@ export default function Desempenho() {
                 tempoProduto,
                 tempoPacote,
                 palette1,
-               palette2,
+                palette2,
                 palette3,
             ] = await Promise.all([
-                // MOCKS
-                fetchJson(`/mocks/metricas-painel/vendasProduto.json`),
-                fetchJson(`/mocks/metricas-painel/vendasPacote.json`),
-                fetchJson(`/mocks/metricas-painel/tempoProduto.json`),
-                fetchJson(`/mocks/metricas-painel/tempoPacote.json`),
+                fetchData('receita-total-produto'),
+                fetchData('receita-total-pacote'),
+                fetchData('receita-mensal-produto'),
+                fetchData('receita-mensal-pacote'),
                 
                 fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette1.json`),

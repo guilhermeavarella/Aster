@@ -3,15 +3,16 @@ import ProfileMenu from "../../components/ProfileMenu";
 import Glass from "../../components/Glass";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
+import api from "../../services/api";
 
 export default function Desempenho() {
-    const [usuariosData, setReceitaProdutoData] = useState();
-    const [avaliacoesData, setReceitaPacoteData] = useState();
-    const [tempoProdutoData, setTempoProdutoData] = useState();
-    const [tempoPacoteData, setTempoPacoteData] = useState();
+    const [usuariosData, setUsuariosData] = useState();
+    const [avaliacoesData, setAvaliacoesData] = useState();
+    const [usuariosProdutoData, setUsuariosProdutoData] = useState();
+    const [avaliacoesProdutoData, setAvaliacoesProdutoData] = useState();
 
     const [produtoSelecionado, setProdutoSelecionado] = useState("Nova");
-    const [pacoteSelecionado, setPacoteSelecionado] = useState("Design");
+    const [produto2Selecionado, setProduto2Selecionado] = useState("Aikonic");
 
     const [colorScheme1, setColorScheme1] = useState();
     const [colorScheme2, setColorScheme2] = useState();
@@ -19,7 +20,7 @@ export default function Desempenho() {
 
     const fetchData = async (request: string) => {
         try {
-            const response = await api.get(`/painel/d/financas/${request}`);
+            const response = await api.get(`/painel/d/tech/${request}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching ${request}:`, error);
@@ -49,27 +50,26 @@ export default function Desempenho() {
             const [
                 usuarios,
                 avaliacoes,
-                tempoProduto,
-                tempoPacote,
+                usuariosProduto,
+                avaliacoesProduto,
                 palette1,
-               palette2,
+                palette2,
                 palette3,
             ] = await Promise.all([
-                // MOCKS
-                fetchJson(`/mocks/metricas-painel/vendasProduto.json`),
-                fetchJson(`/mocks/metricas-painel/vendasPacote.json`),
-                fetchJson(`/mocks/metricas-painel/tempoProduto.json`),
-                fetchJson(`/mocks/metricas-painel/tempoPacote.json`),
+                fetchData('usuarios-produto'),
+                fetchData('media-avaliacoes-pacote'),
+                fetchData('usuarios-mensais-produto'),
+                fetchData('avaliacoes-mensais-pacote'),
                 
                 fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette1.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette2.json`),
             ]);
 
-            setReceitaProdutoData(usuarios);
-            setReceitaPacoteData(avaliacoes);
-            setTempoProdutoData(tempoProduto);
-            setTempoPacoteData(tempoPacote);
+            setUsuariosData(usuarios);
+            setAvaliacoesData(avaliacoes);
+            setUsuariosProdutoData(usuariosProduto);
+            setAvaliacoesProdutoData(avaliacoesProduto);
 
             setColorScheme1(palette1);
             setColorScheme2(palette2);
@@ -82,8 +82,8 @@ export default function Desempenho() {
     if (
         !usuariosData ||
         !avaliacoesData ||
-        !tempoProdutoData ||
-        !tempoPacoteData ||
+        !usuariosProdutoData ||
+        !avaliacoesProdutoData ||
         !colorScheme1 ||
         !colorScheme2 ||
         !colorScheme3
@@ -176,7 +176,7 @@ export default function Desempenho() {
                             <p className="text-sm">Selecione o produto que deseja visualizar</p>
                         </div>
                         <LineChart
-                            dataset={prepararSerie(recortarArray(tempoProdutoData, produtoSelecionado))}
+                            dataset={prepararSerie(recortarArray(usuariosProdutoData, produtoSelecionado))}
                             xAxis={[{
                                 dataKey: 'data',
                                 scaleType: 'time',
@@ -194,7 +194,7 @@ export default function Desempenho() {
                         />
 
                         <div className="flex gap-2 mt-4 pb-3 flex-wrap justify-center">
-                            {Object.keys(tempoProdutoData).map((produto) => (
+                            {Object.keys(usuariosProdutoData).map((produto) => (
                                 <button
                                     key={produto}
                                     onClick={() => setProdutoSelecionado(produto)}
@@ -218,7 +218,7 @@ export default function Desempenho() {
                             <p className="text-sm">Selecione o produto que deseja visualizar</p>
                         </div>
                         <LineChart
-                            dataset={prepararSerie(recortarArray(tempoProdutoData, produtoSelecionado))}
+                            dataset={prepararSerie(recortarArray(avaliacoesProdutoData, produto2Selecionado))}
                             xAxis={[{
                                 dataKey: 'data',
                                 scaleType: 'time',
@@ -228,7 +228,7 @@ export default function Desempenho() {
                                 dataKey: 'vendas',
                                 showMark: false,
                                 label: 'Usuários',
-                                color: colorScheme2[usuariosData.findIndex((d: any) => d.produto === produtoSelecionado) % colorScheme2.length]
+                                color: colorScheme2[usuariosData.findIndex((d: any) => d.produto === produto2Selecionado) % colorScheme2.length]
                             }]}
                             height={240}
                             hideLegend={true}
@@ -236,13 +236,13 @@ export default function Desempenho() {
                         />
 
                         <div className="flex gap-2 mt-4 pb-3 flex-wrap justify-center">
-                            {Object.keys(tempoProdutoData).map((produto) => (
+                            {Object.keys(avaliacoesProdutoData).map((produto) => (
                                 <button
-                                    key={produto}
-                                    onClick={() => setProdutoSelecionado(produto)}
+                                    key={produto + '2'}
+                                    onClick={() => setProduto2Selecionado(produto)}
                                     className={`
                                         px-4 py-1 rounded-lg
-                                        ${produtoSelecionado === produto 
+                                        ${produto2Selecionado === produto 
                                             ? "bg-[var(--content-secondary)] font-semibold text-[var(--content-inverse)]" 
                                             : "bg-[var(--background-fixed-white)] text-[var(--content-primary)] hover:bg-gray-100"
                                         }

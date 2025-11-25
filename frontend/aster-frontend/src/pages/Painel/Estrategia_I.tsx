@@ -27,7 +27,6 @@ export default function Desempenho() {
         }
     };
 
-    // FETCH MOCKS
     const fetchJson = async (path: string) => {
         const response = await fetch(path);
         if (!response.ok) throw new Error(`Erro ao buscar: ${path}`);
@@ -51,28 +50,15 @@ export default function Desempenho() {
                 palette1,
                 palette2,
             ] = await Promise.all([
-                // MOCKS
-                fetchJson(`/mocks/metricas-painel/quantidadesTotais.json`),
-                [222, 280, 86, 120, 180, 78],
-                fetchJson(`/mocks/metricas-painel/vendasPacote.json`),
-                fetchJson(`/mocks/metricas-painel/prevalescenciaContinente.json`),
-                fetchJson(`/mocks/metricas-painel/prevalescenciaContinente.json`),
-                fetchJson(`/mocks/metricas-painel/prevalescenciaContinente.json`),
-
-                fetchJson(`/src/assets/files/color-palettes/chartPalette4.json`),
-                fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`),
-
-                /*
-                fetchData('quantidadesTotais'),
-                fetchData('clientesContinente'),
-                fetchData('clientesPais'),
-                fetchData('porcentagemSegmento'),
-                fetchData('porcentagemAplicacao'),
-                fetchData('porcentagemPorte'),
+                fetchData('quantidades-entidades'),
+                fetchData('clientes-continente'),
+                fetchData('clientes-pais'),
+                fetchData('porcentagem-segmento-atuacao'),
+                fetchData('porcentagem-atividade-uso'),
+                fetchData('porcentagem-porte'),
 
                 fetchJson(`/src/assets/files/color-palettes/chartPalette4.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`)
-                */
             ]);
 
             setQuantidadesData(quantidades);

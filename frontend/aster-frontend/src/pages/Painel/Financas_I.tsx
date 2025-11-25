@@ -3,7 +3,7 @@ import ProfileMenu from "../../components/ProfileMenu";
 import Glass from "../../components/Glass";
 import { PieChart } from '@mui/x-charts/PieChart';
 import api from "../../services/api"
-import { useYScale, useDrawingArea } from '@mui/x-charts/hooks';
+import { useYScale, useDrawingArea} from '@mui/x-charts/hooks';
 import { LineChart, areaElementClasses } from '@mui/x-charts/LineChart';
 
 export default function Desempenho() {
@@ -17,7 +17,7 @@ export default function Desempenho() {
 
     const fetchData = async (request: string) => {
         try {
-            const response = await api.get(`/painel/i/estrategia/${request}`);
+            const response = await api.get(`/painel/i/financas/${request}`);
             return(response.data);
         } catch (error) {
             console.error(`Error fetching json ${request}:`, error);
@@ -53,24 +53,13 @@ export default function Desempenho() {
                 palette1,
                 palette2,
             ] = await Promise.all([
-                // MOCKS
-                fetchJson(`/mocks/metricas-painel/tempoProduto.json`),
-                fetchJson(`/mocks/metricas-painel/tempoProduto.json`),
-                fetchJson(`/mocks/metricas-painel/ticketMedio.json`),
-                fetchJson(`/mocks/metricas-painel/ticketMedio.json`),
-
-                fetchJson(`/src/assets/files/color-palettes/chartPalette4.json`),
-                fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`),
-
-                /*
-                fetchData('tempoReceita'),
-                fetchData('tempoDespesas'),
-                fetchData('ticketMedio'),
-                fetchData('tempoSaldo'),
+                fetchData('receita-total-mensal'),
+                fetchData('despesa-total-mensal'),
+                fetchData('ticket-medio-cliente'),
+                fetchData('saldo-anual'),
 
                 fetchJson(`/src/assets/files/color-palettes/chartPalette4.json`),
                 fetchJson(`/src/assets/files/color-palettes/chartPalette3.json`)
-                */
             ]);
 
             setTempoReceitaData(tempoReceita);
