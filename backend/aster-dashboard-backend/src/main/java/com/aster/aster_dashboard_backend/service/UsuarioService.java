@@ -1,8 +1,6 @@
 package com.aster.aster_dashboard_backend.service;
 
-import com.aster.aster_dashboard_backend.dto.UsuarioDto;
-import com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto;
-import com.aster.aster_dashboard_backend.dto.UsuariosProdutoDto;
+import com.aster.aster_dashboard_backend.dto.*;
 import com.aster.aster_dashboard_backend.entity.Usuario;
 import com.aster.aster_dashboard_backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.Arrays.stream;
 
 @Service
 public class UsuarioService {
@@ -44,13 +44,40 @@ public class UsuarioService {
         return repository.findUsuariosProduto();
     }
 
-    public List<UsuariosMensaisProdutoDto> findUsuariosMensaisProduto() {
+    public MensalProdutoDto<DataUsuariosDto> findUsuariosMensaisProduto() {
         List<Object[]> lista = repository.findUsuariosMensaisProduto();
-        return lista.stream().map(o -> new UsuariosMensaisProdutoDto(
+        List<UsuariosMensaisProdutoDto> dtos = lista.stream().map(o -> new UsuariosMensaisProdutoDto(
                 (o[0].toString()),
                 ((Date) o[1]),
                 ((Long) o[2])
         )).toList();
+
+        MensalProdutoDto<DataUsuariosDto> resultado = new MensalProdutoDto<>();
+
+        for (UsuariosMensaisProdutoDto dto : dtos) {
+            DataUsuariosDto dataUsuarios = new DataUsuariosDto(dto.getData(),dto.getUsuarios());
+
+            switch (dto.getProduto()) {
+                case "Nova"       -> resultado.getNova().add(dataUsuarios);
+                case "Celeste"    -> resultado.getCeleste().add(dataUsuarios);
+                case "Solaris"    -> resultado.getSolaris().add(dataUsuarios);
+                case "PrismaCut"  -> resultado.getPrismaCut().add(dataUsuarios);
+                case "EtherFX"    -> resultado.getEtherFX().add(dataUsuarios);
+                case "Framea"     -> resultado.getFramea().add(dataUsuarios);
+                case "Aikonic"    -> resultado.getAikonic().add(dataUsuarios);
+                case "Orbit"      -> resultado.getOrbit().add(dataUsuarios);
+                case "Graphia"    -> resultado.getGraphia().add(dataUsuarios);
+                case "Nebula3D"   -> resultado.getNebula3D().add(dataUsuarios);
+                case "Spectra"    -> resultado.getSpectra().add(dataUsuarios);
+                case "ScreenFlow" -> resultado.getScreenFlow().add(dataUsuarios);
+                case "LumenFrame" -> resultado.getLumenFrame().add(dataUsuarios);
+                case "AuraPaint"  -> resultado.getAuraPaint().add(dataUsuarios);
+                case "LumenDraw"  -> resultado.getLumenDraw().add(dataUsuarios);
+                case "BloomBank"  -> resultado.getBloomBank().add(dataUsuarios);
+            }
+        }
+
+        return resultado;
     }
 
     @Transactional

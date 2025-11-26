@@ -18,6 +18,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Arrays.stream;
+
 @Service
 public class ProdutoService {
 
@@ -69,13 +71,40 @@ public class ProdutoService {
         )).toList();
     }
 
-    public List<ReceitaMensalProdutoDto> findReceitaMensalProduto() {
+    public MensalProdutoDto<DataReceitaDto> findReceitaMensalProduto() {
         List<Object[]> lista = repository.findReceitaMensalProduto();
-        return lista.stream().map(o-> new ReceitaMensalProdutoDto(
+        List<ReceitaMensalProdutoDto> dtos = lista.stream().map(o-> new ReceitaMensalProdutoDto(
                 (o[0].toString()),
                 ((Date) o[1]),
                 ((BigDecimal) o[2])
         )).toList();
+
+        MensalProdutoDto<DataReceitaDto> resultado = new MensalProdutoDto<>();
+
+        for (ReceitaMensalProdutoDto dto : dtos) {
+            DataReceitaDto dataReceita = new DataReceitaDto(dto.getData(), dto.getReceita());
+
+            switch (dto.getProduto()) {
+                case "Nova"       -> resultado.getNova().add(dataReceita);
+                case "Celeste"    -> resultado.getCeleste().add(dataReceita);
+                case "Solaris"    -> resultado.getSolaris().add(dataReceita);
+                case "PrismaCut"  -> resultado.getPrismaCut().add(dataReceita);
+                case "EtherFX"    -> resultado.getEtherFX().add(dataReceita);
+                case "Framea"     -> resultado.getFramea().add(dataReceita);
+                case "Aikonic"    -> resultado.getAikonic().add(dataReceita);
+                case "Orbit"      -> resultado.getOrbit().add(dataReceita);
+                case "Graphia"    -> resultado.getGraphia().add(dataReceita);
+                case "Nebula3D"   -> resultado.getNebula3D().add(dataReceita);
+                case "Spectra"    -> resultado.getSpectra().add(dataReceita);
+                case "ScreenFlow" -> resultado.getScreenFlow().add(dataReceita);
+                case "LumenFrame" -> resultado.getLumenFrame().add(dataReceita);
+                case "AuraPaint"  -> resultado.getAuraPaint().add(dataReceita);
+                case "LumenDraw"  -> resultado.getLumenDraw().add(dataReceita);
+                case "BloomBank"  -> resultado.getBloomBank().add(dataReceita);
+            }
+        }
+
+        return resultado;
     }
 
     public List<ProdutoDto> findProdutosMaisPopulares() {

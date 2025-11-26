@@ -1,9 +1,6 @@
 package com.aster.aster_dashboard_backend.controller.api.painel;
 
-import com.aster.aster_dashboard_backend.dto.AvaliacaoMensalPacoteDto;
-import com.aster.aster_dashboard_backend.dto.MediaAvaliacoesPacoteDto;
-import com.aster.aster_dashboard_backend.dto.UsuariosMensaisProdutoDto;
-import com.aster.aster_dashboard_backend.dto.UsuariosProdutoDto;
+import com.aster.aster_dashboard_backend.dto.*;
 import com.aster.aster_dashboard_backend.service.PacoteService;
 import com.aster.aster_dashboard_backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +34,12 @@ public class TechDController {
     }
 
     @GetMapping("/usuarios-mensais-produto")
-    public List<UsuariosMensaisProdutoDto> findUsuariosMensaisProduto() {
+    public MensalProdutoDto<DataUsuariosDto> findUsuariosMensaisProduto() {
         return usuarioService.findUsuariosMensaisProduto();
     }
 
     @GetMapping("/avaliacoes-mensais-pacote")
-    public List<AvaliacaoMensalPacoteDto> findAvaliacaoMensalPacote() {
+    public MensalPacoteDto<DataAvaliacaoDto> findAvaliacaoMensalPacote() {
         return pacoteService.findAvaliacaoMensalPacote();
     }
 }

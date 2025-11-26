@@ -1,9 +1,6 @@
 package com.aster.aster_dashboard_backend.controller.api.painel;
 
-import com.aster.aster_dashboard_backend.dto.ReceitaMensalPacoteDto;
-import com.aster.aster_dashboard_backend.dto.ReceitaMensalProdutoDto;
-import com.aster.aster_dashboard_backend.dto.ReceitaTotalPacoteDto;
-import com.aster.aster_dashboard_backend.dto.ReceitaTotalProdutoDto;
+import com.aster.aster_dashboard_backend.dto.*;
 import com.aster.aster_dashboard_backend.service.PacoteService;
 import com.aster.aster_dashboard_backend.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +34,12 @@ public class FinancasDController {
     }
 
     @GetMapping("/receita-mensal-produto")
-    public List<ReceitaMensalProdutoDto> findReceitaMensalProduto() {
+    public MensalProdutoDto<DataReceitaDto> findReceitaMensalProduto() {
         return produtoService.findReceitaMensalProduto();
     }
 
     @GetMapping("/receita-mensal-pacote")
-    public List<ReceitaMensalPacoteDto> findReceitaMensalPacote() {
+    public MensalPacoteDto<DataReceitaDto>  findReceitaMensalPacote() {
         return pacoteService.findReceitaMensalPacote();
     }
 }
