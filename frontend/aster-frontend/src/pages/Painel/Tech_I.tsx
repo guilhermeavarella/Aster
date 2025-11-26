@@ -141,10 +141,9 @@ export default function Desempenho() {
                         <h5 className="text-xl font-semibold text-center">Updates recentes</h5>
                         <div className="w-full h-72 flex items-end">
                            <div className="w-full flex flex-col items-start justify-center p-6 gap-2">
-                                <ListButton label="Teste"/>
-                                <ListButton label="Teste"/>
-                                <ListButton label="Teste"/>
-                                <ListButton label="Teste"/>
+                                {versoesRecentesData.map((item: any, index: number) => (
+                                    <ListButton label={`${item.produtoNome} - ${item.numeroVersao} : ${item.patchNotes}`} key={index} onClick={() => {}} />
+                                ))}
                            </div>
                         </div>
                     </Glass>
