@@ -20,7 +20,7 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
     public List<TotalVendasPacoteDto> findTotalVendasPacote();
 
     @Query("""
-        SELECT new com.aster.aster_dashboard_backend.dto.VendasMensaisPacoteDto(p.nome, DATE_TRUNC('month', l.dataRegistro), COUNT(*))
+        SELECT new com.aster.aster_dashboard_backend.dto.VendasMensaisPacoteDto(p.nome, CAST(DATE_TRUNC('month', l.dataRegistro) AS DATE), COUNT(*))
         FROM Adquire a
         LEFT JOIN Licenca l ON a.id.licencaId = l.id
         LEFT JOIN Pacote p ON a.id.pacoteNome = p.nome

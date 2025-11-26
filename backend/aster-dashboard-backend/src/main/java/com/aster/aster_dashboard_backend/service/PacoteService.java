@@ -51,8 +51,43 @@ public class PacoteService {
         return repository.findTotalVendasPacote();
     }
 
-    public List<VendasMensaisPacoteDto> findVendasMensaisPacote() {
-        return repository.findVendasMensaisPacote();
+    public MensalPacoteDto<DataVendasDto> findVendasMensaisPacote() {
+        List<VendasMensaisPacoteDto> dtos = repository.findVendasMensaisPacote();
+
+        MensalPacoteDto<DataVendasDto> resultado = new MensalPacoteDto<>();
+
+        for (VendasMensaisPacoteDto dto : dtos) {
+            DataVendasDto dataVendas = new DataVendasDto(dto.getData(), dto.getVendas());
+
+            switch (dto.getPacote()) {
+                case "Nova"       -> resultado.getNova().add(dataVendas);
+                case "Celeste"    -> resultado.getCeleste().add(dataVendas);
+                case "Solaris"    -> resultado.getSolaris().add(dataVendas);
+                case "PrismaCut"  -> resultado.getPrismaCut().add(dataVendas);
+                case "EtherFX"    -> resultado.getEtherFX().add(dataVendas);
+                case "Framea"     -> resultado.getFramea().add(dataVendas);
+                case "Aikonic"    -> resultado.getAikonic().add(dataVendas);
+                case "Orbit"      -> resultado.getOrbit().add(dataVendas);
+                case "Graphia"    -> resultado.getGraphia().add(dataVendas);
+                case "Nebula3D"   -> resultado.getNebula3D().add(dataVendas);
+                case "Spectra"    -> resultado.getSpectra().add(dataVendas);
+                case "ScreenFlow" -> resultado.getScreenFlow().add(dataVendas);
+                case "LumenFrame" -> resultado.getLumenFrame().add(dataVendas);
+                case "AuraPaint"  -> resultado.getAuraPaint().add(dataVendas);
+                case "LumenDraw"  -> resultado.getLumenDraw().add(dataVendas);
+                case "BloomBank"  -> resultado.getBloomBank().add(dataVendas);
+                case "Design" ->  resultado.getDesign().add(dataVendas);
+                case "Fotos" -> resultado.getFotos().add(dataVendas);
+                case "Vídeos" -> resultado.getVideos().add(dataVendas);
+                case "Animação"  -> resultado.getAnimacao().add(dataVendas);
+                case "Ilustração" -> resultado.getIlustracao().add(dataVendas);
+                case "Documentos"  -> resultado.getDocumentos().add(dataVendas);
+                case "Social Media"  -> resultado.getSocial_Media().add(dataVendas);
+                case "3D" -> resultado.get_3D().add(dataVendas);
+            }
+        }
+
+        return resultado;
     }
 
     public List<ReceitaTotalPacoteDto> findReceitaTotalPacote() {

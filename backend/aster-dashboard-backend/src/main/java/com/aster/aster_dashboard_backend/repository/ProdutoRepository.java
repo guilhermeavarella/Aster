@@ -45,7 +45,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
     public List<TotalVendasProdutoDto> findTotalVendasProduto();
 
     @Query("""
-        SELECT new com.aster.aster_dashboard_backend.dto.VendasMensaisProdutoDto(p.nome, DATE_TRUNC('month', l.dataRegistro), COUNT(*))
+        SELECT new com.aster.aster_dashboard_backend.dto.VendasMensaisProdutoDto(p.nome, CAST(DATE_TRUNC('month', l.dataRegistro) AS DATE), COUNT(*))
         FROM Adquire a
         LEFT JOIN Licenca l ON a.id.licencaId = l.id
         LEFT JOIN Produto p ON l.produto.id = p.id

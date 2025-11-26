@@ -18,8 +18,6 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Arrays.stream;
-
 @Service
 public class ProdutoService {
 
@@ -59,8 +57,35 @@ public class ProdutoService {
         return repository.findTotalVendasProduto();
     }
 
-    public List<VendasMensaisProdutoDto> findVendasMensaisProduto() {
-        return repository.findVendasMensaisProduto();
+    public MensalProdutoDto<DataVendasDto> findVendasMensaisProduto() {
+        List<VendasMensaisProdutoDto> dtos = repository.findVendasMensaisProduto();
+
+        MensalProdutoDto<DataVendasDto> resultado = new MensalProdutoDto<>();
+
+        for (VendasMensaisProdutoDto dto : dtos) {
+            DataVendasDto dataVendas = new DataVendasDto(dto.getData(), dto.getVendas());
+
+            switch (dto.getProduto()) {
+                case "Nova"       -> resultado.getNova().add(dataVendas);
+                case "Celeste"    -> resultado.getCeleste().add(dataVendas);
+                case "Solaris"    -> resultado.getSolaris().add(dataVendas);
+                case "PrismaCut"  -> resultado.getPrismaCut().add(dataVendas);
+                case "EtherFX"    -> resultado.getEtherFX().add(dataVendas);
+                case "Framea"     -> resultado.getFramea().add(dataVendas);
+                case "Aikonic"    -> resultado.getAikonic().add(dataVendas);
+                case "Orbit"      -> resultado.getOrbit().add(dataVendas);
+                case "Graphia"    -> resultado.getGraphia().add(dataVendas);
+                case "Nebula3D"   -> resultado.getNebula3D().add(dataVendas);
+                case "Spectra"    -> resultado.getSpectra().add(dataVendas);
+                case "ScreenFlow" -> resultado.getScreenFlow().add(dataVendas);
+                case "LumenFrame" -> resultado.getLumenFrame().add(dataVendas);
+                case "AuraPaint"  -> resultado.getAuraPaint().add(dataVendas);
+                case "LumenDraw"  -> resultado.getLumenDraw().add(dataVendas);
+                case "BloomBank"  -> resultado.getBloomBank().add(dataVendas);
+            }
+        }
+
+        return resultado;
     }
 
     public List<ReceitaTotalProdutoDto> findReceitaTotalProduto() {
