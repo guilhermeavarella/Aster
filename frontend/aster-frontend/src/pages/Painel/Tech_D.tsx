@@ -11,8 +11,8 @@ export default function Desempenho() {
     const [usuariosProdutoData, setUsuariosProdutoData] = useState();
     const [avaliacoesProdutoData, setAvaliacoesProdutoData] = useState();
 
-    const [produtoSelecionado, setProdutoSelecionado] = useState("Nova");
-    const [produto2Selecionado, setProduto2Selecionado] = useState("Aikonic");
+    const [produtoSelecionado, setProdutoSelecionado] = useState("nova");
+    const [pacoteSelecionado, setPacoteSelecionado] = useState("aikonic");
 
     const [colorScheme1, setColorScheme1] = useState();
     const [colorScheme2, setColorScheme2] = useState();
@@ -35,7 +35,7 @@ export default function Desempenho() {
     };
 
     function recortarArray(dados: Record<string, any[]>, chave: string) {
-        return dados[chave] ?? [];
+        return dados[chave];
     }
 
     function prepararSerie(serie: any[]) {
@@ -44,6 +44,11 @@ export default function Desempenho() {
             data: new Date(item.data).getTime(),
         }));
     }
+
+    const formatString = (value: string) => {
+        const formatted = value.replace(/_/g, " ");
+        return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+    };
 
     useEffect(() => {
         async function carregarDados() {
@@ -118,11 +123,11 @@ export default function Desempenho() {
                                 dataKey: 'produto', 
                                 colorMap: {
                                     type: 'ordinal',
-                                    values: usuariosData.findIndex((d: any) => d.produto === 'Aikonic') !== -1 ? usuariosData.map((d: any) => d.produto) : [],
+                                    values: usuariosData.map((d: any) => d.produto),
                                     colors: colorScheme1
                                 }
                             }]}
-                            series={[{ dataKey: 'vendas', label: 'Usuários' }]}
+                            series={[{ dataKey: 'usuarios', label: 'Usuários' }]}
                             height={320}
                             hideLegend={true}
                         />
@@ -134,17 +139,17 @@ export default function Desempenho() {
                             <p className="text-sm">Coloque o mouse sobre as barras para mais detalhes</p>
                         </div>
                         <BarChart
-                            dataset={usuariosData}
+                            dataset={avaliacoesData}
                             xAxis={[{ 
                                 scaleType: 'band', 
-                                dataKey: 'produto', 
+                                dataKey: 'pacote', 
                                 colorMap: {
                                     type: 'ordinal',
-                                    values: usuariosData.findIndex((d: any) => d.produto === 'Aikonic') !== -1 ? usuariosData.map((d: any) => d.produto) : [],
+                                    values: avaliacoesData.map((d: any) => d.pacote),
                                     colors: colorScheme3
                                 }
                             }]}
-                            series={[{ dataKey: 'vendas', label: 'Usuários' }]}
+                            series={[{ dataKey: 'avaliacao', label: 'Usuários' }]}
                             height={320}
                             hideLegend={true}
                         />
@@ -183,10 +188,10 @@ export default function Desempenho() {
                                 valueFormatter: dateFormatter,
                             }]}
                             series={[{
-                                dataKey: 'vendas',
+                                dataKey: 'usuarios',
                                 showMark: false,
                                 label: 'Usuários',
-                                color: colorScheme2[usuariosData.findIndex((d: any) => d.produto === produtoSelecionado) % colorScheme2.length]
+                                color: colorScheme2[formatString(produtoSelecionado)]
                             }]}
                             height={240}
                             hideLegend={true}
@@ -206,7 +211,7 @@ export default function Desempenho() {
                                         }
                                     `}
                                 >
-                                    {produto}
+                                    {formatString(produto)}
                                 </button>
                             ))}
                         </div>
@@ -218,17 +223,17 @@ export default function Desempenho() {
                             <p className="text-sm">Selecione o produto que deseja visualizar</p>
                         </div>
                         <LineChart
-                            dataset={prepararSerie(recortarArray(avaliacoesProdutoData, produto2Selecionado))}
+                            dataset={prepararSerie(recortarArray(avaliacoesProdutoData, pacoteSelecionado))}
                             xAxis={[{
                                 dataKey: 'data',
                                 scaleType: 'time',
                                 valueFormatter: dateFormatter,
                             }]}
                             series={[{
-                                dataKey: 'vendas',
+                                dataKey: 'avaliacao',
                                 showMark: false,
-                                label: 'Usuários',
-                                color: colorScheme2[usuariosData.findIndex((d: any) => d.produto === produto2Selecionado) % colorScheme2.length]
+                                label: 'Médias de Avaliação',
+                                color: colorScheme2[formatString(pacoteSelecionado)]
                             }]}
                             height={240}
                             hideLegend={true}
@@ -239,16 +244,16 @@ export default function Desempenho() {
                             {Object.keys(avaliacoesProdutoData).map((produto) => (
                                 <button
                                     key={produto + '2'}
-                                    onClick={() => setProduto2Selecionado(produto)}
+                                    onClick={() => setPacoteSelecionado(produto)}
                                     className={`
                                         px-4 py-1 rounded-lg
-                                        ${produto2Selecionado === produto 
+                                        ${pacoteSelecionado === produto 
                                             ? "bg-[var(--content-secondary)] font-semibold text-[var(--content-inverse)]" 
                                             : "bg-[var(--background-fixed-white)] text-[var(--content-primary)] hover:bg-gray-100"
                                         }
                                     `}
                                 >
-                                    {produto}
+                                    {formatString(produto)}
                                 </button>
                             ))}
                         </div>

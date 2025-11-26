@@ -1,8 +1,30 @@
-[
-    "#e6B791", "#aca0ff", "#dd8ee2", "#ba8bdf", "#8dbddd",
-    "#efa7a0", "#eed79b", "#7d5df4", "#8a80d8", "#e0aeda",
-    "#a8cc8c", "#bf76ef", "#879ce7", "#87d5b4", "#8cd697",
-    "#f486e1", "#c57ede", "#ea71a2", "#e1a978", "#918cb9",
-    "#b99b8c", "#8cb999", "#8cb9b9", "#8c96b9", "#b98c97",
-    "#b9b38c", "#6f7ea7", "#8c68a4"
-]
+{
+  "Nova": "#e6B791",
+  "Celeste": "#aca0ff",
+  "Solaris": "#dd8ee2",
+  "Eclipt": "#ba8bdf",
+  "PrismaCut": "#8dbddd",
+  "EtherFX": "#efa7a0",
+  "Framea": "#eed79b",
+  "Aikonic": "#7d5df4",
+  "Orbit": "#8a80d8",
+  "Graphia": "#e0aeda",
+  "Nebula3D": "#a8cc8c",
+  "Spectra": "#bf76ef",
+  "ScreenFlow": "#879ce7",
+  "LumenFrame": "#87d5b4",
+  "AuraPaint": "#8cd697",
+  "LumenDraw": "#f486e1",
+  "Picta": "#c57ede",
+  "BloomBank": "#ea71a2",
+  "ChromaSwap": "#e1a978",
+  "Design": "#918cb9",
+  "Social Media": "#b99b8c",
+  "Fotos": "#8cb999",
+  "Vídeos": "#8cb9b9",
+  "Animação": "#8c96b9",
+  "Ilustração": "#b98c97",
+  "Documentos": "#b9b38c",
+  "3D": "#6f7ea7",
+  "Whole Bundle": "#8c68a4"
+}
