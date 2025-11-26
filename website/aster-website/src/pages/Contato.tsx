@@ -37,7 +37,7 @@ const profiles: ProfileType[] = [
         foto: '',
         linkedin: '',
         atividades: ['Desenvolvimento Back End','População do Banco de Dados'],
-        vulgo: '"Luisão"',
+        vulgo: '"This is what it is…"',
         nome: 'Luís Guilherme Hitoshi Kanazawa',
     },
     { 
