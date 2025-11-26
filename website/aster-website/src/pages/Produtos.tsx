@@ -11,7 +11,7 @@ export default function Produtos () {
 
     const fetchProdutos = async () => {
         try {
-            const response = await api.get('/home/produtos-mais-populares');
+            const response = await api.get('/galeria/produtos');
             setProdutos(response.data);
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
@@ -20,7 +20,7 @@ export default function Produtos () {
 
     const fetchPacotes = async () => {
         try {
-            const response = await api.get('/home/pacotes-mais-populares');
+            const response = await api.get('/galeria/pacotes');
             setPacotes(response.data);
         } catch (error) {
             console.error('Erro ao buscar pacotes:', error);
@@ -34,7 +34,11 @@ export default function Produtos () {
     useEffect(() => {
         fetchProdutos();
         fetchPacotes();
-    }, [produtos, pacotes]);
+    }, []);
+
+    if (!produtos || !pacotes) {
+        return <div>Carregando...</div>;
+    }
 
     return (
         <section className="w-full bg-gradient-to-tr from-[var(--brand-blue)] via-[var(--brand-lavender)] to-[var(--brand-pink)] flex flex-col items-center justify-start">
@@ -49,11 +53,31 @@ export default function Produtos () {
                 <div className="flex flex-col items-start justify-start gap-6">
                     <p>Filtre por categoria</p>
                     <div className="flex flex-col items-start justify-start gap-1">
+                        {currentCategoria === "Todos" ? (
+                        <button className="w-64 h-10.5 bg-[var(--brand-lavender)]/50 rounded-md px-4 hover:cursor-pointer" key="todos" onClick={() => handleCategoriaChange("Todos")}>
+                            <p className="font-semibold text-left justify-center">
+                                Todos
+                            </p>
+                        </button>
+                        ) : (
+                        <button className="w-64 h-10.5 rounded-md px-4 hover:cursor-pointer" key="todos" onClick={() => handleCategoriaChange("Todos")}>
+                            <p className="font-semibold text-left justify-center">
+                                Todos
+                            </p>
+                        </button>
+                        )}
                         {pacotes.map((pacote) => ( 
-                            (!pacote.categoria.includes(currentCategoria) && currentCategoria !== "Whole Bundle")? null :
-                            <button className="w-64 h-10.5 bg-[var(--brand-lavender)]/50 rounded-md px-4 hover:cursor-pointer" key={pacote.categoria} onClick={() => handleCategoriaChange(pacote.categoria)}>
+                            (!pacote.nome.includes(currentCategoria) && currentCategoria !== "Whole Bundle")? 
+
+                            <button className="w-64 h-10.5 rounded-md px-4 hover:cursor-pointer" key={pacote.nome} onClick={() => handleCategoriaChange(pacote.nome)}>
                                 <p className="font-semibold text-left justify-center">
-                                    {pacote.categoria}
+                                    {pacote.nome}
+                                </p>
+                            </button>
+                            :
+                            <button className="w-64 h-10.5 bg-[var(--brand-lavender)]/50 rounded-md px-4 hover:cursor-pointer" key={pacote.nome} onClick={() => handleCategoriaChange(pacote.nome)}>
+                                <p className="font-semibold text-left justify-center">
+                                    {pacote.nome}
                                 </p>
                             </button>
                         ))}
@@ -62,10 +86,11 @@ export default function Produtos () {
 
                 <div className="grid grid-cols-4 gap-6">
                     {produtos.map((produto) => (
-                        (!produto.categoria.includes(currentCategoria))? null :
+                        (!produto.categorias.includes(currentCategoria)) && currentCategoria !== "Todos" ? null :
                         <ProdutoCard 
-                            key={produto.name}
-                            name={produto.name}
+                            key={produto.nome}
+                            id={produto.id}
+                            name={produto.nome}
                             descricao={produto.descricao}
                         />
                     ))}
@@ -84,11 +109,9 @@ export default function Produtos () {
                 <div className="flex flex-col gap-9">
                     <div className="grid grid-cols-4 gap-9">
                         {pacotes.map((pacote) => ( 
-                            (!pacote.categoria.includes(currentCategoria) && currentCategoria !== "Whole Bundle")? null :
                             <PacoteCard 
-                                key={pacote.name}
-                                name={pacote.name}
-                                produtos={pacote.produtos}
+                                key={pacote.nome}
+                                name={pacote.nome}
                                 individual={pacote.precoIndividual}
                                 organizacional={pacote.precoOrganizacional}
                             />
@@ -102,76 +125,76 @@ export default function Produtos () {
                                 <div className="w-full flex flex-col items-center justify-start gap-2">
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[0].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[0].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[1].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[1].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[2].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[2].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[3].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[3].nome}</p>
                                     </div>
                                 </div>
                                 
                                 <div className="w-full flex flex-col items-center justify-start gap-2">
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[4].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[4].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[5].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[5].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[6].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[6].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[7].name}</p>
-                                    </div>
-                                </div>
-
-                                <div className="w-full flex flex-col items-center justify-start gap-2">
-                                    <div className="w-full flex flex-row items-center justify-start gap-2">
-                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[8].name}</p>
-                                    </div>
-                                    <div className="w-full flex flex-row items-center justify-start gap-2">
-                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[9].name}</p>
-                                    </div>
-                                    <div className="w-full flex flex-row items-center justify-start gap-2">
-                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[10].name}</p>
-                                    </div>
-                                    <div className="w-full flex flex-row items-center justify-start gap-2">
-                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[11].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[7].nome}</p>
                                     </div>
                                 </div>
 
                                 <div className="w-full flex flex-col items-center justify-start gap-2">
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[12].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[8].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[13].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[9].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[14].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[10].nome}</p>
                                     </div>
                                     <div className="w-full flex flex-row items-center justify-start gap-2">
                                         <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
-                                        <p className="font-semibold text-lg">{produtos[15].name}</p>
+                                        <p className="font-semibold text-lg">{produtos[11].nome}</p>
+                                    </div>
+                                </div>
+
+                                <div className="w-full flex flex-col items-center justify-start gap-2">
+                                    <div className="w-full flex flex-row items-center justify-start gap-2">
+                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
+                                        <p className="font-semibold text-lg">{produtos[12].nome}</p>
+                                    </div>
+                                    <div className="w-full flex flex-row items-center justify-start gap-2">
+                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
+                                        <p className="font-semibold text-lg">{produtos[13].nome}</p>
+                                    </div>
+                                    <div className="w-full flex flex-row items-center justify-start gap-2">
+                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
+                                        <p className="font-semibold text-lg">{produtos[14].nome}</p>
+                                    </div>
+                                    <div className="w-full flex flex-row items-center justify-start gap-2">
+                                        <img src="/assets/icons/app.svg" alt="Icone" className="w-12 h-12"/>
+                                        <p className="font-semibold text-lg">{produtos[15].nome}</p>
                                     </div>
                                 </div>
                             </div>
@@ -180,17 +203,17 @@ export default function Produtos () {
                                 <p className="w-full text-sm text-[var(--content-secondary)]">Adquira a coleção completa da Aster por:</p>
                                 <div className="w-full flex flex-row items-start justify-start gap-3">
                                     <div className="flex flex-col items-start justify-star">
-                                        <p className="font-semibold text-lg mb-[-0.25rem]">R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes.findById("Whole Bundle").individual)}/mês</p>
+                                        <p className="font-semibold text-lg mb-[-0.25rem]">R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes[8].precoIndividual)}/mês</p>
                                         <p>Individual</p>
                                     </div>
-                                    <p className="text-sm text-[var(--content-tertiary)] mt-[0.4rem]">ou R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes.findById("Whole Bundle").individual * 10)}/ano</p>
+                                    <p className="text-sm text-[var(--content-tertiary)] mt-[0.4rem]">ou R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes[8].precoIndividual * 10)}/ano</p>
                                 </div>
                                 <div className="w-full flex flex-row items-start justify-start gap-3">
                                     <div className="flex flex-col items-start justify-star">
-                                        <p className="font-semibold text-lg mb-[-0.25rem]">R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes.findById("Whole Bundle").organizacional)}/mês</p>
+                                        <p className="font-semibold text-lg mb-[-0.25rem]">R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes[8].precoOrganizacional)}/mês</p>
                                         <p>Organizacional</p>
                                     </div>
-                                    <p className="text-sm text-[var(--content-tertiary)] mt-[0.4rem]">ou R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes.findById("Whole Bundle").organizacional * 10)}/ano</p>
+                                    <p className="text-sm text-[var(--content-tertiary)] mt-[0.4rem]">ou R$ {Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2 }).format(pacotes[8].precoOrganizacional * 10)}/ano</p>
                                 </div>
                             </div>
                         </div>

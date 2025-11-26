@@ -105,7 +105,11 @@ export default function Home() {
     useEffect(() => {
         fetchProdutos();
         fetchPacotes();
-    }, [produtos, pacotes]);
+    }, []);
+
+    if (!produtos || !pacotes) {
+        return <div>Carregando...</div>;
+    }
 
     return (
         <section className="w-full flex flex-col items-center justify-start">
@@ -127,13 +131,13 @@ export default function Home() {
                     <div className="flex flex-col items-center justify-center gap-6">
 
                         <div className="flex flex-row items-center justify-center gap-6">
-                            <div className="w-76 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
+                            <div className="w-76 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#734b99] to-[#7f4d8f] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src={`/assets/products/${mockProdutos[0].id}.svg`} alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[0].nome}</p>
+                                        <img src={`/assets/products/${produtos[0].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{produtos[0].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[0].descricaoBreve}</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{produtos[0].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
@@ -142,13 +146,13 @@ export default function Home() {
                                 </div>
                             </div>
                     
-                            <div className="w-182 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
+                            <div className="w-182 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#8460a6] to-[#FF99AC] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src={`/assets/products/${mockProdutos[1].id}.svg`} alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[1].nome}</p>
+                                        <img src={`/assets/products/${produtos[1].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{produtos[1].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[1].descricaoBreve}</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{produtos[1].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
@@ -159,13 +163,13 @@ export default function Home() {
                         </div>
                         
                         <div className="flex flex-row items-center justify-center gap-6">
-                            <div className="w-182 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
+                            <div className="w-182 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#d1af80] to-[#e07994] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src={`/assets/products/${mockProdutos[2].id}.svg`} alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[2].nome}</p>
+                                        <img src={`/assets/products/${produtos[2].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{produtos[2].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[2].descricaoBreve}</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{produtos[2].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
@@ -174,13 +178,13 @@ export default function Home() {
                                 </div>
                             </div>
 
-                            <div className="w-76 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#FF9A8B] to-[#FF99AC] p-8">
+                            <div className="w-76 h-76 shadow-md rounded-xl flex flex-col items-start justify-between bg-gradient-to-r from-[#ab68ab] to-[#7361ab] p-8">
                                 <div className="w-full flex flex-col items-start justify-start gap-4">
                                     <div className="w-full flex flex-row items-start justify-start gap-4">
-                                        <img src={`/assets/products/${mockProdutos[3].id}.svg`} alt="img" className="w-12 h-12"/>
-                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{mockProdutos[3].nome}</p>
+                                        <img src={`/assets/products/${produtos[3].id}.svg`} alt="img" className="w-12 h-12"/>
+                                        <p className="font-semibold text-xl text-[var(--content-inverse)]">{produtos[3].nome}</p>
                                     </div>
-                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{mockProdutos[3].descricaoBreve}</p>
+                                    <p className="w-full max-w-105 text-md text-[var(--content-inverse)]">{produtos[3].descricaoBreve}</p>
                                 </div>
 
                                 <div className="w-full flex flex-row items-start justify-start gap-4">
@@ -211,13 +215,13 @@ export default function Home() {
 
                 {/* FAZER DINAMICO */}
                 <div className="w-full flex flex-row items-center justify-center gap-9">
-                    {mockPacotes.map((pacote) => (
+                    {console.log(pacotes)}
+                    {pacotes.map((pacote) => (
                         <PacoteCard 
-                            key={pacote.name}
-                            name={pacote.name} 
-                            produtos={pacote.produtos} 
-                            individual={pacote.individual} 
-                            organizacional={pacote.organizacional} 
+                            key={pacote.nome}
+                            name={pacote.nome} 
+                            individual={pacote.precoIndividual} 
+                            organizacional={pacote.precoOrganizacional} 
                         />
                     ))}
                 </div>
