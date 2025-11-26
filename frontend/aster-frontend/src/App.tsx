@@ -112,11 +112,11 @@ function App() {
                       <img src="/src/assets/icons/sidemenu/operacoes.svg" alt="Operations Icon" className="h-6" />
                       <p> Operações </p>
                     </div>
-                    <NavItem label="Licenças" onClick={() => {navigate('/operacoes/exibir/licenca')}} />
-                    <NavItem label="Produtos" onClick={() => {navigate('/operacoes/exibir/produto')}} />
-                    <NavItem label="Versões" onClick={() => {navigate('/operacoes/exibir/versao')}} />
-                    <NavItem label="Clientes" onClick={() => {navigate('/operacoes/exibir/cliente')}} />
-                    <NavItem label="Pacotes" onClick={() => {navigate('/operacoes/exibir/pacote')}} />
+                    <NavItem label="Licenças" onClick={() => {navigate('/operacoes/exibir/licenca'), window.location.reload()}} />
+                    <NavItem label="Produtos" onClick={() => {navigate('/operacoes/exibir/produto'), window.location.reload()}} />
+                    <NavItem label="Versões" onClick={() => {navigate('/operacoes/exibir/versao'), window.location.reload()}} />
+                    <NavItem label="Clientes" onClick={() => {navigate('/operacoes/exibir/cliente'), window.location.reload()}} />
+                    <NavItem label="Pacotes" onClick={() => {navigate('/operacoes/exibir/pacote'), window.location.reload()}} />
                   </div>
                 </section>
 
@@ -126,8 +126,8 @@ function App() {
                       <img src="/src/assets/icons/sidemenu/suporte.svg" alt="Support Icon" className="h-6" />
                       <p> Suporte </p>
                     </div>
-                    <NavItem label="Devolutivas" onClick={() => {navigate('/suporte/devolutivas')}} />
-                    <NavItem label="Responder ticket" onClick={() => {navigate('/suporte/responder')}} />
+                    <NavItem label="Devolutivas" onClick={() => {navigate('/suporte/devolutivas'), window.location.reload()}} />
+                    <NavItem label="Responder ticket" onClick={() => {navigate('/suporte/responder'), window.location.reload()}} />
                   </div>
                 </section>
               </div>
