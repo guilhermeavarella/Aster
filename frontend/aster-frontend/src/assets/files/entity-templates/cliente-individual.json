@@ -5,8 +5,8 @@
         "nome": "Nome",
         "email": "Email",
         "telefone": "Telefone",
-        "pais": "País",
+        "regiao": "Região",
         "atividadeUso": "Atividade de Uso"
     },
-    "displayed": [ "documento", "nome", "pais", "atividadeUso" ]
+    "displayed": [ "documento", "nome", "regiao", "atividadeUso" ]
 }

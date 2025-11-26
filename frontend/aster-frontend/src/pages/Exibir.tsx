@@ -9,7 +9,7 @@ import api from "../services/api"
 
 
 export default function Login() {
-    let { entidade } = useParams()
+    const [ entidade, setEntidade ] = useState(useParams().entidade as string)
     
     const [ template, setTemplate ] = useState(null)
     const [ page, setPage ] = useState()
@@ -57,11 +57,11 @@ export default function Login() {
     }
 
     useEffect(() => {
-        if (entidade == "cliente") entidade = "cliente-individual";
+        if (entidade && entidade == "cliente") setEntidade("cliente-individual");
+    }, [entidade]);
 
-        console.log("Entidade em display:", entidade);
-        
-        fetchPage(0);
+    useEffect(() => {
+        if (entidade) fetchPage(0);
     }, [entidade]);
 
     return (
@@ -70,8 +70,8 @@ export default function Login() {
                 <section className="w-full flex flex-row items-center justify-center gap-6">
                     <Glass padding="p-3">
                         <div className="w-full min-h-10 min-w-[calc(100vw-33.25rem)] flex flex-row justify-center items-center gap-6">
-                            <Button variant="primary" label="Cliente Individual" onClick={() => {entidade = "cliente-individual"; fetchPage(0)}} />
-                            <Button variant="primary" label="Cliente Organização" onClick={() => {entidade = "cliente-organizacao"; fetchPage(0)}} />
+                            <Button variant="primary" label="Cliente Individual" onClick={() => {setEntidade("cliente-individual"); fetchPage(0)}} />
+                            <Button variant="primary" label="Cliente Organização" onClick={() => {setEntidade("cliente-organizacao"); fetchPage(0)}} />
                         </div>
                     </Glass>
                     <ProfileMenu />
@@ -105,7 +105,8 @@ export default function Login() {
                             </div>
                         </Glass>
                         <Button variant="primary" label="Consultar" onClick={() => {}} />
-                        <Button variant="black" label="Criar Registro" onClick={() => {criarRegistro()}}/>
+                            {console.log("Entidade para criar registro:", entidade)}
+                        <Button variant="black" label="Criar Registro" onClick={() => {navigate(`/operacoes/form/${entidade}`)}}/>
                     </div>
                 </div>
 

@@ -5,10 +5,10 @@
         "nome": "Nome",
         "email": "Email",
         "telefone": "Telefone",
-        "pais": "País",
+        "regiao": "Região",
         "porte": "Porte",
         "setorAtuacao": "Setor de Atuação"
 
     },
-    "displayed": [ "documento", "nome", "pais", "porte" ]
+    "displayed": [ "documento", "nome", "regiao", "porte" ]
 }
