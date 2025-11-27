@@ -34,8 +34,8 @@ const profiles: ProfileType[] = [
         nome: 'Letícia Namie Ono Honda'
     },
     {
-        foto: '',
-        linkedin: '',
+        foto: 'profile_luis.png',
+        linkedin: 'https://www.linkedin.com/in/lu%C3%ADs-kanazawa-277b71311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
         atividades: ['Desenvolvimento Back End','População do Banco de Dados'],
         vulgo: '"This is what it is…"',
         nome: 'Luís Guilherme Hitoshi Kanazawa',
