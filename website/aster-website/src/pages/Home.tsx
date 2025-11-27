@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import PacoteCard from "../components/PacoteCard";
 import api from "../services/api"
+import { Card } from "@mui/material";
+import Aster3D from '../assets/icons/aster3d.png'
 
 export default function Home() {
     const navigate = useNavigate();
@@ -119,6 +121,11 @@ export default function Home() {
                     <p className="h-full max-w-128 text-2xl text-[var(--content-inverse)] text-start flex flex-col items-start justify-start">
                         A gama completa de recursos para designers, artistas, videomakers, criadores independentes e profissionais que querem transformar ideias em experiências visuais extraordinárias. Um ecossistema poderoso, intuitivo e inovador - criado para quem vive de criatividade.
                     </p>
+                    <Card sx={{backgroundImage: `url(${Aster3D})`, width: '340px', height: '380px', backgroundColor: 'transparent', backgroundSize: 'cover',boxShadow: 'none',     // Remove sombra
+    borderRadius: 0,       // Remove cantos arredondados // Remove fundo padrão
+    p: 0,                  // Remove padding interno
+    }}
+                    ></Card>
                     <p className="h-full font-semibold text-6xl text-[var(--content-inverse)] text-end flex flex-col items-end justify-end mt-32 mb-8">
                         Levando suas ideias <br/> aos astros. <br/> Tudo que você precisa
                     </p>
