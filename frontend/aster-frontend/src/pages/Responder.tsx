@@ -139,7 +139,7 @@ export default function Login() {
                 />
 
                 <div className="w-full flex flex-row items-start justify-between">
-                    <p className="font-semibold">{page?.totalRegistros} Registros encontrados</p>
+                    <p className="font-semibold">{page?.totalEntries} Registros encontrados</p>
                     <div className="flex flex-row gap-2">
                         <img src="/src/assets/icons/chevron-left.svg" alt="left arrow" className="w-9 h-9 cursor-pointer" onClick={() => {fetchPage(page.pageNumber)}}/>
                         <BallButton variant="white" label="1" onClick={() => {fetchPage(0)}} />

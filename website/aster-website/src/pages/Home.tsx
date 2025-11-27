@@ -213,13 +213,13 @@ export default function Home() {
                     <p>Adquira um de nossos pacotes e economize! Junte-se a milhares de criadores que já estão transformando suas ideias em realidade com a Aster.</p>
                 </div>
 
-                {/* FAZER DINAMICO */}
                 <div className="w-full flex flex-row items-center justify-center gap-9">
                     {console.log(pacotes)}
                     {pacotes.map((pacote) => (
                         <PacoteCard 
                             key={pacote.nome}
                             name={pacote.nome} 
+                            produtos={pacote.produtos}
                             individual={pacote.precoIndividual} 
                             organizacional={pacote.precoOrganizacional} 
                         />
