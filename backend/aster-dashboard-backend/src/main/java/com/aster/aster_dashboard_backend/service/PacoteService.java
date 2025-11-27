@@ -210,9 +210,26 @@ public class PacoteService {
 
     }
 
-    public List<PacoteDto> findPacotesMaisPopulares() {
+    public List<PacoteComProdutosDto> findPacotesMaisPopulares() {
         List<Pacote> pacotes = repository.findPacotesMaisPopulares();
-        return pacotes.stream().map(converter::toDto).toList();
+        List<PacoteDto> dtos = pacotes.stream().map(converter::toDto).toList();
+
+        List<PacoteComProdutosDto> resultado = new ArrayList<>();
+
+        for (PacoteDto dto : dtos) {
+            PacoteComProdutosDto pacote =  new PacoteComProdutosDto();
+            List<IdNomeProdutoDto> produtos = repository.findNomesAndIdsProdutosPacote(dto.getNome());
+            pacote = pacote.builder()
+                    .nome(dto.getNome())
+                    .precoIndividual(dto.getPrecoIndividual())
+                    .precoOrganizacional(dto.getPrecoOrganizacional())
+                    .produtos(produtos)
+                    .build();
+
+            resultado.add(pacote);
+        }
+
+        return resultado;
     }
 
     @Transactional
