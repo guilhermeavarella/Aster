@@ -4,6 +4,7 @@ import com.aster.aster_dashboard_backend.dto.*;
 import com.aster.aster_dashboard_backend.entity.Pacote;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -213,4 +214,12 @@ public interface PacoteRepository extends JpaRepository<Pacote, String> {
         LIMIT 4
     """)
     public List<Pacote> findPacotesMaisPopulares();
+
+    @Query("""
+        SELECT new com.aster.aster_dashboard_backend.dto.IdNomeProdutoDto(c.id.produtoId, p.nome)
+        FROM Contem c
+        JOIN Produto p ON c.id.produtoId = p.id
+        WHERE c.id.pacoteNome = :pacote
+    """)
+    public List<IdNomeProdutoDto> findNomesAndIdsProdutosPacote(@Param("pacote") String pacote);
 }

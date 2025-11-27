@@ -1,6 +1,6 @@
 package com.aster.aster_dashboard_backend.controller.api.site;
 
-import com.aster.aster_dashboard_backend.dto.PacoteDto;
+import com.aster.aster_dashboard_backend.dto.PacoteComProdutosDto;
 import com.aster.aster_dashboard_backend.dto.ProdutoDto;
 import com.aster.aster_dashboard_backend.service.PacoteService;
 import com.aster.aster_dashboard_backend.service.ProdutoService;
@@ -30,7 +30,7 @@ public class GaleriaController {
     }
 
     @GetMapping("/pacotes")
-    public List<PacoteDto> findPacotes() {
+    public List<PacoteComProdutosDto> findPacotes() {
         return pacoteService.findAll();
     }
 }

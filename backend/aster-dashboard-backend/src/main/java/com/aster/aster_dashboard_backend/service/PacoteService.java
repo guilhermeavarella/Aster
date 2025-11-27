@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +28,27 @@ public class PacoteService {
         this.converter = converter;
     }
 
-    public List<PacoteDto> findAll() {
+    public List<PacoteComProdutosDto> findAll() {
         List<Pacote> lista = repository.findAll();
-        return lista.stream().map(converter::toDto).toList();
+
+        List<PacoteDto> dtos = lista.stream().map(converter::toDto).toList();
+
+        List<PacoteComProdutosDto> resultado = new ArrayList<>();
+
+        for (PacoteDto dto : dtos) {
+            PacoteComProdutosDto pacote =  new PacoteComProdutosDto();
+            List<IdNomeProdutoDto> produtos = repository.findNomesAndIdsProdutosPacote(dto.getNome());
+            pacote = pacote.builder()
+                    .nome(dto.getNome())
+                    .precoIndividual(dto.getPrecoIndividual())
+                    .precoOrganizacional(dto.getPrecoOrganizacional())
+                    .produtos(produtos)
+                    .build();
+
+            resultado.add(pacote);
+        }
+
+        return resultado;
     }
 
     public Page<PacoteDto> findAllPaginated(int page) {
