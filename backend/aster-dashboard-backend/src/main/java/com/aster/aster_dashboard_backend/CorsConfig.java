@@ -14,8 +14,11 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Permite todos os endpoints
-                        .allowedOrigins("http://localhost:3000")
-                        .allowedOrigins("http://localhost:3001")
+                        .allowedOrigins(
+                                "http://localhost:3000",
+                                "http://localhost:3001",
+                                "http://localhost:5000"
+                        )
                         // Frontend React
                         .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
