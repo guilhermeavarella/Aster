@@ -4,10 +4,12 @@ import Button from '../components/Button'
 export default function PacoteCard({
     name,
     individual,
+    produtos,
     organizacional
 }: {
     name: string;
     individual: number;
+    produtos: {};
     organizacional: number;
 }) {
     const navigate = useNavigate();
@@ -16,9 +18,17 @@ export default function PacoteCard({
             <p className="font-semibold text-2xl text-center">{name}</p>
             <div className="w-full h-full flex flex-col items-center justify-between">
                 <div className="w-full flex flex-col items-center justify-start gap-2">
-                    <div className="w-full flex flex-row items-center justify-center mt-12">
-                        <img src="/assets/icons/app.svg" alt="Icone" className="w-16 h-16"/>
-                    </div>
+                    {produtos.slice(0, 3).map((produto: any, index: number) => {
+                        const isThird = index === 2 && produtos.length > 3;
+                        return (
+                            <div key={produto.produtoId} className="w-full flex flex-row items-center justify-start gap-3">
+                                <img src={`/assets/products/${produto.produtoId}.svg`} alt="Icone" className="w-12 h-12" />
+                                <p className="font-semibold text-lg">
+                                    {produto.nomeProduto}{isThird ? " ..." : ""}
+                                </p>
+                            </div>
+                        );
+                    })}
                 </div>
                 
                 <div className="w-full flex flex-col gap-1 mb-6">
