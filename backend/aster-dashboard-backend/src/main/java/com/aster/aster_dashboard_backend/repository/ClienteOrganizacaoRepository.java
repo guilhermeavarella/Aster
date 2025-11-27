@@ -20,19 +20,21 @@ public interface ClienteOrganizacaoRepository extends JpaRepository<Organizacao,
         ),
         marcada AS (
             SELECT
-                CASE
-                    WHEN 100.0 * qtd / SUM(qtd) OVER () < 5 THEN 'Outros'
-                    ELSE setor_atuacao
-                END AS setor_agrupado,
-                qtd
+                setor_atuacao,
+                qtd,
+                ROW_NUMBER() OVER (ORDER BY qtd DESC) AS posicao
             FROM base
         ),
         agrupada AS (
             SELECT
-                setor_agrupado,
+                CASE
+                    WHEN posicao > 9 THEN 'Outros'   -- os 9 maiores permanecem, os demais agrupam
+                    ELSE setor_atuacao
+                END AS setor_agrupado,
                 SUM(qtd) AS qtd_final
             FROM marcada
-            GROUP BY setor_agrupado
+            GROUP BY
+                CASE WHEN posicao > 9 THEN 'Outros' ELSE setor_atuacao END
         ),
         total AS (
             SELECT SUM(qtd_final) AS total_geral FROM agrupada
